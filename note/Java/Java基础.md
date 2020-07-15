@@ -1,6 +1,6 @@
 [TOC]
 
-### 1. char、byte、short两两运算结果（包括自己与自己）为int
+### 1. `char`、`byte`、`short`两两运算结果（包括自己与自己）为`int`
 
 > char、byte、short -> int -> long -> float -> double
 
@@ -10,7 +10,7 @@ byte b = 14;
 byte c = b + c; // 编译出错 int --/-> byte
 ```
 
-### 2. 整型默认为int，浮点型默认为double
+### 2. 整型默认为`int`，浮点型默认为`double`
 
 ### 3. 原码、反码、补码（计算机存储一律使用补码）
 
@@ -85,5 +85,6 @@ String suffix = suf > 9 ? (char) ('A' + (suf - 10)) + "" : suf + "";
 System.out.println("0x" + prefix + suffix); // 0x3D
 ```
 
+### 9. `switch`表达式只能使用`char`、`byte`、`short`、`int`、枚举、`String`等几种类型
 
-
+### 10. 引用类型变量要么为`null`，要么为地址值
