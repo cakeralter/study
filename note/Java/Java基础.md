@@ -113,4 +113,6 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 
 - 引用类型传递引用的地址值
 
+### 14 `this`构造器只能在构造器首行调用，即只能调用一次
+
 
