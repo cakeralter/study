@@ -18,3 +18,12 @@ apt-get install vim
  docker cp /etc/localtime [containerId]:/etc/localtime
  ```
 
+### 3. Docker容器和宿主机文件复制
+
+```powershell
+# 复制宿主机nacos-server.jar文件到nacos容器/home/nacos/target目录下
+docker cp /home/dc2-user/nacos-server.jar nacos:/home/nacos/target
+
+# 复制nacos容器nacos-server.jar文件到宿主机/home/nacos/target目录下
+docker cp nacos:/home/nacos/targetnacos-server.jar /home/dc2-user/
+```

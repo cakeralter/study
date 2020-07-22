@@ -389,7 +389,30 @@ docker run -d \
 --name tale \
 -v /etc/localtime:/etc/localtime:ro \
 -v /root/docker/tale:/var/tale_home \
--p 127.0.0.1:9000:9000 \
+-p 127.0.0.1:9010:9000 \
 -m 1024m --memory-swap -1 \
 tale:1.0
+```
+
+### 13. Docker安装Jenkins
+
+- 拉取镜像
+
+```powershell
+docker pull jenkinsci/blueocean
+```
+
+- 启动容器
+
+```powershell
+mkdir -p /root/jenkins/home
+	&& touch /root/jenkins/docker.sock
+
+docker run -d \
+-p 9002:8080 -p 50000:50000 \
+-v /root/jenkins/home:/var/jenkins_home \
+-v /root/jenkins/docker.sock:/var/run/docker.sock \
+-v /etc/localtime:/etc/localtime:ro \
+--name=jenkins --restart=always \
+jenkinsci/blueocean
 ```
