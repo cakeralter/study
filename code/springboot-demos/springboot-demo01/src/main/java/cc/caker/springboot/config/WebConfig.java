@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
@@ -17,6 +18,7 @@ import static com.alibaba.fastjson.serializer.SerializerFeature.*;
  * @author cakeralter
  * @date 2020/7/24
  */
+@EnableWebMvc
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
