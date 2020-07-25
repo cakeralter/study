@@ -32,6 +32,12 @@ public class SingletonTest {
  */
 class SingletonOne {
 
+    /**
+     * <code>public static SingletonOne instance = new SingletonOne();</code>
+     * 这种方式可能会出现 <b>SingletonOne.instance = null</b> 问题
+     * 需要加final使instance成为常量
+     */
+
     private final static SingletonOne INSTANCE = new SingletonOne();
 
     private SingletonOne() {
