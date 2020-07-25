@@ -6,7 +6,7 @@ import java.io.PrintStream;
  * @author cakeralter
  * @date 2020/7/19
  */
-public class Question01 {
+public class Question {
 
     public static void main(String[] args) {
         int a = 10;

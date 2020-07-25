@@ -7,7 +7,8 @@ public static void main(String[] args) {
     int a = 10;
     int b = 20;
 
-    method(a, b); // 编写method方法，要求在method调用后仅输入"a=100,b=200"
+    // 编写method方法，要求在method调用后仅输入"a=100,b=200"
+    method(a, b); 
 
     System.out.println("a=" + a + ",b=" + b);
 }
@@ -44,9 +45,100 @@ public static void method(int a, int b) {
 ```java
 public static void main(String[] args) {
     int arr1[] = new int[10];
-    System.out.println(arr1); // [I@39a054a5
+    // [I@39a054a5
+    System.out.println(arr1); 
 
     char arr2[] = new char[10];
-    System.out.println(arr2); // agsg
+    // agsg
+    System.out.println(arr2); 
+}
+```
+
+### 3. 多态题，以下代码输出为：
+
+```java
+public static void main(String[] args) {
+    Sub sub = new Sub();
+    // 20
+    System.out.println(sub.count);
+    // 20
+    sub.print();
+
+    Base base = sub;
+    // true
+    System.out.println(base == sub);
+    // 10
+    System.out.println(base.count);
+    // 20
+    base.print();
+}
+
+
+class Base {
+    int count = 10;
+
+    public void print() {
+        System.out.println(this.count);
+    }
+}
+
+class Sub extends Base {
+    int count = 20;
+
+    @Override
+    public void print() {
+        System.out.println(this.count);
+    }
+}
+```
+
+### 4. 多态题，以下代码输出为：
+
+```java
+public static void main(String[] args) {
+    Base base = new Sub();
+    // 可变参数和数组构成重写 --- Sub.print(int a, int[] arr)
+    base.print(1, 2, 3);
+
+    Sub sub = (Sub) base;
+    // 重载确定参数优先 --- Sub.print(int a, int b, int c)
+    sub.print(1, 2, 3);
+}
+
+class Base {
+
+    public void print(int a, int... arr) {
+        System.out.println("Base.print(int a, int... arr)");
+    }
+}
+
+class Sub extends Base {
+
+    public void print(int a, int[] arr) {
+        System.out.println("Sub.print(int a, int[] arr)");
+    }
+
+    public void print(int a, int b, int c) {
+        System.out.println("Sub.print(int a, int b, int c)");
+    }
+}
+```
+
+### 5. 包装类，以下代码输出为：
+
+```java
+public static void main(String[] args) {
+    Object o1 = true ? new Integer(1) : new Double(2.0);
+    // 三元运算符两端类型一致，所以会进行自动类型提升 --- 1.0
+    System.out.println(o1);
+
+    Object o2 = null;
+    if(true) {
+    	o2 = new Integer(1);
+    }else {
+    	o2 = new Double(2.0);
+    }
+    // 1
+    System.out.println(o2);
 }
 ```

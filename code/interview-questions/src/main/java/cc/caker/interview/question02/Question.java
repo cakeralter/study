@@ -4,7 +4,7 @@ package cc.caker.interview.question02;
  * @author cakeralter
  * @date 2020/7/19
  */
-public class Question02 {
+public class Question {
 
     public static void main(String[] args) {
         int arr1[] = {1, 2, 4, 2, 3};
