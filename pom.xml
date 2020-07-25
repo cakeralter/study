@@ -6,7 +6,11 @@
 
     <groupId>cc.caker</groupId>
     <artifactId>study</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>code/design-mode</module>
+    </modules>
 
 
 </project>

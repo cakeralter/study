@@ -10,20 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <!--算法-->
-    <artifactId>algorithm</artifactId>
+    <!--设计模式-->
+    <artifactId>design-mode</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.2.5</version>
-        </dependency>
-    </dependencies>
 
 </project>
