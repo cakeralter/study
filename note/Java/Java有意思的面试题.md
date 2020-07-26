@@ -143,4 +143,36 @@ public static void main(String[] args) {
 }
 ```
 
+### 6. 接口和抽象类，代码如下：
+
+接口和抽象类属性重名，调用时必须明确引用位置
+
+```java
+interface BaseInterface {
+
+    int x = 1;
+    int y = 2;
+}
+
+abstract class BaseClass {
+
+    int x = 11;
+    int z = 33;
+}
+
+class Sub extends BaseClass implements BaseInterface {
+
+    public void print() {
+        // 报错 对 'x' 的引用不明确，'BaseClass.x' 和 'BaseInterface.x' 均匹配
+//        System.out.println(x);
+        // BaseInterface.x
+        System.out.println(BaseInterface.x);
+        // BaseClass.x
+        System.out.println(super.x);
+        System.out.println(y);
+        System.out.println(z);
+    }
+}
+```
+
 
