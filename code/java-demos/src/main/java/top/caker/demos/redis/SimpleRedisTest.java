@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import redis.clients.jedis.*;
-import top.caker.demos.bean.Student;
-import top.caker.demos.bean.Teacher;
+import top.caker.demos.serialize.bean.Student;
+import top.caker.demos.serialize.bean.Teacher;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

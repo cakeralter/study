@@ -2,8 +2,8 @@ package top.caker.demos.serialize;
 
 import org.junit.Before;
 import org.junit.Test;
-import top.caker.demos.bean.Student;
-import top.caker.demos.bean.Teacher;
+import top.caker.demos.serialize.bean.Student;
+import top.caker.demos.serialize.bean.Teacher;
 
 import java.io.*;
 

@@ -175,4 +175,14 @@ class Sub extends BaseClass implements BaseInterface {
 }
 ```
 
+### 7. 单目运算符，如下：
+
+```java
+public static void main(String[] args) {
+    int i = -5;
+    // error - 单目运算符不能用于字面量，i++执行后 i = ++(-4)错误
+//        i = ++(i++);
+    System.out.println(i);
+}
+```
 

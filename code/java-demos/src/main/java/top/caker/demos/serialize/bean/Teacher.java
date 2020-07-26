@@ -1,4 +1,4 @@
-package top.caker.demos.bean;
+package top.caker.demos.serialize.bean;
 
 import java.io.Serializable;
 import java.util.LinkedList;
