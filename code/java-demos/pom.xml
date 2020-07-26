@@ -10,8 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <!--日常demo-->
-    <artifactId>demos</artifactId>
+    <!--java日常demo-->
+    <artifactId>java-demos</artifactId>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
