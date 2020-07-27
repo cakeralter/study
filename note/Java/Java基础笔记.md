@@ -166,7 +166,7 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 
 2. 不能多次调用线程对象的 `start()` 方法，会报 `IllegalThreadStateException` 异常
 
-### 24. 线程常用方法：
+### 25. 线程常用方法：
 
 - `Thread` 类中的方法
 
