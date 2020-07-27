@@ -158,7 +158,7 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 
 ![Java线程状态转换图](https://gitee.com/cakeralter/images/raw/master/20200727210059.png)
 
-### 23. `Thread` 使用几点总结：
+### 24. `Thread` 使用几点总结：
 
 1. 不能直接调用 `run()` 来启动线程
 
