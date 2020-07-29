@@ -29,7 +29,7 @@ public class UserController {
 
     @ApiOperation("通过ID查询用户")
     @ApiImplicitParams(
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/{id}")
     public ResponseResult<?> user(@PathVariable("id") Integer id) {
