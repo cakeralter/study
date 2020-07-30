@@ -1,7 +1,5 @@
 package cc.caker.mode.singleton;
 
-import java.util.Objects;
-
 /**
  * 单例模式
  * <p>
@@ -24,6 +22,16 @@ public class SingletonTest {
         SingletonTwo two1 = SingletonTwo.getInstance();
         SingletonTwo two2 = SingletonTwo.getInstance();
         System.out.println("懒汉式一：" + (two1 == two2));
+
+        // 懒汉式单例二
+        SingletonThree three1 = SingletonThree.getInstance();
+        SingletonThree three2 = SingletonThree.getInstance();
+        System.out.println("懒汉式二：" + (three1 == three2));
+
+        // 懒汉式单例三
+        SingletonThree four1 = SingletonThree.getInstance();
+        SingletonThree four2 = SingletonThree.getInstance();
+        System.out.println("懒汉式三：" + (four1 == four2));
     }
 }
 
@@ -53,14 +61,62 @@ class SingletonOne {
  */
 class SingletonTwo {
 
-    private static SingletonTwo instance = null;
+    private static SingletonTwo instance;
 
     private SingletonTwo() {
     }
 
     public static SingletonTwo getInstance() {
-        if (Objects.isNull(instance)) {
+        if (instance != null) {
             instance = new SingletonTwo();
+        }
+
+        return instance;
+    }
+}
+
+/**
+ * 懒汉式单例 - 同步方法实现（性能较低）
+ */
+class SingletonThree {
+
+    private static SingletonThree instance;
+
+    private SingletonThree() {
+    }
+
+    /**
+     * 每次线程都要获取锁，性能较差
+     *
+     * @return
+     */
+    public static synchronized SingletonThree getInstance() {
+        if (instance != null) {
+            instance = new SingletonThree();
+        }
+
+        return instance;
+    }
+}
+
+/**
+ * 懒汉式单例 - 双重检查
+ */
+class SingletonFour {
+
+    private static volatile SingletonFour instance;
+
+    private SingletonFour() {
+    }
+
+    public static SingletonFour getInstance() {
+        if (instance != null) {
+            synchronized (SingletonFour.class) {
+                if (instance != null) {
+//                    双重检查防止初始化时多个线程进入调用构造器，volatile强制刷新主存
+                    instance = new SingletonFour();
+                }
+            }
         }
 
         return instance;

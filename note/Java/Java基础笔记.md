@@ -187,3 +187,5 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 15. **isDaemon()** ：测试线程是否为守护线程
 
 - `Object` 类中的方法
+
+### 26. 
