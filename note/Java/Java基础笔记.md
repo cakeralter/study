@@ -185,7 +185,48 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 13. **interrupted()** ：测试线程是否已中断
 14. **setDaemon(boolean on)** ：是否将线程设置为守护线程
 15. **isDaemon()** ：测试线程是否为守护线程
+16.  **setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh)** ：设置默认异常处理器
+17.  **setUncaughtExceptionHandler(UncaughtExceptionHandler eh)** ：设置调用线程异常处理器
 
 - `Object` 类中的方法
 
-### 26. 
+1. **wait() **：使调用线程进入等待状态
+2. **notify()** ：通知一个等待状态的线程继续执行
+3. **notifyAll()** ：通知所有等待线程继续执行
+
+### 26. `wait()`、 `notify()` 和 `notifyAll()`
+
+1. `wait()`、 `notify()`、`notifyAll()` 这三个方法必须在同步代码块或同步方法中调用
+
+   ```java
+   // 同步方法
+   public void synchronized method() {
+       // wait() / notify() / notifyAll()
+   }
+   // 同步代码块
+   synchronized(this) {
+       // wait() / notify() / notifyAll()
+   }
+   ```
+
+2. `wait()`、 `notify()`、`notifyAll()` 必须由同步监视器对象调用，否则会抛异常
+
+### 27. `sleep()` 和 `wait()`
+
+- 相同：`sleep()` 和 `wait()` 都会使调用线程进入阻塞状态
+- 不同：
+  1. `sleep()` 是在 `Thread` 类中定义，`wait()` 是在 `Object` 类中定义
+  2. `sleep()` 可以在任何地方调用，`wait()` 只能在同步方法或同步代码块中调用
+  3. 线程调用 `wait()` 后会释放自己当前持有的锁对象，而调用 `sleep()` 则不会
+
+### 28. `synchronized` 和 `Lock`
+
+### 29. 创建线程的几种方式
+
+1. 继承 `Thread` 类重写 `run()` 方法
+2. 实现 `Runnable` 接口实现 `run()` 方法
+3. 实现 `Callable` 接口实现 `call()` 方法
+4. 使用线程池：`ExecutorService` 接口和 `ThreadPoolExecutor` 类
+
+
+

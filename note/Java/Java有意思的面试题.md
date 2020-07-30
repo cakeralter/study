@@ -188,6 +188,4 @@ public static void main(String[] args) {
 
 ### 8. 如何解决线程安全问题？
 
-### 9. `synchronized` 与 `Lock` 的异同？
-
-### 10. 如何避免死锁？
+### 9. 如何避免死锁？
