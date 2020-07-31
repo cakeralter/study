@@ -74,11 +74,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/cn.smallbun.screw/screw-core -->
-        <dependency>
+        <!--<dependency>
             <groupId>cn.smallbun.screw</groupId>
             <artifactId>screw-core</artifactId>
             <version>${screw.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 
