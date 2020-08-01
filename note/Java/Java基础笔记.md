@@ -228,5 +228,18 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 3. 实现 `Callable` 接口实现 `call()` 方法
 4. 使用线程池：`ExecutorService` 接口和 `ThreadPoolExecutor` 类
 
+### 30. `String` 类总结
 
+1. `String` 类被 `final` 修饰，说明其不可被继承
+2. `String` 类实现了 `Serializable` 接口，说明其可以序列化
+3. `String` 类实现了 `Comparable` 接口，说明其可以比较大小
+4. `String` 类使用 `char` 数组存储字符，并且数组被 `final` 修饰
+5. `String` 类中的字符序列是不可变的
+6. 通过字面量声明一个字符串时，该字符串会存储在字符串常量池中（常量池已经存在直接返回引用，常量池不存在则先在常量池创建字符串后返回引用）
+7. 通过构造器声明一个字符串时，会在堆中创建一个对象后返回对象的引用（该对象中存储的是常量池中字符串的引用值）
 
+### 31. `String` 、`StringBuffer` 及 `StringBuilder`
+
+- **String** ：不可变的字符序列，底层是 `char` 数组
+- **StringBuffer** ：可变的字符序列，底层是 `char` 数组；线程安全，效率低
+- **StringBuilder** ：可变的字符序列，底层是 `char` 数组；线程不安全，效率高

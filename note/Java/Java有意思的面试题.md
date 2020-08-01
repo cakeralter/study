@@ -189,3 +189,75 @@ public static void main(String[] args) {
 ### 8. 如何解决线程安全问题？
 
 ### 9. 如何避免死锁？
+
+### 10. `String a = new String("abnc");` 总共创建了几个对象？
+
+两个。一个是字符串常量池的 `abnc` ，一个是堆空间中的对象。
+
+### 11. 字符串，代码如下：
+
+> 1. 常量与常量拼接的结果在常量池中，且常量池不会存储多个相同的常量；
+> 2. 变量参与的拼接在堆中进行；
+> 3. intern()方法返回常量池中的地址。
+
+```java
+public static void main(String[] args) {
+
+   	String s1 = "Java";
+    String s2 = "Script";
+    String s3 = "JavaScript";
+    String s4 = "Java" + "Script";
+    String s5 = s1 + "Script";
+    String s6 = "Java" + s2;
+    String s7 = s1 + s2;
+    String s8 = (s1 + s2).intern();
+    final String s9 = "Java";
+    String s10 = s9 + s2;
+    String s11 = s9 + "Script";
+
+    /*
+	 * 1. 常量与常量拼接的结果在常量池中，且常量池不会存储多个相同的常量；
+	 * 2. 变量参与的拼接在堆中进行；
+	 * 3. intern()方法返回常量池中的地址。
+     * */
+    // true
+    System.out.println(s3 == s4);
+    // false
+    System.out.println(s3 == s5);
+    // false
+    System.out.println(s3 == s6);
+    // false
+    System.out.println(s3 == s7);
+    // true
+    System.out.println(s3 == s8);
+    // false
+    System.out.println(s3 == s10);
+    // true --- s9是常量
+    System.out.println(s3 == s11);
+}
+```
+
+### 12. 值传递与字符串，以下代码输出：
+
+```java
+public static void main(String[] args) {
+    Test t = new Test();
+    t.change(t.a, t.b);
+
+    // wangmin
+    System.out.println(t.a);
+    // chengyuying
+    System.out.println(t.b);
+}
+
+static class Test {
+
+	String a = "wangmin";
+	char[] b = {'a', 'h', 'e', 'n', 'g', 'y', 'u', 'y', 'i', 'n', 'g'};
+
+   	void change(String str, char[] ch) {
+        str = "luqian";
+        ch[0] = 'c';
+    }
+}
+```
