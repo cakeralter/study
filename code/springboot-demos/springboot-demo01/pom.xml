@@ -76,11 +76,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.baomidou</groupId>

@@ -2,6 +2,7 @@ package cc.caker.springboot.controller;
 
 import cc.caker.springboot.common.vo.ResponseResult;
 import cc.caker.springboot.service.UserService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,6 +45,6 @@ public class UserController {
     @PostMapping("/list")
     public ResponseResult<?> list(@RequestParam(defaultValue = "1") Integer page,
                                   @RequestParam(defaultValue = "5") Integer size) {
-        return ResponseResult.ok(userService.list(page, size));
+        return ResponseResult.ok(userService.page(new Page<>(page, size)));
     }
 }
