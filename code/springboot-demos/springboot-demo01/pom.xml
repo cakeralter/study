@@ -15,6 +15,7 @@
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <screw.version>1.0.3</screw.version>
         <mysql.version>8.0.20</mysql.version>
+        <pagehelper.version>1.3.0</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -71,6 +72,13 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/cn.smallbun.screw/screw-core -->

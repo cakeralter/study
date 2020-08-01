@@ -35,4 +35,15 @@ public class UserController {
     public ResponseResult<?> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(userService.selectById(id));
     }
+
+    @ApiOperation("分页查询所有用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),
+            @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
+    })
+    @PostMapping("/list")
+    public ResponseResult<?> list(@RequestParam(defaultValue = "1") Integer page,
+                                  @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseResult.ok(userService.list(page, size));
+    }
 }

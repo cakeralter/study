@@ -1,6 +1,7 @@
 package cc.caker.springboot.service;
 
 import cc.caker.springboot.repo.model.User;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author cakeralter
@@ -9,4 +10,6 @@ import cc.caker.springboot.repo.model.User;
 public interface UserService {
 
     User selectById(Integer id);
+
+    PageInfo<User> list(Integer page, Integer size);
 }

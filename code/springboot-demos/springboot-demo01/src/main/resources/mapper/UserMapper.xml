@@ -20,4 +20,10 @@
         where id = #{id}
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+    </select>
+
 </mapper>
