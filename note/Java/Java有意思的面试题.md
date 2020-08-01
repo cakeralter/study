@@ -1,6 +1,6 @@
 [TOC]
 
-### 1. 题干如下：
+### 1. 编写代码，要求如下：
 
 ```java
 public static void main(String[] args) {
@@ -19,7 +19,7 @@ public static void main(String[] args) {
 ```java
 public static void method(int a, int b) {
     System.out.println("a=" + 100 + ",b=" + 200);
-    System.exit(-1);
+    System.exit(0);
 }
 ```
 
@@ -40,7 +40,7 @@ public static void method(int a, int b) {
 }
 ```
 
-### 2. 以下代码输出为：
+### 2. 数组，以下代码输出为：
 
 ```java
 public static void main(String[] args) {
@@ -143,7 +143,7 @@ public static void main(String[] args) {
 }
 ```
 
-### 6. 接口和抽象类，代码如下：
+### 6. 接口和抽象类，以下代码输出为：
 
 接口和抽象类属性重名，调用时必须明确引用位置
 
@@ -175,7 +175,7 @@ class Sub extends BaseClass implements BaseInterface {
 }
 ```
 
-### 7. 单目运算符，如下：
+### 7. 单目运算符，以下代码输出为：
 
 ```java
 public static void main(String[] args) {
@@ -194,7 +194,7 @@ public static void main(String[] args) {
 
 两个。一个是字符串常量池的 `abnc` ，一个是堆空间中的对象。
 
-### 11. 字符串，代码如下：
+### 11. 字符串，以下代码输出为：
 
 > 1. 常量与常量拼接的结果在常量池中，且常量池不会存储多个相同的常量；
 > 2. 变量参与的拼接在堆中进行；
@@ -237,7 +237,7 @@ public static void main(String[] args) {
 }
 ```
 
-### 12. 值传递与字符串，以下代码输出：
+### 12. 值传递与字符串，以下代码输出为：
 
 ```java
 public static void main(String[] args) {
@@ -261,3 +261,29 @@ static class Test {
     }
 }
 ```
+
+### 13. `StringBuffer` ，以下代码输出为：
+
+```java
+public static void main(String[] args) {
+    String str = null;
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(str);
+
+    // 4
+    System.out.println(buffer.length());
+    // null
+    System.out.println(buffer);
+
+    /*
+		public StringBuffer(String str) {
+			super(str.length() + 16);
+			append(str);
+		}
+	*/
+    // NullPointerException
+    StringBuffer stringBuffer = new StringBuffer(str);
+    System.out.println(stringBuffer);
+}
+```
+

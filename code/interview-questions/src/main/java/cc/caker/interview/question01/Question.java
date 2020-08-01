@@ -25,7 +25,7 @@ public class Question {
      */
     /*public static void method(int a, int b) {
         System.out.println("a=" + 100 + ",b=" + 200);
-        System.exit(-1);
+        System.exit(0);
     }*/
 
     /**
