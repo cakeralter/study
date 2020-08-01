@@ -13,13 +13,6 @@
         id, username, password, age
     </sql>
 
-    <select id="selectById" resultMap="BaseResultMap" parameterType="integer">
-        select
-        <include refid="Base_Column_List"/>
-        from t_user
-        where id = #{id}
-    </select>
-
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -33,7 +33,7 @@ public class UserController {
     )
     @PostMapping("/{id}")
     public ResponseResult<?> user(@PathVariable("id") Integer id) {
-        return ResponseResult.ok(userService.selectById(id));
+        return ResponseResult.ok(userService.getById(id));
     }
 
     @ApiOperation("分页查询所有用户")
