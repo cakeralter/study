@@ -243,3 +243,161 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 - **String** ：不可变的字符序列，底层是 `char` 数组
 - **StringBuffer** ：可变的字符序列，底层是 `char` 数组；线程安全，效率低
 - **StringBuilder** ：可变的字符序列，底层是 `char` 数组；线程不安全，效率高
+
+### 32. 数组的缺点总结
+
+1. 数组初始化后，长度不可修改
+2. 数组没有提供友好的API，对其进行操作（如删除、插入、获取有效值等操作）比较麻烦，效率不高
+3. 数组对于一些特殊需求不能实现（如无序、不可重复）
+
+### 33. `Collection` 总结
+
+> 有序、无序指的是数据在内存中是否连续存储
+
+- `List` ：有序、可重复
+
+  - `ArrayList`
+
+    1.  底层采用 `Object[]` 实现
+
+       ```java
+       transient Object[] elementData;
+       ```
+
+    2.  线程不安全，查找效率高
+
+    3.  在jdk7中默认构造器会创建一个容量为10的空数组；而jdk8则创建了一个空数组，在第一次调用 `add` 方法时才会对数组进行扩容
+
+       ```java
+       // jdk7
+       public ArrayList() {
+           this(10);
+       }
+       
+       public ArrayList(int initialCapacity) {
+           super();
+           if (initialCapacity < 0)
+               throw new IllegalArgumentException("Illegal Capacity: "+
+                                                  initialCapacity);
+           this.elementData = new Object[initialCapacity];
+       }
+       
+       // jdk8
+       public ArrayList() {
+           this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+       }
+       ```
+
+    4.  扩容操作：
+
+       ```java
+       private void grow(int minCapacity) {
+           // overflow-conscious code
+           int oldCapacity = elementData.length;
+           // 1.5倍
+           int newCapacity = oldCapacity + (oldCapacity >> 1);
+           if (newCapacity - minCapacity < 0)
+               newCapacity = minCapacity;
+           if (newCapacity - MAX_ARRAY_SIZE > 0)
+               newCapacity = hugeCapacity(minCapacity);
+           // minCapacity is usually close to size, so this is a win:
+           elementData = Arrays.copyOf(elementData, newCapacity);
+       }
+       ```
+
+  - `LinkedList`
+
+    1.  底层采用双向链表实现
+
+       ```java
+       transient Node<E> first;
+       transient Node<E> last;
+       
+       private static class Node<E> {
+           E item;
+           Node<E> next;
+           Node<E> prev;
+       
+           Node(Node<E> prev, E element, Node<E> next) {
+               this.item = element;
+               this.next = next;
+               this.prev = prev;
+           }
+       }
+       ```
+
+    2.  在随机插入、删除操作频繁时效率高于 `ArrayList` 
+
+  - `Vector`
+
+    1.  底层采用 `Object[]` 实现
+
+       ```java
+       protected Object[] elementData;
+       ```
+
+    2.  线程安全，效率较低
+
+    3. 扩容操作：
+
+       ```java
+       private void grow(int minCapacity) {
+           // overflow-conscious code
+           int oldCapacity = elementData.length;
+           // 2倍
+           int newCapacity = oldCapacity + ((capacityIncrement > 0) ?
+           	capacityIncrement : oldCapacity);
+           if (newCapacity - minCapacity < 0)
+           	newCapacity = minCapacity;
+           if (newCapacity - MAX_ARRAY_SIZE > 0)
+           	newCapacity = hugeCapacity(minCapacity);
+           elementData = Arrays.copyOf(elementData, newCapacity);
+       }
+       ```
+
+- `Set`：无序、不可重复
+
+  - `HashSet`
+
+    1.  底层采用 `HashMap` 实现
+
+    ```java
+    private transient HashMap<E,Object> map;
+    ```
+    
+    2.  判断元素是否重复需要调用 `hashCode()` 、`equals()` 方法
+
+  - `LinkedHashSet`
+
+    1.  底层采用 `HashMap` 实现
+    2.  继承自 `HashSet`
+
+    ```java
+    public class LinkedHashSet<E>
+        extends HashSet<E>
+        implements Set<E>, Cloneable, java.io.Serializable
+    ```
+
+    3.  判断元素是否重复需要调用 `hashCode()` 、`equals()` 方法
+    4.  底层维护了一个双向链表，使得遍历时可以保持插入顺序
+    5.  对于频繁的遍历操作，`LinkedHashSet` 效率高于 `HashSet`
+
+  - `TreeSet`
+
+    1.   底层类似 `TreeMap`
+    2.   只能放入相同类型的元素
+    3.   判断元素是否重复需要调用 `hashCode()` 、`compare()` 方法
+
+- `Map`
+
+  - `HashMap`
+
+    
+
+  - `LinkedHashMap`
+
+    
+
+  - `TreeMap`
+
+    
