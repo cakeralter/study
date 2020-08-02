@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
+ * 枚举测试
+ *
  * @author cakeralter
  * @date 2020/8/1
  */
