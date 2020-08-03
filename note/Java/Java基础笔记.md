@@ -391,13 +391,15 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 - `Map`
 
   - `HashMap`
-
-    
-
+    1. 线程不安全，效率高
+    2. 键和值均允许为 `null` 
   - `LinkedHashMap`
-
-    
-
+    1. 底层在 `HashMap` 基础上维护了一个双向链表，使得可以在遍历时保持插入顺序
+    2. 对于频繁的遍历操作，`LinkedHashMap` 效率高于 `HashMap`
   - `TreeMap`
-
-    
+    1. 底层使用红黑树实现
+    2. 插入时按照key进行排序
+  - `Hashtable`
+    1. 线程不安全，效率低
+    2. 键值不允许为 `null`
+  - `Properties` ：常用来处理配置信息，键值均为 `String` 类型
