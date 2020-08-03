@@ -386,7 +386,7 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 
     1. 底层类似 `TreeMap`
     2. 只能放入相同类型的元素
-    3. 判断元素是否重复需要调用 `hashCode()` 、`compare()` 方法
+    3. 判断元素是否重复需要调用 `compare()` 方法
 
 - `Map`
 
