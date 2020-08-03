@@ -304,3 +304,36 @@ public static void main(String[] args) {
 }
 ```
 
+### 15. `Set` ，若 `Person` 已经重写了 `hashCode` 和 `equals` 方法，则以下代码输出为：
+
+``````java
+public static void main(String[] args) {
+    Set<Person> set = new HashSet<>();
+    Person p1 = new Person(1, "wangmin");
+    Person p2 = new Person(2, "wangjie");
+
+    set.add(p1);
+    set.add(p2);
+    // [Person{id=1, name='wangmin'}, Person{id=2, name='wangjie'}]
+    System.out.println(set);
+    System.out.println("--------------");
+
+    p1.name = "luqian";
+    set.remove(p1);
+    // p1的hashcode改变了，remove的时候大概率不在数组同一索引处
+    // [Person{id=1, name='luqian'}, Person{id=2, name='wangjie'}]
+    System.out.println(set);
+    System.out.println("--------------");
+
+    set.add(new Person(1, "luqian"));
+    // [Person{id=1, name='luqian'}, Person{id=2, name='wangjie'}, Person{id=1, name='luqian'}]
+    System.out.println(set);
+    System.out.println("--------------");
+
+    set.add(new Person(1, "wangmin"));
+    // 说明HashSet是先根据hashCode方法确定数组下标，再根据hashCode和equals方法确认位置
+    // [Person{id=1, name='luqian'}, Person{id=1, name='wangmin'}, Person{id=2, name='wangjie'}, Person{id=1, name='luqian'}]
+    System.out.println(set);
+}
+``````
+
