@@ -1,8 +1,8 @@
 package cc.caker.springboot.controller;
 
 import cc.caker.springboot.common.vo.ResponseResult;
-import cc.caker.springboot.repo.model.db1.User;
-import cc.caker.springboot.service.UserService;
+import cc.caker.springboot.repo.model.db2.Menu;
+import cc.caker.springboot.service.MenuService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -14,39 +14,33 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author cakeralter
- * @date 2020/7/23
+ * @date 2020/8/4
  */
-@Api(tags = "用户管理接口")
+@Api(tags = "菜单管理接口")
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/meun")
+public class MenuController {
 
     @Autowired
-    private UserService userService;
+    private MenuService menuService;
 
-    @ApiOperation("Hello")
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello SpringBoot!";
-    }
-
-    @ApiOperation("通过ID查询用户")
+    @ApiOperation("通过ID查询菜单")
     @ApiImplicitParams(
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
+            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/{id}")
-    public ResponseResult<User> user(@PathVariable("id") Integer id) {
-        return ResponseResult.ok(userService.getById(id));
+    public ResponseResult<Menu> user(@PathVariable("id") Integer id) {
+        return ResponseResult.ok(menuService.getById(id));
     }
 
-    @ApiOperation("分页查询所有用户")
+    @ApiOperation("分页查询所有菜单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
     })
     @PostMapping("/list")
-    public ResponseResult<IPage<User>> list(@RequestParam(defaultValue = "1") Integer page,
+    public ResponseResult<IPage<Menu>> list(@RequestParam(defaultValue = "1") Integer page,
                                             @RequestParam(defaultValue = "5") Integer size) {
-        return ResponseResult.ok(userService.page(new Page<>(page, size)));
+        return ResponseResult.ok(menuService.page(new Page<>(page, size)));
     }
 }

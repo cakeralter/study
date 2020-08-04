@@ -1,17 +1,17 @@
 package cc.caker.springboot.service.impl;
 
-import cc.caker.springboot.repo.mapper.db1.UserMapper;
-import cc.caker.springboot.repo.model.db1.User;
-import cc.caker.springboot.service.UserService;
+import cc.caker.springboot.repo.mapper.db2.MenuMapper;
+import cc.caker.springboot.repo.model.db2.Menu;
+import cc.caker.springboot.service.MenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author cakeralter
- * @date 2020/7/23
+ * @date 2020/8/4
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 }
