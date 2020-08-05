@@ -15,6 +15,7 @@
         <module>code/java-demos</module>
         <module>code/interview-questions</module>
         <module>code/springboot-demos/springboot-demo01</module>
+        <module>code/common</module>
     </modules>
 
 </project>

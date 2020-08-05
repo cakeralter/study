@@ -15,13 +15,13 @@
 
 ### 2. 代码
 
-|    类型     |        项目         |
-| :---------: | :-----------------: |
-|    Java     |     java-demos      |
-|   面试题    | interview-questions |
-|    算法     |      algorithm      |
-|  设计模式   |     design-mode     |
-| SpringBoot  |  springboot-demo01  |
-| SpringCloud | springcloud-demo01  |
+|    类型     |                   项目                   |
+| :---------: | :--------------------------------------: |
+|    Java     |                java-demos                |
+|   面试题    |           interview-questions            |
+|    算法     |                algorithm                 |
+|  设计模式   |               design-mode                |
+| SpringBoot  | springboot-demo01<br />springboot-demo02 |
+| SpringCloud |            springcloud-demo01            |
 
 
