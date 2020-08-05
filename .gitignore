@@ -18,8 +18,10 @@ buildNumber.properties
 mvnw
 *.cmd
 !src/*
+*.log
 
 ### IDEA
 /.idea/
 *.iml
 .idea/
+code/springboot-demos/springboot-demo01/src/main/java/cc/caker/springboot/common/util/
