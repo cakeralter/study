@@ -37,13 +37,13 @@ public class DB2Config {
     }
 
     @Bean("db2SqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor interceptor) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor paginationInterceptor) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource());
         bean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/db2/*Mapper.xml"));
         bean.setTypeAliasesPackage("cc.caker.springboot.repo.model.db2");
-        bean.setPlugins(interceptor);
+        bean.setPlugins(paginationInterceptor);
         return bean.getObject();
     }
 }

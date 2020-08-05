@@ -41,7 +41,7 @@ public class DB1Config {
 
     @Primary
     @Bean("db1SqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor interceptor) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor paginationInterceptor) throws Exception {
         // 此处有坑 不能用 SqlSessionFactoryBean
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource());
@@ -49,9 +49,10 @@ public class DB1Config {
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/db1/*Mapper.xml"));
         bean.setTypeAliasesPackage("cc.caker.springboot.repo.model.db1");
         // 多数据源下需要手动注入分页插件
-        bean.setPlugins(interceptor);
+        bean.setPlugins(paginationInterceptor);
 //        MybatisConfiguration configuration = new MybatisConfiguration();
-//        configuration.addInterceptor(interceptor);
+        // 配置打印完整SQL
+//        configuration.setLogImpl(StdOutImpl.class);
 //        bean.setConfiguration(configuration);
         return bean.getObject();
     }
