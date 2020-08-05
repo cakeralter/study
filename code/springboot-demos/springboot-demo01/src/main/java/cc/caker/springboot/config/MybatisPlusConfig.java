@@ -11,13 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MybatisPlusConfig {
 
-    @Bean("db1PaginationInterceptor")
+    @Bean
     public PaginationInterceptor paginationInterceptor1() {
-        return new PaginationInterceptor();
-    }
-
-    @Bean("db2PaginationInterceptor")
-    public PaginationInterceptor paginationInterceptor2() {
         return new PaginationInterceptor();
     }
 }

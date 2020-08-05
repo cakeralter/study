@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,17 +32,17 @@ public class DB2Config {
     }
 
     @Bean("db2TransactionManager")
-    public TransactionManager transactionManager(@Qualifier("db2DataSource") DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
+    public TransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean("db2SqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("db2DataSource") DataSource dataSource,
-                                               @Qualifier("db2PaginationInterceptor") PaginationInterceptor interceptor) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor interceptor) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
+        bean.setDataSource(dataSource());
         bean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/db2/*Mapper.xml"));
+        bean.setTypeAliasesPackage("cc.caker.springboot.repo.model.db2");
         bean.setPlugins(interceptor);
         return bean.getObject();
     }

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,20 +35,24 @@ public class DB1Config {
 
     @Primary
     @Bean("db1TransactionManager")
-    public TransactionManager transactionManager(@Qualifier("db1DataSource") DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
+    public TransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 
     @Primary
     @Bean("db1SqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("db1DataSource") DataSource dataSource,
-                                               @Qualifier("db1PaginationInterceptor") PaginationInterceptor interceptor) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(PaginationInterceptor interceptor) throws Exception {
         // 此处有坑 不能用 SqlSessionFactoryBean
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
+        bean.setDataSource(dataSource());
         bean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/db1/*Mapper.xml"));
+        bean.setTypeAliasesPackage("cc.caker.springboot.repo.model.db1");
+        // 多数据源下需要手动注入分页插件
         bean.setPlugins(interceptor);
+//        MybatisConfiguration configuration = new MybatisConfiguration();
+//        configuration.addInterceptor(interceptor);
+//        bean.setConfiguration(configuration);
         return bean.getObject();
     }
 }
