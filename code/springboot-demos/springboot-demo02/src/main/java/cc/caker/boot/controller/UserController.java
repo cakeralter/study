@@ -1,20 +1,19 @@
-package cc.caker.springboot.controller;
+package cc.caker.boot.controller;
 
+import cc.caker.boot.repo.entity.db2.User;
+import cc.caker.boot.service.UserService;
 import cc.caker.common.boot.vo.ResponseResult;
-import cc.caker.springboot.repo.model.db1.User;
-import cc.caker.springboot.service.UserService;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author cakeralter
- * @date 2020/7/23
+ * @date 2020/8/4
  */
 @Api(tags = "用户管理接口")
 @RestController
@@ -24,19 +23,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation("Hello")
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello SpringBoot!";
-    }
-
     @ApiOperation("通过ID查询用户")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/{id}")
     public ResponseResult<User> user(@PathVariable("id") Integer id) {
-        return ResponseResult.ok(userService.getById(id));
+        return ResponseResult.ok(userService.user(id));
     }
 
     @ApiOperation("分页查询所有用户")
@@ -45,8 +38,8 @@ public class UserController {
             @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
     })
     @PostMapping("/list")
-    public ResponseResult<IPage<User>> list(@RequestParam(defaultValue = "1") Integer page,
-                                            @RequestParam(defaultValue = "5") Integer size) {
-        return ResponseResult.ok(userService.page(new Page<>(page, size)));
+    public ResponseResult<Page<User>> list(@RequestParam(defaultValue = "1") Integer page,
+                                           @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseResult.ok(userService.page(page, size));
     }
 }

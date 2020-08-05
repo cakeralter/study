@@ -1,4 +1,4 @@
-package cc.caker.springboot.common.enumeration;
+package cc.caker.common.boot.enumeration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

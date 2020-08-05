@@ -15,9 +15,16 @@
 
     <properties>
         <lombok.version>1.18.12</lombok.version>
+        <mysql.version>8.0.20</mysql.version>
     </properties>
 
     <dependencies>
+        <!--mysql8-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

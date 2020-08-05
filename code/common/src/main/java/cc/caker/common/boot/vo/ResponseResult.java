@@ -1,10 +1,10 @@
-package cc.caker.springboot.common.vo;
+package cc.caker.common.boot.vo;
 
 import lombok.*;
 
 import java.io.Serializable;
 
-import static cc.caker.springboot.common.enumeration.ResponseCode.OK;
+import static cc.caker.common.boot.enumeration.ResponseCode.OK;
 
 /**
  * @author cakeralter

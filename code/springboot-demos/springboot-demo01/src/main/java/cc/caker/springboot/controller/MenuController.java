@@ -1,6 +1,6 @@
 package cc.caker.springboot.controller;
 
-import cc.caker.springboot.common.vo.ResponseResult;
+import cc.caker.common.boot.vo.ResponseResult;
 import cc.caker.springboot.repo.model.db2.Menu;
 import cc.caker.springboot.service.MenuService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
