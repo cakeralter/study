@@ -1,5 +1,6 @@
 package cc.caker.boot.repo.entity.db2;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,6 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "t_user")
-@JsonIgnoreProperties("password")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -1453435234448368065L;
@@ -30,6 +30,7 @@ public class User implements Serializable {
     private Integer id;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "userface")
