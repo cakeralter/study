@@ -1,8 +1,8 @@
 package cc.caker.springboot.controller;
 
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.repo.model.db2.Menu;
-import cc.caker.springboot.service.MenuService;
+import cc.caker.springboot.repo.model.db2.Log;
+import cc.caker.springboot.service.LogService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/8/4
  */
 @RequiredArgsConstructor
-@Api(tags = "菜单管理接口")
+@Api(tags = "日志管理接口")
 @RestController
-@RequestMapping("/meun")
-public class MenuController {
+@RequestMapping("/log")
+public class LogController {
 
-    private final MenuService menuService;
+    private final LogService logService;
 
-    @ApiOperation("通过ID查询菜单")
+    @ApiOperation("通过ID查询日志")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/{id}")
-    public ResponseResult<Menu> user(@PathVariable("id") Integer id) {
-        return ResponseResult.ok(menuService.getById(id));
+    public ResponseResult<Log> user(@PathVariable("id") Integer id) {
+        return ResponseResult.ok(logService.getById(id));
     }
 
-    @ApiOperation("分页查询所有菜单")
+    @ApiOperation("分页查询所有日志")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
     })
     @PostMapping("/list")
-    public ResponseResult<IPage<Menu>> list(@RequestParam(defaultValue = "1") Integer page,
-                                            @RequestParam(defaultValue = "5") Integer size) {
-        return ResponseResult.ok(menuService.page(new Page<>(page, size)));
+    public ResponseResult<IPage<Log>> list(@RequestParam(defaultValue = "1") Integer page,
+                                           @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseResult.ok(logService.page(new Page<>(page, size)));
     }
 }

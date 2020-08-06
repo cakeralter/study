@@ -19,7 +19,7 @@ public class Generator {
 
     @Test
     public void test() {
-        Generator.execute("springboot-demo01");
+        Generator.execute("");
     }
 
     private static void execute(String moduleName) {
@@ -29,7 +29,7 @@ public class Generator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\workspace\\mine\\study\\code\\springboot-demos\\springboot-demo01" + "/src/test/java");
+        gc.setOutputDir("D:\\springboot-demo01");
         gc.setAuthor("cakeralter");
         // 生成后是否打开资源管理器
         gc.setOpen(true);
@@ -49,7 +49,7 @@ public class Generator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://116.85.4.107/springboot_demo?useSSL=false&useUnicode=true&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://116.85.4.107/springboot_demo_02?useSSL=false&useUnicode=true&characterEncoding=utf8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("caker1996");
@@ -62,9 +62,9 @@ public class Generator {
         pc.setModuleName(moduleName);
         pc.setParent("cc.caker.springboot");
         pc.setController("controller");
-        pc.setEntity("repo.model");
+        pc.setEntity("model");
         pc.setService("service");
-        pc.setMapper("repo.mapper");
+        pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
 
         // 5、策略配置

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.caker.springboot.repo.mapper.db1.AdminRoleMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, admin_id, role_id, create_time
+    </sql>
+
+    <select id="findByAdminId" resultType="Role" parameterType="int">
+        select tr.*
+        from t_admin_role tar
+                 join t_role tr on tar.role_id = tr.id
+        where tar.admin_id = #{adminId}
+    </select>
+
+</mapper>

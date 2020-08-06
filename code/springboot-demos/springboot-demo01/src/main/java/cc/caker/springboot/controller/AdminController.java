@@ -2,8 +2,10 @@ package cc.caker.springboot.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.repo.model.db1.User;
-import cc.caker.springboot.service.UserService;
+import cc.caker.springboot.repo.model.db1.Admin;
+import cc.caker.springboot.repo.model.db1.Role;
+import cc.caker.springboot.service.AdminRoleService;
+import cc.caker.springboot.service.AdminService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -23,19 +25,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @Api(tags = "用户管理接口")
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
 
-    private final UserService userService;
     private final RedisService redisService;
+    private final AdminService adminService;
+    private final AdminRoleService adminRoleService;
 
     @ApiOperation("通过ID查询用户")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/{id}")
-    public ResponseResult<User> user(@PathVariable("id") Integer id) {
-        return ResponseResult.ok(userService.getById(id));
+    public ResponseResult<Admin> user(@PathVariable("id") Integer id) {
+        return ResponseResult.ok(adminService.getById(id));
     }
 
     @ApiOperation("分页查询所有用户")
@@ -44,20 +47,29 @@ public class UserController {
             @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
     })
     @PostMapping("/list")
-    public ResponseResult<IPage<User>> list(@RequestParam(defaultValue = "1") Integer page,
-                                            @RequestParam(defaultValue = "5") Integer size) {
-        return ResponseResult.ok(userService.page(new Page<>(page, size)));
+    public ResponseResult<IPage<Admin>> list(@RequestParam(defaultValue = "1") Integer page,
+                                             @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseResult.ok(adminService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("查询所有用户")
     @PostMapping("/all")
-    public ResponseResult<List<User>> all() {
-        List<User> all = redisService.get("userAll", User.class);
+    public ResponseResult<List<Admin>> all() {
+        List<Admin> all = redisService.get("userAll", Admin.class);
         if (CollectionUtils.isEmpty(all)) {
-            all = userService.list();
+            all = adminService.list();
             redisService.put("userAll", all);
         }
         return ResponseResult.ok(all);
+    }
+
+    @ApiOperation("查询用户所有角色")
+    @PostMapping("/{adminId}/roles")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name = "adminId", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
+    )
+    public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
+        return ResponseResult.ok(adminRoleService.getRolesByAdmin(adminId));
     }
 
     @ApiOperation("XSS测试")
