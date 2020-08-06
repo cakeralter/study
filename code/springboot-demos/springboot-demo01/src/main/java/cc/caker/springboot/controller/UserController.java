@@ -59,4 +59,10 @@ public class UserController {
         }
         return ResponseResult.ok(all);
     }
+
+    @ApiOperation("XSS测试")
+    @PostMapping("/xss")
+    public ResponseResult<String> testXss(String str) {
+        return ResponseResult.ok(str);
+    }
 }
