@@ -2,7 +2,7 @@ package cc.caker.boot.controller;
 
 import cc.caker.boot.repo.entity.db2.User;
 import cc.caker.boot.service.UserService;
-import cc.caker.common.boot.vo.ResponseResult;
+import cc.caker.common.vo.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

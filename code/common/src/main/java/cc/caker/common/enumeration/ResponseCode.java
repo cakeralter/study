@@ -1,4 +1,4 @@
-package cc.caker.common.boot.enumeration;
+package cc.caker.common.enumeration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package cc.caker.springboot.controller;
 
-import cc.caker.common.boot.vo.ResponseResult;
+import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.repo.model.db2.Menu;
 import cc.caker.springboot.service.MenuService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -9,20 +9,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author cakeralter
  * @date 2020/8/4
  */
+@RequiredArgsConstructor
 @Api(tags = "菜单管理接口")
 @RestController
 @RequestMapping("/meun")
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
     @ApiOperation("通过ID查询菜单")
     @ApiImplicitParams(

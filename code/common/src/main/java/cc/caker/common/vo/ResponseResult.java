@@ -1,10 +1,9 @@
-package cc.caker.common.boot.vo;
+package cc.caker.common.vo;
 
+import cc.caker.common.enumeration.ResponseCode;
 import lombok.*;
 
 import java.io.Serializable;
-
-import static cc.caker.common.boot.enumeration.ResponseCode.OK;
 
 /**
  * @author cakeralter
@@ -23,7 +22,7 @@ public class ResponseResult<T> implements Serializable {
     private T data;
 
     public static <T> ResponseResult<T> ok(T data) {
-        return new ResponseResult<>(OK.getCode(), "", data);
+        return new ResponseResult<>(ResponseCode.OK.getCode(), "", data);
     }
 
     public static <T> ResponseResult<T> build(int code, String message, T data) {
