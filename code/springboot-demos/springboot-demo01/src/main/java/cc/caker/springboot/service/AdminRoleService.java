@@ -21,4 +21,13 @@ public interface AdminRoleService extends IService<AdminRole> {
      * @return
      */
     List<Role> getRolesByAdmin(Integer id);
+
+    /**
+     * 授予用户角色
+     *
+     * @param adminId 用户ID
+     * @param roleIds 角色ID数组
+     * @return
+     */
+    boolean grant(Integer adminId, Integer... roleIds);
 }

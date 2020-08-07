@@ -74,6 +74,12 @@ public class AdminController {
         return ResponseResult.ok(roles);
     }
 
+    @ApiOperation("授予用户角色")
+    @PostMapping("/{adminId}/grant")
+    public ResponseResult<?> grant(@PathVariable("adminId") Integer adminId, @RequestParam("roleIds[]") Integer[] roleIds) {
+        return adminRoleService.grant(adminId, roleIds) ? ResponseResult.ok() : ResponseResult.fail();
+    }
+
     @ApiOperation("XSS测试")
     @PostMapping("/xss")
     public ResponseResult<String> testXss(String str) {
