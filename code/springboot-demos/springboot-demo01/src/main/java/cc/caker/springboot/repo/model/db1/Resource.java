@@ -29,36 +29,48 @@ import java.time.LocalDateTime;
 public class Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("资源ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    @ApiModelProperty(value = "父级资源id")
+
+    @ApiModelProperty("父级资源id")
     @TableField("parent_id")
     private Integer parentId;
-    @ApiModelProperty(value = "资源名称")
+
+    @ApiModelProperty("资源名称")
     @TableField("name")
     private String name;
-    @ApiModelProperty(value = "资源编码")
+
+    @ApiModelProperty("资源编码")
     @TableField("code")
     private String code;
-    @ApiModelProperty(value = "图标")
+
+    @ApiModelProperty("图标")
     @TableField("icon")
     private String icon;
-    @ApiModelProperty(value = "资源类型：1->目录；2->菜单；3->按钮（接口绑定权限）")
+
+    @ApiModelProperty("资源类型：1->目录；2->菜单；3->按钮（接口绑定权限）")
     @TableField("type")
     private Integer type;
-    @ApiModelProperty(value = "前端资源路径")
+
+    @ApiModelProperty("前端资源路径")
     @TableField("uri")
     private String uri;
-    @ApiModelProperty(value = "启用状态；0->禁用；1->启用")
+
+    @ApiModelProperty("启用状态；0->禁用；1->启用")
     @TableField("status")
     private Integer status;
-    @ApiModelProperty(value = "创建时间")
+
+    @ApiModelProperty(value = "创建时间", hidden = true)
     @TableField("create_time")
     private LocalDateTime createTime;
-    @ApiModelProperty(value = "最后修改时间")
+
+    @ApiModelProperty(value = "最后修改时间", hidden = true)
     @TableField("update_time")
     private LocalDateTime updateTime;
-    @ApiModelProperty(value = "排序")
+
+    @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;
 }

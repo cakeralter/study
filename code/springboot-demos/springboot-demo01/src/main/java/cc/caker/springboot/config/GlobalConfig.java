@@ -16,6 +16,12 @@ import java.util.Map;
 @Configuration
 public class GlobalConfig {
 
+    /**
+     * Xss过滤
+     *
+     * @param filter
+     * @return
+     */
     @Bean
     public FilterRegistrationBean<XssFilter> filterFilterRegistrationBean(XssFilter filter) {
         FilterRegistrationBean<XssFilter> bean = new FilterRegistrationBean<>();

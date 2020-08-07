@@ -2,6 +2,7 @@ package cc.caker.springboot.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
+import cc.caker.springboot.constant.Constant;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.repo.model.db1.Role;
 import cc.caker.springboot.service.AdminRoleService;
@@ -58,18 +59,19 @@ public class AdminController {
     @ApiOperation("查询所有用户")
     @PostMapping("/all")
     public ResponseResult<List<Admin>> all() {
-        List<Admin> all = redisService.get("userAll", Admin.class);
-        if (CollectionUtils.isEmpty(all)) {
-            all = adminService.list();
-            redisService.put("userAll", all);
-        }
-        return ResponseResult.ok(all);
+        return ResponseResult.ok(adminService.list());
     }
 
     @ApiOperation("查询用户所有角色")
     @PostMapping("/{adminId}/roles")
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
-        return ResponseResult.ok(adminRoleService.getRolesByAdmin(adminId));
+        String key = Constant.ADMIN_ROLE + "::" + adminId;
+        List<Role> roles = redisService.get(key, Role.class);
+        if (CollectionUtils.isEmpty(roles)) {
+            roles = adminRoleService.getRolesByAdmin(adminId);
+            redisService.put(key, roles);
+        }
+        return ResponseResult.ok(roles);
     }
 
     @ApiOperation("XSS测试")

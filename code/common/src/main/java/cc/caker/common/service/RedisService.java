@@ -20,6 +20,16 @@ public interface RedisService {
     boolean put(final String key, String value);
 
     /**
+     * put string
+     *
+     * @param key
+     * @param value
+     * @param expire
+     * @return
+     */
+    boolean put(final String key, String value, long expire);
+
+    /**
      * put list string
      *
      * @param key
@@ -27,6 +37,16 @@ public interface RedisService {
      * @return
      */
     <T> boolean put(final String key, List<T> list);
+
+    /**
+     * put list string
+     *
+     * @param key
+     * @param list
+     * @param expire
+     * @return
+     */
+    <T> boolean put(final String key, List<T> list, long expire);
 
     /**
      * get string

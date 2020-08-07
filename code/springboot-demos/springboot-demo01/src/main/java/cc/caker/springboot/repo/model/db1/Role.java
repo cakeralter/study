@@ -29,25 +29,35 @@ import java.time.LocalDateTime;
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @ApiModelProperty("角色ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     @ApiModelProperty("角色名称，用于显示")
     @TableField("name")
     private String name;
+
     @ApiModelProperty("角色描述")
-    @TableField("descrip")
-    private String descript;
+    @TableField("description")
+    private String description;
+
     @ApiModelProperty("角色CODE,用于权限判断")
     @TableField("code")
     private String code;
+
+    @ApiModelProperty(value = "创建时间", hidden = true)
     @TableField("create_time")
     private LocalDateTime createTime;
+
+    @ApiModelProperty(value = "更新时间", hidden = true)
     @TableField("update_time")
     private LocalDateTime updateTime;
+
     @ApiModelProperty("角色状态")
     @TableField("status")
     private Integer status;
+
     @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;

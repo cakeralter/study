@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.List;
 
+import static cc.caker.springboot.constant.Constant.DEFAULT_KEY_EXPIRE;
+
 /**
  * @author cakeralter
  * @since 2020/8/6
@@ -21,14 +23,24 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public boolean put(String key, String value) {
-        template.opsForValue().set(key, value);
+        return put(key, value, DEFAULT_KEY_EXPIRE);
+    }
+
+    @Override
+    public boolean put(String key, String value, long expire) {
+        template.opsForValue().set(key, value, Duration.ofMillis(expire));
         return true;
     }
 
     @Override
     public <T> boolean put(String key, List<T> list) {
-        template.opsForValue().set(key, JSONObject.toJSONString(list));
-        return false;
+        return put(key, list, DEFAULT_KEY_EXPIRE);
+    }
+
+    @Override
+    public <T> boolean put(String key, List<T> list, long expire) {
+        template.opsForValue().set(key, JSONObject.toJSONString(list), Duration.ofMillis(expire));
+        return true;
     }
 
     @Override

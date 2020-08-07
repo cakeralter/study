@@ -29,14 +29,18 @@ import java.time.LocalDateTime;
 public class RoleResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     @ApiModelProperty(value = "角色ID")
     @TableField("role_id")
     private Integer roleId;
+
     @ApiModelProperty(value = "资源ID")
     @TableField("resource_id")
     private Integer resourceId;
+
     @TableField("create_time")
     private LocalDateTime createTime;
 }

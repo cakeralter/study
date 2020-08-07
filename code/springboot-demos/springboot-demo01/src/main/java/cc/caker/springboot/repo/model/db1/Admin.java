@@ -31,23 +31,23 @@ public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty("用户ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "用户名，用于显示")
+    @ApiModelProperty("用户名，用于显示")
     @TableField("nick_name")
     private String nickName;
 
-    @ApiModelProperty(value = "用户名，用于登录")
+    @ApiModelProperty("用户名，用于登录")
     @TableField("username")
     private String username;
 
-    @ApiModelProperty(value = "登录密码")
-    @TableField("password")
+    @ApiModelProperty("登录密码")
+    @TableField(value = "password")
     private String password;
 
-    @ApiModelProperty(value = "头像")
+    @ApiModelProperty("头像")
     @TableField("icon")
     private String icon;
 
@@ -67,7 +67,7 @@ public class Admin implements Serializable {
     @TableField("login_time")
     private LocalDateTime loginTime;
 
-    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
+    @ApiModelProperty("帐号启用状态：0->禁用；1->启用")
     @TableField("status")
     private Integer status;
 

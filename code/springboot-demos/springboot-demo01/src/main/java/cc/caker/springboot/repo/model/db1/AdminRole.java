@@ -29,14 +29,18 @@ import java.time.LocalDateTime;
 public class AdminRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     @ApiModelProperty(value = "用户ID")
     @TableField("admin_id")
     private Integer adminId;
+
     @ApiModelProperty(value = "角色ID")
     @TableField("role_id")
     private Integer roleId;
+
     @TableField("create_time")
     private LocalDateTime createTime;
 }
