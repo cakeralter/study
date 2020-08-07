@@ -30,38 +30,51 @@ import java.time.LocalDateTime;
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "用户ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    @ApiModelProperty("用户名，用于显示")
+
+    @ApiModelProperty(value = "用户名，用于显示")
     @TableField("nick_name")
     private String nickName;
-    @ApiModelProperty("用户名，用于登录")
+
+    @ApiModelProperty(value = "用户名，用于登录")
     @TableField("username")
     private String username;
-    @ApiModelProperty("登录密码")
+
+    @ApiModelProperty(value = "登录密码")
     @TableField("password")
     private String password;
-    @ApiModelProperty("头像")
+
+    @ApiModelProperty(value = "头像")
     @TableField("icon")
     private String icon;
+
     @ApiModelProperty("邮箱")
     @TableField("email")
     private String email;
+
     @ApiModelProperty("备注信息")
     @TableField("note")
     private String note;
-    @ApiModelProperty("创建时间")
+
+    @ApiModelProperty(value = "创建时间", hidden = true)
     @TableField("create_time")
     private LocalDateTime createTime;
-    @ApiModelProperty("最后登录时间")
+
+    @ApiModelProperty(value = "最后登录时间", hidden = true)
     @TableField("login_time")
     private LocalDateTime loginTime;
-    @ApiModelProperty("帐号启用状态：0->禁用；1->启用")
+
+    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
     @TableField("status")
     private Integer status;
+
     @ApiModelProperty("用户私钥")
     @TableField("secret")
     private String secret;
+
     @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;

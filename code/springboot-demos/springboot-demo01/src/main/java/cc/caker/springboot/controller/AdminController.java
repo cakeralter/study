@@ -9,8 +9,6 @@ import cc.caker.springboot.service.AdminService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.CollectionUtils;
@@ -32,20 +30,25 @@ public class AdminController {
     private final AdminService adminService;
     private final AdminRoleService adminRoleService;
 
+    @ApiOperation("插入用户")
+    @PostMapping("/save")
+    public ResponseResult<?> save(Admin admin) {
+        return adminService.save(admin) ? ResponseResult.ok() : ResponseResult.fail();
+    }
+
+    @ApiOperation("更新用户")
+    @PatchMapping("/update")
+    public ResponseResult<?> update(Admin admin) {
+        return adminService.updateById(admin) ? ResponseResult.ok() : ResponseResult.fail();
+    }
+
     @ApiOperation("通过ID查询用户")
-    @ApiImplicitParams(
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
-    )
     @PostMapping("/{id}")
     public ResponseResult<Admin> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(adminService.getById(id));
     }
 
     @ApiOperation("分页查询所有用户")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),
-            @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
-    })
     @PostMapping("/list")
     public ResponseResult<IPage<Admin>> list(@RequestParam(defaultValue = "1") Integer page,
                                              @RequestParam(defaultValue = "5") Integer size) {
@@ -65,9 +68,6 @@ public class AdminController {
 
     @ApiOperation("查询用户所有角色")
     @PostMapping("/{adminId}/roles")
-    @ApiImplicitParams(
-            @ApiImplicitParam(name = "adminId", value = "用户ID", required = true, paramType = "path", dataType = "Integer")
-    )
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
         return ResponseResult.ok(adminRoleService.getRolesByAdmin(adminId));
     }
