@@ -1,18 +1,23 @@
 package cc.caker.springboot.config;
 
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import cc.caker.springboot.component.LocalDateTimeConverter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static com.alibaba.fastjson.serializer.SerializerFeature.*;
 
 /**
  * @author cakeralter
@@ -24,40 +29,39 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-        converter.setSupportedMediaTypes(getSupportedMediaTypes());
-        FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(
-                // null -> ""
-                WriteNullStringAsEmpty,
-                // 禁止循环引用
-                DisableCircularReferenceDetect,
-                // null -> 0
-                WriteNullNumberAsZero
-        );
-        converter.setFastJsonConfig(config);
-        converter.setDefaultCharset(StandardCharsets.UTF_8);
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper mapper = new ObjectMapper();
+        // 属性为 空（""） 或者为 NULL 都不序列化
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        // 未知属性不报错
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // 允许出现特殊字符和转义符
+        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        // 允许出现单引号
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        // 属性驼峰转下划线
+//        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+//        mapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        // 字段保留，将null值转为""
+        /*mapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+            @Override
+            public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+                gen.writeString("");
+            }
+        });*/
+//        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        // jdk8时间处理
+        JavaTimeModule modules = new JavaTimeModule();
+        modules.addSerializer(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        modules.addSerializer(new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        modules.addSerializer(new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        mapper.registerModules(modules);
+        converter.setObjectMapper(mapper);
         converters.add(converter);
     }
 
-    private List<MediaType> getSupportedMediaTypes() {
-        List<MediaType> supportedMediaTypes = new ArrayList<>();
-        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
-        supportedMediaTypes.add(MediaType.APPLICATION_ATOM_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
-        supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
-        supportedMediaTypes.add(MediaType.APPLICATION_PDF);
-        supportedMediaTypes.add(MediaType.APPLICATION_RSS_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_XHTML_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_XML);
-        supportedMediaTypes.add(MediaType.IMAGE_GIF);
-        supportedMediaTypes.add(MediaType.IMAGE_JPEG);
-        supportedMediaTypes.add(MediaType.IMAGE_PNG);
-        supportedMediaTypes.add(MediaType.TEXT_EVENT_STREAM);
-        supportedMediaTypes.add(MediaType.TEXT_HTML);
-        supportedMediaTypes.add(MediaType.TEXT_MARKDOWN);
-        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
-        supportedMediaTypes.add(MediaType.TEXT_XML);
-        return supportedMediaTypes;
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new LocalDateTimeConverter());
     }
 }

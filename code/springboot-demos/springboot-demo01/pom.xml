@@ -66,10 +66,16 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>-->
+
+        <!--jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
         <!--swagger-->

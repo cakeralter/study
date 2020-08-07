@@ -1,12 +1,16 @@
 package cc.caker.springboot.service.impl;
 
 import cc.caker.common.service.RedisService;
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static cc.caker.springboot.constant.Constant.DEFAULT_KEY_EXPIRE;
@@ -15,11 +19,13 @@ import static cc.caker.springboot.constant.Constant.DEFAULT_KEY_EXPIRE;
  * @author cakeralter
  * @since 2020/8/6
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class RedisServiceImpl implements RedisService {
 
     private final StringRedisTemplate template;
+    private final ObjectMapper mapper;
 
     @Override
     public boolean put(String key, String value) {
@@ -39,7 +45,12 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public <T> boolean put(String key, List<T> list, long expire) {
-        template.opsForValue().set(key, JSONObject.toJSONString(list), Duration.ofMillis(expire));
+        try {
+            template.opsForValue().set(key, mapper.writeValueAsString(list), Duration.ofMillis(expire));
+        } catch (JsonProcessingException e) {
+            log.error("[{}] 放入缓存出错", key, e);
+            return false;
+        }
         return true;
     }
 
@@ -50,8 +61,13 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public <T> List<T> get(String key, Class<T> clazz) {
-        String value = template.opsForValue().get(key);
-        return JSONObject.parseArray(value, clazz);
+        JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, clazz);
+        try {
+            return mapper.readValue(template.opsForValue().get(key), type);
+        } catch (Exception e) {
+            log.error("查询缓存 [{}] 出错", key, e);
+        }
+        return null;
     }
 
     @Override
