@@ -7,4 +7,34 @@
         id, parent_id, name, code, icon, type, uri, status, create_time, update_time, sort
     </sql>
 
+    <resultMap id="Base_Result_Map" type="Resource">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="icon" column="icon"/>
+        <result property="type" column="type"/>
+        <result property="uri" column="uri"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="sort" column="sort"/>
+        <result property="parentId" column="parent_id"/>
+        <!--级联查询-->
+        <collection property="children" column="id" ofType="Resource" select="findByParentId"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="Base_Result_Map">
+        select *
+        from t_resource
+        where parent_id is null
+        order by sort
+    </select>
+
+    <select id="findByParentId" resultMap="Base_Result_Map">
+        select *
+        from t_resource
+        where parent_id = #{parentId}
+        order by sort
+    </select>
+
 </mapper>

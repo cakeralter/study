@@ -29,5 +29,5 @@ public interface AdminRoleService extends IService<AdminRole> {
      * @param roleIds 角色ID数组
      * @return
      */
-    boolean grant(Integer adminId, Integer... roleIds);
+    boolean grantRole(Integer adminId, Integer... roleIds);
 }

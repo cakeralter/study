@@ -30,6 +30,12 @@ public class ResourceController {
         return resourceService.save(resource) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
+    @ApiOperation("删除资源")
+    @DeleteMapping("/delete")
+    public ResponseResult<Integer> delete(@RequestParam("ids") Integer[] ids) {
+        return ResponseResult.ok(resourceService.delete(ids));
+    }
+
     @ApiOperation("更新资源")
     @PatchMapping("/update")
     public ResponseResult<?> update(Resource resource) {
@@ -52,6 +58,6 @@ public class ResourceController {
     @ApiOperation("查询所有资源")
     @PostMapping("/all")
     public ResponseResult<List<Resource>> all() {
-        return ResponseResult.ok(resourceService.list());
+        return ResponseResult.ok(resourceService.findAll());
     }
 }

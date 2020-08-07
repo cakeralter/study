@@ -13,6 +13,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 后台资源表
@@ -73,4 +74,7 @@ public class Resource implements Serializable {
     @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;
+
+    @TableField(exist = false)
+    private List<Resource> children;
 }

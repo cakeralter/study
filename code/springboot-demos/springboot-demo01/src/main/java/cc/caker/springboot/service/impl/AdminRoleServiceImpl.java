@@ -37,7 +37,7 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean grant(Integer adminId, Integer... roleIds) {
+    public boolean grantRole(Integer adminId, Integer... roleIds) {
         if (Objects.isNull(adminId) || Objects.isNull(roleIds)) {
             return false;
         }

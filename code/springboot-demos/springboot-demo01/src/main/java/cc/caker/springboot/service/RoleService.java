@@ -10,4 +10,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-08-06
  */
 public interface RoleService extends IService<Role> {
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    int delete(Integer[] ids);
 }

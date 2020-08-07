@@ -4,7 +4,9 @@ import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.constant.Constant;
 import cc.caker.springboot.repo.model.db1.Admin;
+import cc.caker.springboot.repo.model.db1.Resource;
 import cc.caker.springboot.repo.model.db1.Role;
+import cc.caker.springboot.service.AdminResourceService;
 import cc.caker.springboot.service.AdminRoleService;
 import cc.caker.springboot.service.AdminService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,11 +32,18 @@ public class AdminController {
     private final RedisService redisService;
     private final AdminService adminService;
     private final AdminRoleService adminRoleService;
+    private final AdminResourceService adminResourceService;
 
     @ApiOperation("插入用户")
     @PostMapping("/save")
     public ResponseResult<?> save(Admin admin) {
         return adminService.save(admin) ? ResponseResult.ok() : ResponseResult.fail();
+    }
+
+    @ApiOperation("删除用户")
+    @DeleteMapping("/delete")
+    public ResponseResult<Integer> delete(@RequestParam("ids") Integer[] ids) {
+        return ResponseResult.ok(adminService.delete(ids));
     }
 
     @ApiOperation("更新用户")
@@ -65,7 +74,7 @@ public class AdminController {
     @ApiOperation("查询用户所有角色")
     @PostMapping("/{adminId}/roles")
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
-        String key = Constant.ADMIN_ROLE + "::" + adminId;
+        String key = Constant.UM_ADMIN_ROLE + "::" + adminId;
         List<Role> roles = redisService.get(key, Role.class);
         if (CollectionUtils.isEmpty(roles)) {
             roles = adminRoleService.getRolesByAdmin(adminId);
@@ -75,14 +84,26 @@ public class AdminController {
     }
 
     @ApiOperation("授予用户角色")
-    @PostMapping("/{adminId}/grant")
-    public ResponseResult<?> grant(@PathVariable("adminId") Integer adminId, @RequestParam("roleIds[]") Integer[] roleIds) {
-        return adminRoleService.grant(adminId, roleIds) ? ResponseResult.ok() : ResponseResult.fail();
+    @PostMapping("/{adminId}/grant/role")
+    public ResponseResult<?> grantRole(@PathVariable("adminId") Integer adminId, @RequestParam("roleIds[]") Integer[] roleIds) {
+        return adminRoleService.grantRole(adminId, roleIds) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
-    @ApiOperation("XSS测试")
-    @PostMapping("/xss")
-    public ResponseResult<String> testXss(String str) {
-        return ResponseResult.ok(str);
+    @ApiOperation("查询用户所有资源")
+    @PostMapping("/{adminId}/resources")
+    public ResponseResult<List<Resource>> resources(@PathVariable("adminId") Integer adminId) {
+        String key = Constant.UM_ADMIN_RESOURCE + "::" + adminId;
+        List<Resource> resources = redisService.get(key, Resource.class);
+        if (CollectionUtils.isEmpty(resources)) {
+            resources = adminResourceService.getResourceByAdminId(adminId);
+            redisService.put(key, resources);
+        }
+        return ResponseResult.ok(resources);
+    }
+
+    @ApiOperation("授予用户资源")
+    @PostMapping("/{adminId}/grant/resource")
+    public ResponseResult<?> grant(@PathVariable("adminId") Integer adminId, @RequestParam("resourceIds[]") Integer[] resourceIds) {
+        return adminResourceService.grantResource(adminId, resourceIds) ? ResponseResult.ok() : ResponseResult.fail();
     }
 }

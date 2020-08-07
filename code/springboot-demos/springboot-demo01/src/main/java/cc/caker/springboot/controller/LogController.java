@@ -43,4 +43,10 @@ public class LogController {
                                            @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(logService.page(new Page<>(page, size)));
     }
+
+    @ApiOperation("XSS测试")
+    @PostMapping("/xss")
+    public ResponseResult<String> testXss(String str) {
+        return ResponseResult.ok(str);
+    }
 }
