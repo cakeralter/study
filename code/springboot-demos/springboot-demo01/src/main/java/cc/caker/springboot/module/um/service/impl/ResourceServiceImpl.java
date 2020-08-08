@@ -10,8 +10,11 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台资源表 服务实现类
@@ -47,8 +50,18 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     @Cacheable(value = "resource", unless = "#result == null")
     @Override
-    public List<Resource> loadAllResources() {
-
-        return null;
+    public Map<String, String> loadAllResources() {
+        List<Resource> resources = resourceMapper.findAllEnabled();
+        Map<String, String> chains = new HashMap<>(32);
+        resources.forEach(x -> {
+            StringBuilder allow = new StringBuilder("authc, perms[")
+                    .append(x.getCode()).append("]");
+            if (!CollectionUtils.isEmpty(x.getRoles())) {
+                allow.append(", roles[")
+                        .append(String.join(",", x.getRoles())).append("]");
+            }
+            chains.put(x.getUri(), allow.toString());
+        });
+        return chains;
     }
 }

@@ -4,6 +4,7 @@ import cc.caker.springboot.repo.model.db1.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台资源表 服务类
@@ -33,5 +34,5 @@ public interface ResourceService extends IService<Resource> {
      *
      * @return
      */
-    List<Resource> loadAllResources();
+    Map<String, String> loadAllResources();
 }

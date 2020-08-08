@@ -27,4 +27,19 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @return
      */
     List<Resource> findByParentId(Integer parentId);
+
+    /**
+     * 查询所有可用资源
+     *
+     * @return
+     */
+    List<Resource> findAllEnabled();
+
+    /**
+     * 查询该资源所有role
+     *
+     * @param id
+     * @return
+     */
+    List<String> findRoles(Integer id);
 }

@@ -43,10 +43,6 @@ public class Resource implements Serializable {
     @TableField("name")
     private String name;
 
-    @ApiModelProperty("资源shiro配置")
-    @TableField("allow")
-    private String allow;
-
     @ApiModelProperty("资源编码")
     @TableField("code")
     private String code;
@@ -81,4 +77,7 @@ public class Resource implements Serializable {
 
     @TableField(exist = false)
     private List<Resource> children;
+
+    @TableField(exist = false)
+    private List<String> roles;
 }

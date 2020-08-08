@@ -4,14 +4,13 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, name, code, allow, icon, type, uri, status, create_time, update_time, sort
+        id, parent_id, name, code, icon, type, uri, status, create_time, update_time, sort
     </sql>
 
     <resultMap id="Base_Result_Map" type="Resource">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="code" column="code"/>
-        <result property="allow" column="allow"/>
         <result property="icon" column="icon"/>
         <result property="type" column="type"/>
         <result property="uri" column="uri"/>
@@ -20,22 +19,44 @@
         <result property="updateTime" column="update_time"/>
         <result property="sort" column="sort"/>
         <result property="parentId" column="parent_id"/>
+    </resultMap>
+
+    <resultMap id="Children_Map" extends="Base_Result_Map" type="Resource">
         <!--级联查询-->
         <collection property="children" column="id" ofType="Resource" select="findByParentId"/>
     </resultMap>
 
-    <select id="findAll" resultMap="Base_Result_Map">
+    <resultMap id="Enabled_Map" extends="Base_Result_Map" type="Resource">
+        <collection property="roles" column="id" ofType="string" select="findRoles"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="Children_Map">
         select *
         from t_resource
         where parent_id is null
         order by sort
     </select>
 
-    <select id="findByParentId" resultMap="Base_Result_Map">
+    <select id="findByParentId" resultMap="Children_Map">
         select *
         from t_resource
         where parent_id = #{parentId}
         order by sort
+    </select>
+
+    <select id="findAllEnabled" resultMap="Enabled_Map">
+        select *
+        from t_resource
+        where status = 1
+    </select>
+
+    <select id="findRoles" resultType="string">
+        select distinct tr.code
+        from t_role tr
+                 join t_role_resource trr on tr.id = trr.role_id
+                 join t_resource tre on trr.resource_id = tre.id and tre.status = 1
+        where tr.status = 1
+          and tre.id = #{id}
     </select>
 
 </mapper>
