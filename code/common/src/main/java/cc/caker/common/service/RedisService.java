@@ -91,7 +91,7 @@ public interface RedisService {
     /**
      * delete keys
      *
-     * @param key
+     * @param keys
      * @return
      */
     int delete(final String... keys);

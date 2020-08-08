@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +74,7 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public <K, V> Map<K, V> get(String key, Class<K> kClass, Class<V> vClass) {
-        MapType mapType = mapper.getTypeFactory().constructMapType(HashMap.class, kClass, vClass);
+        MapType mapType = mapper.getTypeFactory().constructMapType(LinkedHashMap.class, kClass, vClass);
         try {
             return mapper.readValue(template.opsForValue().get(key), mapType);
         } catch (Exception e) {

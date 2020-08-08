@@ -21,4 +21,19 @@ public interface Enumerations {
         private final String name;
         private final int value;
     }
+
+    /**
+     * 资源类型
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum ResourceType {
+        DIRECTORY("目录", 1),
+        MENU("菜单", 2),
+        INTERFACE("接口", 3),
+        BUTTON("按钮", 4);
+
+        private final String name;
+        private final int value;
+    }
 }

@@ -25,38 +25,38 @@ public class ResourceController {
     private final ResourceService resourceService;
 
     @ApiOperation("插入资源")
-    @PostMapping("/save")
+    @PostMapping("/s/save")
     public ResponseResult<?> save(Resource resource) {
         return resourceService.save(resource) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("删除资源")
-    @DeleteMapping("/delete")
+    @DeleteMapping("/d/delete")
     public ResponseResult<Integer> delete(@RequestParam("ids") Integer[] ids) {
         return ResponseResult.ok(resourceService.delete(ids));
     }
 
     @ApiOperation("更新资源")
-    @PatchMapping("/update")
+    @PatchMapping("/u/update")
     public ResponseResult<?> update(Resource resource) {
         return resourceService.updateById(resource) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("通过ID查询资源")
-    @PostMapping("/{id}")
+    @PostMapping("/q/{id}")
     public ResponseResult<Resource> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(resourceService.getById(id));
     }
 
     @ApiOperation("分页查询所有资源")
-    @PostMapping("/list")
+    @PostMapping("/q/list")
     public ResponseResult<IPage<Resource>> list(@RequestParam(defaultValue = "1") Integer page,
                                                 @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(resourceService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("查询所有资源")
-    @PostMapping("/all")
+    @PostMapping("/q/all")
     public ResponseResult<List<Resource>> all() {
         return ResponseResult.ok(resourceService.findAll());
     }

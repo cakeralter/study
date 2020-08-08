@@ -32,50 +32,50 @@ public class RoleController {
     private final RoleResourceService roleResourceService;
 
     @ApiOperation("插入角色")
-    @PostMapping("/save")
+    @PostMapping("/s/save")
     public ResponseResult<?> save(Role role) {
         return roleService.save(role) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("删除角色")
-    @DeleteMapping("/delete")
+    @DeleteMapping("/d/delete")
     public ResponseResult<Integer> delete(@RequestParam("ids") Integer[] ids) {
         return ResponseResult.ok(roleService.delete(ids));
     }
 
     @ApiOperation("更新角色")
-    @PatchMapping("/update")
+    @PatchMapping("/u/update")
     public ResponseResult<?> update(Role role) {
         return roleService.updateById(role) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("通过ID查询角色")
-    @PostMapping("/{id}")
+    @PostMapping("/q/{id}")
     public ResponseResult<Role> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(roleService.getById(id));
     }
 
     @ApiOperation("分页查询所有角色")
-    @PostMapping("/list")
+    @PostMapping("/q/list")
     public ResponseResult<IPage<Role>> list(@RequestParam(defaultValue = "1") Integer page,
                                             @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(roleService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("查询所有角色")
-    @PostMapping("/all")
+    @PostMapping("/q/all")
     public ResponseResult<List<Role>> all() {
         return ResponseResult.ok(roleService.list());
     }
 
     @ApiOperation("授予角色资源")
-    @PostMapping("/{roleId}/grant/resource")
+    @PostMapping("/g/{roleId}/resource")
     public ResponseResult<?> grant(@PathVariable Integer roleId, @RequestParam("resourceIds[]") Integer[] resourceIds) {
         return roleResourceService.grantResource(roleId, resourceIds) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("查询角色所有资源")
-    @PostMapping("/{roleId}/resources")
+    @PostMapping("/q/{roleId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("roleId") Integer roleId) {
         String key = RedisConstant.UM_ROLE_RESOURCE + "::" + roleId;
         List<Resource> resources = redisService.get(key, Resource.class);

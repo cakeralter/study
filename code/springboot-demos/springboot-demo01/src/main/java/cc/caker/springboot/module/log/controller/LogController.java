@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Api(tags = "日志管理接口")
 @RestController
-@RequestMapping("/log")
+@RequestMapping("/sm/log")
 public class LogController {
 
     private final LogService logService;
@@ -28,7 +28,7 @@ public class LogController {
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path", dataType = "Integer")
     )
-    @PostMapping("/{id}")
+    @PostMapping("/q/{id}")
     public ResponseResult<Log> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(logService.getById(id));
     }
@@ -38,14 +38,14 @@ public class LogController {
             @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "每页条数", defaultValue = "5", dataType = "Integer")
     })
-    @PostMapping("/list")
+    @PostMapping("/q/list")
     public ResponseResult<IPage<Log>> list(@RequestParam(defaultValue = "1") Integer page,
                                            @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(logService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("XSS测试")
-    @PostMapping("/xss")
+    @PostMapping("/t/xss")
     public ResponseResult<String> testXss(String str) {
         return ResponseResult.ok(str);
     }

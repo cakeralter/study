@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +28,7 @@ import static cc.caker.springboot.constant.RedisConstant.UM_RESOURCES_ENABLED_AL
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
-    private final Map<String, String> DEFAULT_PERMISSIONS = new HashMap<>();
+    private final Map<String, String> DEFAULT_PERMISSIONS = new LinkedHashMap<>();
 
     {
         DEFAULT_PERMISSIONS.put("/logout", "anon");
@@ -72,7 +72,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         Map<String, String> chains = redisService.get(UM_RESOURCES_ENABLED_ALL, String.class, String.class);
         if (Objects.isNull(chains)) {
             List<Resource> resources = resourceMapper.findAllEnabled();
-            chains = new HashMap<>(DEFAULT_PERMISSIONS);
+            chains = new LinkedHashMap<>(DEFAULT_PERMISSIONS);
             for (Resource resource : resources) {
                 String allow = String.format("authc, perms[%s]", resource.getCode());
                 chains.put(resource.getUri(), allow);

@@ -45,9 +45,12 @@
     </select>
 
     <select id="findAllEnabled" resultType="Resource">
-        select *
+        select id, uri, code
         from t_resource
         where status = 1
+          and uri is not null
+          and uri != ''
+        order by sort
     </select>
 
     <!--<select id="findRoles" resultType="string">
