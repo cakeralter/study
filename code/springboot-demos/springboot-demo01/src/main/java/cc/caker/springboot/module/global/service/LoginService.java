@@ -1,4 +1,4 @@
-package cc.caker.springboot.module.um.service;
+package cc.caker.springboot.module.global.service;
 
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.repo.model.db1.Admin;

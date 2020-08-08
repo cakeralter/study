@@ -26,9 +26,9 @@
         <collection property="children" column="id" ofType="Resource" select="findByParentId"/>
     </resultMap>
 
-    <resultMap id="Enabled_Map" extends="Base_Result_Map" type="Resource">
+    <!--<resultMap id="Enabled_Map" extends="Base_Result_Map" type="Resource">
         <collection property="roles" column="id" ofType="string" select="findRoles"/>
-    </resultMap>
+    </resultMap>-->
 
     <select id="findAll" resultMap="Children_Map">
         select *
@@ -44,19 +44,19 @@
         order by sort
     </select>
 
-    <select id="findAllEnabled" resultMap="Enabled_Map">
+    <select id="findAllEnabled" resultType="Resource">
         select *
         from t_resource
         where status = 1
     </select>
 
-    <select id="findRoles" resultType="string">
+    <!--<select id="findRoles" resultType="string">
         select distinct tr.code
         from t_role tr
                  join t_role_resource trr on tr.id = trr.role_id
                  join t_resource tre on trr.resource_id = tre.id and tre.status = 1
         where tr.status = 1
           and tre.id = #{id}
-    </select>
+    </select>-->
 
 </mapper>

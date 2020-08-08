@@ -41,5 +41,5 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @param id
      * @return
      */
-    List<String> findRoles(Integer id);
+//    List<String> findRoles(Integer id);
 }

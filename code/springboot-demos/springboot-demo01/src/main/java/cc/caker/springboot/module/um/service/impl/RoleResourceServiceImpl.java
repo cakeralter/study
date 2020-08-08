@@ -1,5 +1,6 @@
 package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.common.service.RedisService;
 import cc.caker.springboot.module.um.service.RoleResourceService;
 import cc.caker.springboot.repo.mapper.db1.RoleMapper;
 import cc.caker.springboot.repo.mapper.db1.RoleResourceMapper;
@@ -17,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static cc.caker.springboot.constant.RedisConstant.UM_ROLE_RESOURCE;
+
 /**
  * 角色资源表 服务实现类
  *
@@ -29,6 +32,7 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
 
     private final RoleResourceMapper roleResourceMapper;
     private final RoleMapper roleMapper;
+    private final RedisService redisService;
 
     @Override
     public List<Resource> getResourcesByRoleId(Integer roleId) {
@@ -54,6 +58,10 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
             rr.setResourceId(x);
             return rr;
         }).collect(Collectors.toList());
-        return super.saveBatch(roleResources);
+        boolean result = super.saveBatch(roleResources);
+        if (result) {
+            redisService.delete(UM_ROLE_RESOURCE);
+        }
+        return result;
     }
 }

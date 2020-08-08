@@ -1,5 +1,6 @@
 package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.common.service.RedisService;
 import cc.caker.springboot.module.um.service.AdminResourceService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.mapper.db1.AdminResourceMapper;
@@ -18,6 +19,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cc.caker.springboot.constant.Enumerations.Status;
+import static cc.caker.springboot.constant.RedisConstant.UM_ADMIN_RESOURCE;
 
 /**
  * @author cakeralter
@@ -29,6 +31,7 @@ public class AdminResourceServiceImpl extends ServiceImpl<AdminResourceMapper, A
 
     private final AdminResourceMapper adminResourceMapper;
     private final AdminMapper adminMapper;
+    private final RedisService redisService;
 
     @Override
     public List<Resource> getResourceByAdminId(Integer adminId) {
@@ -54,6 +57,10 @@ public class AdminResourceServiceImpl extends ServiceImpl<AdminResourceMapper, A
             ar.setResourceId(x);
             return ar;
         }).collect(Collectors.toList());
-        return super.saveBatch(adminResources);
+        boolean result = super.saveBatch(adminResources);
+        if (result) {
+            redisService.delete(UM_ADMIN_RESOURCE);
+        }
+        return result;
     }
 }

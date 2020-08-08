@@ -34,7 +34,7 @@ import java.time.format.DateTimeFormatter;
 public class RedisConfig {
 
     @Bean
-    public Jackson2JsonRedisSerializer<Object> genericFastJsonRedisSerializer() {
+    public Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer() {
         Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
         serializer.setObjectMapper(objectMapper());
         return serializer;
@@ -71,9 +71,9 @@ public class RedisConfig {
     public <T> RedisTemplate<String, T> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, T> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
-        template.setKeySerializer(genericFastJsonRedisSerializer());
+        template.setKeySerializer(jackson2JsonRedisSerializer());
         template.setValueSerializer(stringRedisSerializer());
-        template.setHashKeySerializer(genericFastJsonRedisSerializer());
+        template.setHashKeySerializer(jackson2JsonRedisSerializer());
         template.setHashValueSerializer(stringRedisSerializer());
         template.afterPropertiesSet();
         return template;

@@ -1,7 +1,7 @@
-package cc.caker.springboot.module.um.service.impl;
+package cc.caker.springboot.module.global.service.impl;
 
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.module.um.service.LoginService;
+import cc.caker.springboot.module.global.service.LoginService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.util.EncryptUtils;

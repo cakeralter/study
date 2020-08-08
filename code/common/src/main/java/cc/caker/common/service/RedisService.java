@@ -1,6 +1,7 @@
 package cc.caker.common.service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Redis操作接口
@@ -30,23 +31,24 @@ public interface RedisService {
     boolean put(final String key, String value, long expire);
 
     /**
-     * put list string
+     * put T
      *
      * @param key
-     * @param list
+     * @param data
      * @return
      */
-    <T> boolean put(final String key, List<T> list);
+    <T> boolean put(final String key, T data);
 
     /**
-     * put list string
+     * put T
      *
      * @param key
-     * @param list
+     * @param data
      * @param expire
+     * @param <T>
      * @return
      */
-    <T> boolean put(final String key, List<T> list, long expire);
+    <T> boolean put(final String key, T data, long expire);
 
     /**
      * get string
@@ -67,12 +69,32 @@ public interface RedisService {
     <T> List<T> get(final String key, Class<T> clazz);
 
     /**
+     * get map
+     *
+     * @param key
+     * @param kClass
+     * @param vClass
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    <K, V> Map<K, V> get(final String key, Class<K> kClass, Class<V> vClass);
+
+    /**
      * delete key
      *
      * @param key
      * @return
      */
     Boolean delete(final String key);
+
+    /**
+     * delete keys
+     *
+     * @param key
+     * @return
+     */
+    int delete(final String... keys);
 
     /**
      * 设置过期时间

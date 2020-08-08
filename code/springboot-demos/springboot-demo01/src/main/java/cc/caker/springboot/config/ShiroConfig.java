@@ -35,13 +35,6 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
-
-        chain.addPathDefinition("/um/logout", "anon");
-        chain.addPathDefinition("/um/login", "anon");
-        chain.addPathDefinition("/swagger**/**", "anon");
-        chain.addPathDefinition("/v3/**", "anon");
-        chain.addPathDefinition("/**", "authc");
-
         for (Map.Entry<String, String> next : resourceService.loadAllResources().entrySet()) {
             chain.addPathDefinition(next.getKey(), next.getValue());
         }

@@ -1,9 +1,9 @@
 package cc.caker.springboot.module.global.service.impl;
 
 import cc.caker.common.service.RedisService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.MapType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static cc.caker.springboot.constant.RedisConstant.DEFAULT_KEY_EXPIRE;
 
@@ -39,15 +41,15 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public <T> boolean put(String key, List<T> list) {
-        return put(key, list, DEFAULT_KEY_EXPIRE);
+    public <T> boolean put(String key, T data) {
+        return put(key, data, DEFAULT_KEY_EXPIRE);
     }
 
     @Override
-    public <T> boolean put(String key, List<T> list, long expire) {
+    public <T> boolean put(String key, T data, long expire) {
         try {
-            template.opsForValue().set(key, mapper.writeValueAsString(list), Duration.ofMillis(expire));
-        } catch (JsonProcessingException e) {
+            template.opsForValue().set(key, mapper.writeValueAsString(data), Duration.ofMillis(expire));
+        } catch (Exception e) {
             log.error("[{}] 放入缓存出错", key, e);
             return false;
         }
@@ -71,8 +73,30 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public <K, V> Map<K, V> get(String key, Class<K> kClass, Class<V> vClass) {
+        MapType mapType = mapper.getTypeFactory().constructMapType(HashMap.class, kClass, vClass);
+        try {
+            return mapper.readValue(template.opsForValue().get(key), mapType);
+        } catch (Exception e) {
+            log.error("查询缓存 [{}] 出错", key, e);
+        }
+        return null;
+    }
+
+    @Override
     public Boolean delete(String key) {
         return template.delete(key);
+    }
+
+    @Override
+    public int delete(String... keys) {
+        int count = 0;
+        for (String key : keys) {
+            if (delete(key)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override

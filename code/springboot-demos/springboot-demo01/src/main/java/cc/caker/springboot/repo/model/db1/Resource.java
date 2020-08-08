@@ -78,6 +78,6 @@ public class Resource implements Serializable {
     @TableField(exist = false)
     private List<Resource> children;
 
-    @TableField(exist = false)
-    private List<String> roles;
+//    @TableField(exist = false)
+//    private List<String> roles;
 }

@@ -1,20 +1,22 @@
 package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.common.service.RedisService;
 import cc.caker.springboot.constant.Enumerations;
 import cc.caker.springboot.module.um.service.ResourceService;
 import cc.caker.springboot.repo.mapper.db1.ResourceMapper;
 import cc.caker.springboot.repo.model.db1.Resource;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import static cc.caker.springboot.constant.RedisConstant.UM_RESOURCES_ALL;
+import static cc.caker.springboot.constant.RedisConstant.UM_RESOURCES_ENABLED_ALL;
 
 /**
  * 后台资源表 服务实现类
@@ -26,15 +28,29 @@ import java.util.Map;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
-    private final ResourceMapper resourceMapper;
+    private final Map<String, String> DEFAULT_PERMISSIONS = new HashMap<>();
 
-    @Cacheable(value = "resource", unless = "#result == null")
-    @Override
-    public List<Resource> findAll() {
-        return resourceMapper.findAll();
+    {
+        DEFAULT_PERMISSIONS.put("/logout", "anon");
+        DEFAULT_PERMISSIONS.put("/login", "anon");
+        DEFAULT_PERMISSIONS.put("/swagger**/**", "anon");
+        DEFAULT_PERMISSIONS.put("/v3/**", "anon");
+        DEFAULT_PERMISSIONS.put("/**", "authc");
     }
 
-    @CacheEvict(value = "resource", allEntries = true)
+    private final ResourceMapper resourceMapper;
+    private final RedisService redisService;
+
+    @Override
+    public List<Resource> findAll() {
+        List<Resource> resources = redisService.get(UM_RESOURCES_ALL, Resource.class);
+        if (Objects.isNull(resources)) {
+            resources = resourceMapper.findAll();
+            redisService.put(UM_RESOURCES_ALL, resources);
+        }
+        return resources;
+    }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int delete(Integer... ids) {
@@ -45,23 +61,24 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             resource.setId(id);
             count += resourceMapper.updateById(resource);
         }
+        if (count > 0) {
+            redisService.delete(UM_RESOURCES_ALL, UM_RESOURCES_ENABLED_ALL);
+        }
         return count;
     }
 
-    @Cacheable(value = "resource", unless = "#result == null")
     @Override
     public Map<String, String> loadAllResources() {
-        List<Resource> resources = resourceMapper.findAllEnabled();
-        Map<String, String> chains = new HashMap<>(32);
-        resources.forEach(x -> {
-            StringBuilder allow = new StringBuilder("authc, perms[")
-                    .append(x.getCode()).append("]");
-            if (!CollectionUtils.isEmpty(x.getRoles())) {
-                allow.append(", roles[")
-                        .append(String.join(",", x.getRoles())).append("]");
+        Map<String, String> chains = redisService.get(UM_RESOURCES_ENABLED_ALL, String.class, String.class);
+        if (Objects.isNull(chains)) {
+            List<Resource> resources = resourceMapper.findAllEnabled();
+            chains = new HashMap<>(DEFAULT_PERMISSIONS);
+            for (Resource resource : resources) {
+                String allow = String.format("authc, perms[%s]", resource.getCode());
+                chains.put(resource.getUri(), allow);
             }
-            chains.put(x.getUri(), allow.toString());
-        });
+            redisService.put(UM_RESOURCES_ENABLED_ALL, chains);
+        }
         return chains;
     }
 }
