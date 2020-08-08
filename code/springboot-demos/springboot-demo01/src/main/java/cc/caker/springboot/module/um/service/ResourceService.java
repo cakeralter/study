@@ -27,4 +27,11 @@ public interface ResourceService extends IService<Resource> {
      * @return
      */
     int delete(Integer... ids);
+
+    /**
+     * 加载所有可用资源
+     *
+     * @return
+     */
+    List<Resource> loadAllResources();
 }

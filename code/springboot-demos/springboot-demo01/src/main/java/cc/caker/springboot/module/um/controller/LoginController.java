@@ -1,5 +1,6 @@
 package cc.caker.springboot.module.um.controller;
 
+import cc.caker.common.enumeration.ResponseCode;
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.module.um.service.LoginService;
 import io.swagger.annotations.Api;
@@ -37,5 +38,17 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken(username, password));
         return ResponseResult.ok(subject.getPrincipal());
+    }
+
+    @ApiOperation(value = "未登录", hidden = true)
+    @RequestMapping("/no")
+    public ResponseResult<?> noLogin() {
+        return ResponseResult.fail(ResponseCode.FORBIDDEN.getStatus(), "请先登录系统!");
+    }
+
+    @ApiOperation(value = "未授权", hidden = true)
+    @RequestMapping("/authorize")
+    public ResponseResult<?> authorize() {
+        return ResponseResult.fail(ResponseCode.UNAUTHORIZED.getStatus(), "账号无权访问!");
     }
 }

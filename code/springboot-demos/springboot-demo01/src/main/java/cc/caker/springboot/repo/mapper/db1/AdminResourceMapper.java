@@ -23,10 +23,10 @@ public interface AdminResourceMapper extends BaseMapper<AdminResource> {
     List<Resource> findByAdminId(@Param("adminId") Integer adminId, @Param("state") Integer state);
 
     /**
-     * 查询用户资源Uri
+     * 查询用户资源code
      *
      * @param adminId
      * @return
      */
-    Set<String> findUriByAdminId(@Param("adminId") Integer adminId);
+    Set<String> findCodeByAdminId(@Param("adminId") Integer adminId);
 }

@@ -6,6 +6,8 @@ import cc.caker.springboot.repo.mapper.db1.ResourceMapper;
 import cc.caker.springboot.repo.model.db1.Resource;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +25,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     private final ResourceMapper resourceMapper;
 
+    @Cacheable(value = "resource", unless = "#result == null")
     @Override
     public List<Resource> findAll() {
         return resourceMapper.findAll();
     }
 
+    @CacheEvict(value = "resource", allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int delete(Integer... ids) {
@@ -39,5 +43,12 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             count += resourceMapper.updateById(resource);
         }
         return count;
+    }
+
+    @Cacheable(value = "resource", unless = "#result == null")
+    @Override
+    public List<Resource> loadAllResources() {
+
+        return null;
     }
 }

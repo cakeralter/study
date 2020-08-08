@@ -39,7 +39,7 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
-//        chain.addPathDefinition("/um/admin/**", "authc, roles[admin]");
+        chain.addPathDefinition("/um/admin/**", "authc, roles[ADMIN]");
 //        chain.addPathDefinition("/um/admin/all", "anon");
 //        chain.addPathDefinition("/um/logout", "anon");
 //        chain.addPathDefinition("/um/login", "anon");

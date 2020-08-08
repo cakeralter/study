@@ -86,5 +86,5 @@ public class Admin implements Serializable {
     private Set<String> roles;
 
     @TableField(exist = false)
-    private Set<String> resources;
+    private Set<String> perms;
 }

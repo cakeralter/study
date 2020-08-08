@@ -18,8 +18,8 @@
         <!--级联查询-->
         <collection property="roles" column="id" ofType="string"
                     select="cc.caker.springboot.repo.mapper.db1.AdminRoleMapper.findRolesByAdminId"/>
-        <collection property="resources" column="id" ofType="string"
-                    select="cc.caker.springboot.repo.mapper.db1.AdminResourceMapper.findUriByAdminId"/>
+        <collection property="perms" column="id" ofType="string"
+                    select="cc.caker.springboot.repo.mapper.db1.AdminResourceMapper.findCodeByAdminId"/>
     </resultMap>
 
     <select id="findByUsername" resultMap="Base_Admin_Map">

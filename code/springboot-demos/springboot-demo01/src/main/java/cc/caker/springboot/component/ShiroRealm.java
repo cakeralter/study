@@ -75,7 +75,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Admin principal = (Admin) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setRoles(principal.getRoles());
-        info.setStringPermissions(principal.getResources());
+        info.setStringPermissions(principal.getPerms());
         return info;
     }
 }
