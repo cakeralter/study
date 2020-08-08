@@ -19,16 +19,18 @@ import static cc.caker.common.enumeration.ResponseCode.OK;
 public class ResponseResult<T> implements Serializable {
 
     private static final long serialVersionUID = 8100914725362538840L;
-    private int code;
+    private int status;
     private String message;
+    private boolean ok;
     private T data;
 
     private ResponseResult() {
     }
 
-    private ResponseResult(int code, String message, T data) {
-        this.code = code;
+    private ResponseResult(int status, String message, boolean ok, T data) {
+        this.status = status;
         this.message = message;
+        this.ok = ok;
         this.data = data;
     }
 
@@ -39,15 +41,16 @@ public class ResponseResult<T> implements Serializable {
     /**
      * 构建响应对象
      *
-     * @param code    响应码
+     * @param status  响应码
      * @param message 相应信息
+     * @param ok      是否成功
      * @param data    响应数据
      * @param <T>
      * @return ResponseResult<T>
      */
-    public static <T> ResponseResult<T> build(int code, String message, T data) {
+    public static <T> ResponseResult<T> build(int status, String message, boolean ok, T data) {
         return new ResponseResultBuilder<T>()
-                .ofCode(code).ofMessage(message).ofData(data)
+                .ofStatus(status).ofMessage(message).ofOk(ok).ofData(data)
                 .build();
     }
 
@@ -66,7 +69,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> ok(String msg, T data) {
-        return build(OK.getCode(), msg, data);
+        return build(OK.getStatus(), msg, true, data);
     }
 
     /**
@@ -80,7 +83,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> error(String msg) {
-        return build(ERROR.getCode(), msg, null);
+        return build(ERROR.getStatus(), msg, false, null);
     }
 
     /**
@@ -94,16 +97,17 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> fail(String msg) {
-        return fail(ERROR.getCode(), msg);
+        return fail(ERROR.getStatus(), msg);
     }
 
-    public static <T> ResponseResult<T> fail(int code, String msg) {
-        return build(code, msg, null);
+    public static <T> ResponseResult<T> fail(int status, String msg) {
+        return build(status, msg, false, null);
     }
 
     private static final class ResponseResultBuilder<T> {
-        private int code;
+        private int status;
         private String message;
+        private boolean ok;
         private T data;
 
         private ResponseResultBuilder() {
@@ -113,13 +117,18 @@ public class ResponseResult<T> implements Serializable {
             return new ResponseResultBuilder<>();
         }
 
-        public ResponseResultBuilder<T> ofCode(int code) {
-            this.code = code;
+        public ResponseResultBuilder<T> ofStatus(int status) {
+            this.status = status;
             return this;
         }
 
         public ResponseResultBuilder<T> ofMessage(String message) {
             this.message = message;
+            return this;
+        }
+
+        public ResponseResultBuilder<T> ofOk(boolean ok) {
+            this.ok = ok;
             return this;
         }
 
@@ -130,8 +139,9 @@ public class ResponseResult<T> implements Serializable {
 
         public ResponseResult<T> build() {
             ResponseResult<T> responseResult = new ResponseResult<>();
-            responseResult.setCode(code);
+            responseResult.setStatus(status);
             responseResult.setMessage(message);
+            responseResult.setOk(ok);
             responseResult.setData(data);
             return responseResult;
         }

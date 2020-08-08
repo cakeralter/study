@@ -1,11 +1,11 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.springboot.module.um.service.RoleResourceService;
 import cc.caker.springboot.repo.mapper.db1.RoleMapper;
 import cc.caker.springboot.repo.mapper.db1.RoleResourceMapper;
 import cc.caker.springboot.repo.model.db1.Resource;
 import cc.caker.springboot.repo.model.db1.Role;
 import cc.caker.springboot.repo.model.db1.RoleResource;
-import cc.caker.springboot.service.RoleResourceService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
-package cc.caker.springboot.controller;
+package cc.caker.springboot.module.log.controller;
 
 import cc.caker.common.vo.ResponseResult;
+import cc.caker.springboot.module.log.service.LogService;
 import cc.caker.springboot.repo.model.db2.Log;
-import cc.caker.springboot.service.LogService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;

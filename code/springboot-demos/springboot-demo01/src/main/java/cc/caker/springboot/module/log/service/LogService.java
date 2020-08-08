@@ -1,4 +1,4 @@
-package cc.caker.springboot.service;
+package cc.caker.springboot.module.log.service;
 
 import cc.caker.springboot.repo.model.db2.Log;
 import com.baomidou.mybatisplus.extension.service.IService;

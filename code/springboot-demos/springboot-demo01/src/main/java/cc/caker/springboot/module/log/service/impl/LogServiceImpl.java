@@ -1,8 +1,8 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.log.service.impl;
 
+import cc.caker.springboot.module.log.service.LogService;
 import cc.caker.springboot.repo.mapper.db2.LogMapper;
 import cc.caker.springboot.repo.model.db2.Log;
-import cc.caker.springboot.service.LogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

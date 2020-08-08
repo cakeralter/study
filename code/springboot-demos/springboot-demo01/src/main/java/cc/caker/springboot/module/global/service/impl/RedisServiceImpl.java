@@ -1,4 +1,4 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.global.service.impl;
 
 import cc.caker.common.service.RedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;

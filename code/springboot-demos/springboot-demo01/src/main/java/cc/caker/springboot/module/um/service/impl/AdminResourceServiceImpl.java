@@ -1,11 +1,11 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.springboot.module.um.service.AdminResourceService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.mapper.db1.AdminResourceMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.repo.model.db1.AdminResource;
 import cc.caker.springboot.repo.model.db1.Resource;
-import cc.caker.springboot.service.AdminResourceService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static cc.caker.springboot.constant.Enumerations.Status;
 
 /**
  * @author cakeralter
@@ -30,7 +32,7 @@ public class AdminResourceServiceImpl extends ServiceImpl<AdminResourceMapper, A
 
     @Override
     public List<Resource> getResourceByAdminId(Integer adminId) {
-        return adminResourceMapper.findByAdminId(adminId);
+        return adminResourceMapper.findByAdminId(adminId, Status.ENABLED.getValue());
     }
 
     @Transactional(rollbackFor = Exception.class)

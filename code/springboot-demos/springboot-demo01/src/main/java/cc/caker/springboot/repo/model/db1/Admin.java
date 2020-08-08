@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,7 @@ import java.time.LocalDateTime;
 @Setter
 @TableName("t_admin")
 @ApiModel(value = "Admin对象", description = "用户表")
+@JsonIgnoreProperties(value = {"password", "secret"}, allowSetters = true)
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +45,7 @@ public class Admin implements Serializable {
     @TableField("username")
     private String username;
 
-    @ApiModelProperty("登录密码")
+    @ApiModelProperty(value = "登录密码")
     @TableField(value = "password")
     private String password;
 

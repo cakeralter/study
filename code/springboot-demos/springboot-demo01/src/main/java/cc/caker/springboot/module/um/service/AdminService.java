@@ -1,4 +1,4 @@
-package cc.caker.springboot.service;
+package cc.caker.springboot.module.um.service;
 
 import cc.caker.springboot.repo.model.db1.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -17,5 +17,14 @@ public interface AdminService extends IService<Admin> {
      * @param ids
      * @return
      */
-    int delete(Integer[] ids);
+    int delete(Integer... ids);
+
+    /**
+     * 修改密码
+     *
+     * @param adminId
+     * @param password
+     * @return
+     */
+    boolean changePassword(String adminId, String password);
 }

@@ -1,14 +1,14 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.springboot.constant.Enumerations;
+import cc.caker.springboot.module.um.service.ResourceService;
 import cc.caker.springboot.repo.mapper.db1.ResourceMapper;
 import cc.caker.springboot.repo.model.db1.Resource;
-import cc.caker.springboot.service.ResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +30,14 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int delete(Integer[] ids) {
-        return resourceMapper.deleteBatchIds(Arrays.asList(ids));
+    public int delete(Integer... ids) {
+        int count = 0;
+        Resource resource = new Resource();
+        resource.setStatus(Enumerations.Status.DISABLED.getValue());
+        for (Integer id : ids) {
+            resource.setId(id);
+            count += resourceMapper.updateById(resource);
+        }
+        return count;
     }
 }

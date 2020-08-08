@@ -1,14 +1,14 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.springboot.module.um.service.RoleService;
 import cc.caker.springboot.repo.mapper.db1.RoleMapper;
 import cc.caker.springboot.repo.model.db1.Role;
-import cc.caker.springboot.service.RoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
+import static cc.caker.springboot.constant.Enumerations.Status;
 
 /**
  * 角色表 服务实现类
@@ -24,7 +24,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int delete(Integer[] ids) {
-        return roleMapper.deleteBatchIds(Arrays.asList(ids));
+    public int delete(Integer... ids) {
+        int count = 0;
+        Role role = new Role();
+        role.setStatus(Status.DISABLED.getValue());
+        for (Integer id : ids) {
+            role.setId(id);
+            count += roleMapper.updateById(role);
+        }
+        return count;
     }
 }

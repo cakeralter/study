@@ -1,4 +1,4 @@
-package cc.caker.springboot.service;
+package cc.caker.springboot.module.um.service;
 
 import cc.caker.springboot.repo.model.db1.AdminRole;
 import cc.caker.springboot.repo.model.db1.Role;

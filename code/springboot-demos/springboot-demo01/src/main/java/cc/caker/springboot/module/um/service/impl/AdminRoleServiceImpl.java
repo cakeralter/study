@@ -1,11 +1,11 @@
-package cc.caker.springboot.service.impl;
+package cc.caker.springboot.module.um.service.impl;
 
+import cc.caker.springboot.module.um.service.AdminRoleService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.mapper.db1.AdminRoleMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.repo.model.db1.AdminRole;
 import cc.caker.springboot.repo.model.db1.Role;
-import cc.caker.springboot.service.AdminRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;

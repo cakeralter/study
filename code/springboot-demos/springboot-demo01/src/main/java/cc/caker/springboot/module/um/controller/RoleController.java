@@ -1,12 +1,12 @@
-package cc.caker.springboot.controller;
+package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.constant.Constant;
+import cc.caker.springboot.module.um.service.RoleResourceService;
+import cc.caker.springboot.module.um.service.RoleService;
 import cc.caker.springboot.repo.model.db1.Resource;
 import cc.caker.springboot.repo.model.db1.Role;
-import cc.caker.springboot.service.RoleResourceService;
-import cc.caker.springboot.service.RoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Api(tags = "角色管理接口")
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/um/role")
 public class RoleController {
 
     private final RedisService redisService;

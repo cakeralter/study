@@ -1,4 +1,4 @@
-package cc.caker.springboot.service;
+package cc.caker.springboot.module.um.service;
 
 import cc.caker.springboot.repo.model.db1.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -26,5 +26,5 @@ public interface ResourceService extends IService<Resource> {
      * @param ids
      * @return
      */
-    int delete(Integer[] ids);
+    int delete(Integer... ids);
 }
