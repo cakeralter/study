@@ -7,4 +7,26 @@
         id, nick_name, username, password, icon, email, note, create_time, login_time, status, secret, sort
     </sql>
 
+    <resultMap id="Base_Admin_Map" type="Admin">
+        <id property="id" column="id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="status" column="status"/>
+        <result property="secret" column="secret"/>
+        <!--级联查询-->
+        <collection property="roles" column="id" ofType="string"
+                    select="cc.caker.springboot.repo.mapper.db1.AdminRoleMapper.findRolesByAdminId"/>
+        <collection property="resources" column="id" ofType="string"
+                    select="cc.caker.springboot.repo.mapper.db1.AdminResourceMapper.findUriByAdminId"/>
+    </resultMap>
+
+    <select id="findByUsername" resultMap="Base_Admin_Map">
+        select id, nick_name, username, password, login_time, status, secret
+        from t_admin
+        where username = #{username}
+          and status = 1
+    </select>
+
 </mapper>

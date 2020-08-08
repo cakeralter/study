@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author cakeralter
@@ -20,4 +21,12 @@ public interface AdminResourceMapper extends BaseMapper<AdminResource> {
      * @return
      */
     List<Resource> findByAdminId(@Param("adminId") Integer adminId, @Param("state") Integer state);
+
+    /**
+     * 查询用户资源Uri
+     *
+     * @param adminId
+     * @return
+     */
+    Set<String> findUriByAdminId(@Param("adminId") Integer adminId);
 }

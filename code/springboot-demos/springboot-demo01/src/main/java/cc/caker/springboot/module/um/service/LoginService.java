@@ -15,5 +15,6 @@ public interface LoginService {
      * @param admin
      * @return
      */
+    @Deprecated
     ResponseResult<String> login(Admin admin);
 }

@@ -4,13 +4,14 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, name, code, icon, type, uri, status, create_time, update_time, sort
+        id, parent_id, name, code, allow, icon, type, uri, status, create_time, update_time, sort
     </sql>
 
     <resultMap id="Base_Result_Map" type="Resource">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="code" column="code"/>
+        <result property="allow" column="allow"/>
         <result property="icon" column="icon"/>
         <result property="type" column="type"/>
         <result property="uri" column="uri"/>

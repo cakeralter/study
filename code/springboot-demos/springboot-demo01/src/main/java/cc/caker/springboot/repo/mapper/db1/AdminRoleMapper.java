@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 用户角色表 Mapper 接口
@@ -17,10 +18,18 @@ import java.util.List;
 public interface AdminRoleMapper extends BaseMapper<AdminRole> {
 
     /**
-     * 通过用户ID查询所有资源
+     * 通过用户ID查询所有角色
      *
      * @param adminId
      * @return
      */
-    List<Role> findByAdminId(@Param("adminId") Integer adminId);
+    List<Role> findRoles(@Param("adminId") Integer adminId);
+
+    /**
+     * 通过用户ID查询所有角色CODE
+     *
+     * @param adminId
+     * @return
+     */
+    Set<String> findRolesByAdminId(@Param("adminId") Integer adminId);
 }

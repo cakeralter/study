@@ -19,6 +19,6 @@ public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
     public ResponseResult<?> handleException(Exception e) {
         log.error("请求出错：" + e.getMessage(), e);
-        return ResponseResult.build(ResponseCode.ERROR.getStatus(), e.getMessage(), null);
+        return ResponseResult.fail(ResponseCode.SERVER_ERROR.getStatus(), e.getMessage());
     }
 }

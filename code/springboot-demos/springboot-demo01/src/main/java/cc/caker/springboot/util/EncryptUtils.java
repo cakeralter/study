@@ -1,30 +1,40 @@
 package cc.caker.springboot.util;
 
-import org.springframework.util.Base64Utils;
-import org.springframework.util.DigestUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.util.StringUtils;
 
 /**
+ * 加密
+ *
  * @author cakeralter
  * @date 2020/8/8
  */
-public interface CodingUtils {
+public interface EncryptUtils {
 
     /**
      * 公钥
      */
     String PUBLIC_KEY = "SpringBoot";
+    /**
+     * 加密的次数
+     */
+    int HASH_ITERATIONS = 1024;
+    /**
+     * 加密方式
+     */
+    String ENCRYPT_TYPE = "md5";
 
     /**
-     * 加密
+     * encrypt
      *
      * @param str
+     * @param salt
      * @return
      */
     static String encrypt(String str, String salt) {
         if (StringUtils.isEmpty(str)) {
             salt = PUBLIC_KEY;
         }
-        return DigestUtils.md5DigestAsHex(Base64Utils.encode((str + salt).getBytes()));
+        return new SimpleHash(ENCRYPT_TYPE, str, salt, HASH_ITERATIONS).toHex();
     }
 }

@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static cc.caker.springboot.constant.Constant.DEFAULT_KEY_EXPIRE;
+import static cc.caker.springboot.constant.RedisConstant.DEFAULT_KEY_EXPIRE;
 
 /**
  * @author cakeralter

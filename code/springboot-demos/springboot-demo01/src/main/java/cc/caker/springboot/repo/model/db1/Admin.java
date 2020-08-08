@@ -15,6 +15,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * 用户表
@@ -80,4 +81,10 @@ public class Admin implements Serializable {
     @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;
+
+    @TableField(exist = false)
+    private Set<String> roles;
+
+    @TableField(exist = false)
+    private Set<String> resources;
 }

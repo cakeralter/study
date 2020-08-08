@@ -7,11 +7,20 @@
         id, admin_id, role_id, create_time
     </sql>
 
-    <select id="findByAdminId" resultType="Role" parameterType="int">
+    <select id="findRoles" resultType="Role" parameterType="int">
         select tr.*
         from t_admin_role tar
                  join t_role tr on tar.role_id = tr.id
         where tar.admin_id = #{adminId}
+          and tr.status = 1
+    </select>
+
+    <select id="findRolesByAdminId" resultType="string" parameterType="int">
+        select distinct tr.code
+        from t_admin_role tar
+                 join t_role tr on tar.role_id = tr.id
+        where tar.admin_id = #{adminId}
+          and tr.status = 1
     </select>
 
 </mapper>

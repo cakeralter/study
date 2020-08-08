@@ -4,7 +4,7 @@ import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.module.um.service.LoginService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
-import cc.caker.springboot.util.CodingUtils;
+import cc.caker.springboot.util.EncryptUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         q.setStatus(Status.ENABLED.getValue());
         Admin origin = adminMapper.selectOne(new QueryWrapper<>(q));
         if (Objects.isNull(origin)
-                || !Objects.equals(origin.getPassword(), CodingUtils.encrypt(admin.getPassword(), origin.getSecret()))) {
+                || !Objects.equals(origin.getPassword(), EncryptUtils.encrypt(admin.getPassword(), origin.getSecret()))) {
             return ResponseResult.fail("用户名或密码错误");
         }
         Admin target = new Admin();

@@ -32,7 +32,7 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
 
     @Override
     public List<Role> getRolesByAdmin(Integer id) {
-        return adminRoleMapper.findByAdminId(id);
+        return adminRoleMapper.findRoles(id);
     }
 
     @Transactional(rollbackFor = Exception.class)

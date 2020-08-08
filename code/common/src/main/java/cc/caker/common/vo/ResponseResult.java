@@ -6,8 +6,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-import static cc.caker.common.enumeration.ResponseCode.ERROR;
 import static cc.caker.common.enumeration.ResponseCode.OK;
+import static cc.caker.common.enumeration.ResponseCode.SERVER_ERROR;
 
 /**
  * @author cakeralter
@@ -79,11 +79,11 @@ public class ResponseResult<T> implements Serializable {
      * @return
      */
     public static <T> ResponseResult<T> error() {
-        return error(ERROR.name());
+        return error(SERVER_ERROR.name());
     }
 
     public static <T> ResponseResult<T> error(String msg) {
-        return build(ERROR.getStatus(), msg, false, null);
+        return build(SERVER_ERROR.getStatus(), msg, false, null);
     }
 
     /**
@@ -97,7 +97,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> fail(String msg) {
-        return fail(ERROR.getStatus(), msg);
+        return fail(SERVER_ERROR.getStatus(), msg);
     }
 
     public static <T> ResponseResult<T> fail(int status, String msg) {

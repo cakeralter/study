@@ -16,17 +16,21 @@ public enum ResponseCode {
      */
     OK(200),
     /**
+     * 未登录
+     */
+    UNAUTHORIZED(401),
+    /**
+     * 未授权拒绝访问
+     */
+    FORBIDDEN(403),
+    /**
      * 资源不存在
      */
     NOT_FIND(404),
     /**
-     * 未授权
-     */
-    UNAUTHORIZED(401),
-    /**
      * 服务器出错
      */
-    ERROR(500);
+    SERVER_ERROR(500);
 
     private final int status;
 }

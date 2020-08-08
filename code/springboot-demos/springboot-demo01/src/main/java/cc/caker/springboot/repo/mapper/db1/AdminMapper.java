@@ -10,4 +10,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-08-06
  */
 public interface AdminMapper extends BaseMapper<Admin> {
+
+    /**
+     * 根据用户名查询
+     *
+     * @param username
+     * @return
+     */
+    Admin findByUsername(String username);
 }

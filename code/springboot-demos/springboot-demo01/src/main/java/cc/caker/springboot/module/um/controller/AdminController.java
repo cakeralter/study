@@ -2,14 +2,14 @@ package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.constant.Constant;
+import cc.caker.springboot.constant.RedisConstant;
 import cc.caker.springboot.module.um.service.AdminResourceService;
 import cc.caker.springboot.module.um.service.AdminRoleService;
 import cc.caker.springboot.module.um.service.AdminService;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.repo.model.db1.Resource;
 import cc.caker.springboot.repo.model.db1.Role;
-import cc.caker.springboot.util.CodingUtils;
+import cc.caker.springboot.util.EncryptUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -38,7 +38,7 @@ public class AdminController {
     @ApiOperation("插入用户")
     @PostMapping("/save")
     public ResponseResult<?> save(Admin admin) {
-        admin.setPassword(CodingUtils.encrypt(admin.getPassword(), admin.getSecret()));
+        admin.setPassword(EncryptUtils.encrypt(admin.getPassword(), admin.getSecret()));
         return adminService.save(admin) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
@@ -82,7 +82,7 @@ public class AdminController {
     @ApiOperation("查询用户所有角色")
     @PostMapping("/{adminId}/roles")
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
-        String key = Constant.UM_ADMIN_ROLE + "::" + adminId;
+        String key = RedisConstant.UM_ADMIN_ROLE + "::" + adminId;
         List<Role> roles = redisService.get(key, Role.class);
         if (CollectionUtils.isEmpty(roles)) {
             roles = adminRoleService.getRolesByAdmin(adminId);
@@ -100,7 +100,7 @@ public class AdminController {
     @ApiOperation("查询用户所有资源")
     @PostMapping("/{adminId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("adminId") Integer adminId) {
-        String key = Constant.UM_ADMIN_RESOURCE + "::" + adminId;
+        String key = RedisConstant.UM_ADMIN_RESOURCE + "::" + adminId;
         List<Resource> resources = redisService.get(key, Resource.class);
         if (CollectionUtils.isEmpty(resources)) {
             resources = adminResourceService.getResourceByAdminId(adminId);

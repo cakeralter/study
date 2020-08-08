@@ -2,16 +2,15 @@ package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.module.um.service.LoginService;
-import cc.caker.springboot.repo.model.db1.Admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 /**
  * @author cakeralter
@@ -28,13 +27,15 @@ public class LoginController {
     /**
      * 返回token
      *
-     * @param admin
+     * @param username
+     * @param password
      * @return
-     * @throws UserPrincipalNotFoundException
      */
     @ApiOperation("登录")
     @PostMapping
-    public ResponseResult<String> login(@RequestBody Admin admin) {
-        return loginService.login(admin);
+    public ResponseResult<?> login(String username, String password) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(new UsernamePasswordToken(username, password));
+        return ResponseResult.ok(subject.getPrincipal());
     }
 }

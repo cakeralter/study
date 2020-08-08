@@ -4,7 +4,7 @@ import cc.caker.springboot.constant.Enumerations;
 import cc.caker.springboot.module.um.service.AdminService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
-import cc.caker.springboot.util.CodingUtils;
+import cc.caker.springboot.util.EncryptUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         if (Objects.isNull(origin)) {
             return false;
         }
-        origin.setPassword(CodingUtils.encrypt(password, origin.getSecret()));
+        origin.setPassword(EncryptUtils.encrypt(password, origin.getSecret()));
         return adminMapper.updateById(origin) > 0;
     }
 }

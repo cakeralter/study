@@ -2,7 +2,7 @@ package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.constant.Constant;
+import cc.caker.springboot.constant.RedisConstant;
 import cc.caker.springboot.module.um.service.RoleResourceService;
 import cc.caker.springboot.module.um.service.RoleService;
 import cc.caker.springboot.repo.model.db1.Resource;
@@ -77,7 +77,7 @@ public class RoleController {
     @ApiOperation("查询角色所有资源")
     @PostMapping("/{roleId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("roleId") Integer roleId) {
-        String key = Constant.UM_ROLE_RESOURCE + "::" + roleId;
+        String key = RedisConstant.UM_ROLE_RESOURCE + "::" + roleId;
         List<Resource> resources = redisService.get(key, Resource.class);
         if (CollectionUtils.isEmpty(resources)) {
             resources = roleResourceService.getResourcesByRoleId(roleId);

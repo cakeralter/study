@@ -4,7 +4,7 @@ package cc.caker.springboot.constant;
  * @author cakeralter
  * @date 2020/8/7
  */
-public interface Constant {
+public interface RedisConstant {
 
     /**
      * 默认key有效时间(s)
