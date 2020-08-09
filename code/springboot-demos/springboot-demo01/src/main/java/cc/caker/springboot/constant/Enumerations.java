@@ -36,4 +36,17 @@ public interface Enumerations {
         private final String name;
         private final int value;
     }
+
+    /**
+     * 日志类型
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum LogType {
+        NORMAL("正常", 1),
+        EXCEPTION("异常", 2);
+
+        private final String name;
+        private final int value;
+    }
 }

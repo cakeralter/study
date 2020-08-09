@@ -2,7 +2,7 @@ package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.constant.RedisConstant;
+import cc.caker.springboot.constant.RedisConst;
 import cc.caker.springboot.module.um.service.AdminResourceService;
 import cc.caker.springboot.module.um.service.AdminRoleService;
 import cc.caker.springboot.module.um.service.AdminService;
@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -82,7 +82,7 @@ public class AdminController {
     @ApiOperation("查询用户所有角色")
     @PostMapping("/q/{adminId}/roles")
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
-        String key = RedisConstant.UM_ADMIN_ROLE + "::" + adminId;
+        String key = RedisConst.UM_ADMIN_ROLE + "::" + adminId;
         List<Role> roles = redisService.get(key, Role.class);
         if (CollectionUtils.isEmpty(roles)) {
             roles = adminRoleService.getRolesByAdmin(adminId);
@@ -100,7 +100,7 @@ public class AdminController {
     @ApiOperation("查询用户所有资源")
     @PostMapping("/q/{adminId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("adminId") Integer adminId) {
-        String key = RedisConstant.UM_ADMIN_RESOURCE + "::" + adminId;
+        String key = RedisConst.UM_ADMIN_RESOURCE + "::" + adminId;
         List<Resource> resources = redisService.get(key, Resource.class);
         if (CollectionUtils.isEmpty(resources)) {
             resources = adminResourceService.getResourceByAdminId(adminId);

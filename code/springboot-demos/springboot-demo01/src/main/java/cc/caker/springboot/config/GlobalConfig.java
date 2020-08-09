@@ -1,6 +1,6 @@
 package cc.caker.springboot.config;
 
-import cc.caker.springboot.component.XssFilter;
+import cc.caker.springboot.component.xss.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

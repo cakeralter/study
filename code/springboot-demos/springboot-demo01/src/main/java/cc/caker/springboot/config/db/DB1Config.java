@@ -1,4 +1,4 @@
-package cc.caker.springboot.config;
+package cc.caker.springboot.config.db;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

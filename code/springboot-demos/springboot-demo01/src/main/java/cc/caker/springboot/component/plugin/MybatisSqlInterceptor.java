@@ -1,4 +1,4 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.plugin;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -18,7 +18,6 @@ import org.apache.ibatis.session.RowBounds;
  */
 @Intercepts(@Signature(type = Executor.class, method = "query",
         args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}))
-//@Component
 public class MybatisSqlInterceptor implements Interceptor {
 
     @Override

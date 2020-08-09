@@ -1,7 +1,8 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.shiro;
 
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
+import com.google.common.base.Strings;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
@@ -11,7 +12,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -50,7 +50,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        if (StringUtils.isEmpty(token.getUsername())) {
+        if (Strings.isNullOrEmpty(token.getUsername())) {
             throw new AccountException("用户名为空!");
         }
         Admin origin = adminMapper.findByUsername(token.getUsername());

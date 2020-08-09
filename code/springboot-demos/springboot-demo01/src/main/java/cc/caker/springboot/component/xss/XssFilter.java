@@ -1,8 +1,8 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.xss;
 
 
+import com.google.common.base.Strings;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class XssFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String isIncludeRichText = filterConfig.getInitParameter("isIncludeRichText");
-        if (!StringUtils.isEmpty(isIncludeRichText)) {
+        if (!Strings.isNullOrEmpty(isIncludeRichText)) {
             IS_INCLUDE_RICH_TEXT = Boolean.parseBoolean(isIncludeRichText);
         }
         String temp = filterConfig.getInitParameter("excludes");

@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cc.caker.springboot.constant.Enumerations.Status;
-import static cc.caker.springboot.constant.RedisConstant.UM_ADMIN_RESOURCE;
+import static cc.caker.springboot.constant.RedisConst.UM_ADMIN_RESOURCE;
 
 /**
  * @author cakeralter

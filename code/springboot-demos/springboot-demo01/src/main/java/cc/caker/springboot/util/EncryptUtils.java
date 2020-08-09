@@ -1,7 +1,7 @@
 package cc.caker.springboot.util;
 
+import com.google.common.base.Strings;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.util.StringUtils;
 
 /**
  * 加密
@@ -32,7 +32,7 @@ public interface EncryptUtils {
      * @return
      */
     static String encrypt(String str, String salt) {
-        if (StringUtils.isEmpty(str)) {
+        if (Strings.isNullOrEmpty(salt)) {
             salt = PUBLIC_KEY;
         }
         return new SimpleHash(ENCRYPT_TYPE, str, salt, HASH_ITERATIONS).toHex();

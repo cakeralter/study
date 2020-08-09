@@ -2,7 +2,7 @@ package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.service.RedisService;
 import cc.caker.common.vo.ResponseResult;
-import cc.caker.springboot.constant.RedisConstant;
+import cc.caker.springboot.constant.RedisConst;
 import cc.caker.springboot.module.um.service.RoleResourceService;
 import cc.caker.springboot.module.um.service.RoleService;
 import cc.caker.springboot.repo.model.db1.Resource;
@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -77,7 +77,7 @@ public class RoleController {
     @ApiOperation("查询角色所有资源")
     @PostMapping("/q/{roleId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("roleId") Integer roleId) {
-        String key = RedisConstant.UM_ROLE_RESOURCE + "::" + roleId;
+        String key = RedisConst.UM_ROLE_RESOURCE + "::" + roleId;
         List<Resource> resources = redisService.get(key, Resource.class);
         if (CollectionUtils.isEmpty(resources)) {
             resources = roleResourceService.getResourcesByRoleId(roleId);

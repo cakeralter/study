@@ -1,6 +1,7 @@
 package cc.caker.springboot.module.um.controller;
 
 import cc.caker.common.vo.ResponseResult;
+import cc.caker.springboot.component.log.SysLog;
 import cc.caker.springboot.module.um.service.ResourceService;
 import cc.caker.springboot.repo.model.db1.Resource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -55,6 +56,7 @@ public class ResourceController {
         return ResponseResult.ok(resourceService.page(new Page<>(page, size)));
     }
 
+    @SysLog
     @ApiOperation("查询所有资源")
     @PostMapping("/q/all")
     public ResponseResult<List<Resource>> all() {

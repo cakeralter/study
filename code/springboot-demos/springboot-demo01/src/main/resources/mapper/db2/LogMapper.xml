@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        ID, CREATE_TIME, TYPE, SYSTEM, HOST, TOTAL_MEMORY, FREE_MEMORY, TOTAL_DISK, FREE_DISK, CPU_CANUSE, DB_CONNECT, LOCATION, LOG_LEVEL, MESSAGE
+        id, description, method, type, request_ip, exception_code, exception_detail, params, user_id, create_time
     </sql>
 
 </mapper>

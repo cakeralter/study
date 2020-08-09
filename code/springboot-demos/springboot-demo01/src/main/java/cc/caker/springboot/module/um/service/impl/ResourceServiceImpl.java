@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static cc.caker.springboot.constant.RedisConstant.UM_RESOURCES_ALL;
-import static cc.caker.springboot.constant.RedisConstant.UM_RESOURCES_ENABLED_ALL;
+import static cc.caker.springboot.constant.RedisConst.UM_RESOURCES_ALL;
+import static cc.caker.springboot.constant.RedisConst.UM_RESOURCES_ENABLED_ALL;
 
 /**
  * 后台资源表 服务实现类

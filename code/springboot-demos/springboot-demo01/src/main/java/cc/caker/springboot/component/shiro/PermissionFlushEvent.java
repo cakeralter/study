@@ -1,4 +1,4 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.shiro;
 
 /**
  * 权限刷新事件

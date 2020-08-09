@@ -1,7 +1,7 @@
 package cc.caker.springboot.module.um.service.impl;
 
 import cc.caker.common.service.RedisService;
-import cc.caker.springboot.component.PermissionFlushEvent;
+import cc.caker.springboot.component.shiro.PermissionFlushEvent;
 import cc.caker.springboot.module.um.service.AdminRoleService;
 import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.mapper.db1.AdminRoleMapper;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static cc.caker.springboot.constant.RedisConstant.UM_ADMIN_ROLE;
+import static cc.caker.springboot.constant.RedisConst.UM_ADMIN_ROLE;
 
 /**
  * 用户角色表 服务实现类

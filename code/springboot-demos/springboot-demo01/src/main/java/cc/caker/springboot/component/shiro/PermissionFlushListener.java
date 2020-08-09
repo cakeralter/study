@@ -1,4 +1,4 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.shiro;
 
 import cc.caker.springboot.module.um.service.ResourceService;
 import lombok.RequiredArgsConstructor;

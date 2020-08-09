@@ -26,7 +26,7 @@ public class LogController {
 
     @ApiOperation("通过ID查询日志")
     @ApiImplicitParams(
-            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path", dataType = "Integer")
+            @ApiImplicitParam(name = "id", value = "日志ID", required = true, paramType = "path", dataType = "Integer")
     )
     @PostMapping("/q/{id}")
     public ResponseResult<Log> user(@PathVariable("id") Integer id) {

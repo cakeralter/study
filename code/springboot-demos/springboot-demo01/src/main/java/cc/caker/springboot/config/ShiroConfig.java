@@ -1,6 +1,6 @@
 package cc.caker.springboot.config;
 
-import cc.caker.springboot.component.ShiroRealm;
+import cc.caker.springboot.component.shiro.ShiroRealm;
 import cc.caker.springboot.module.um.service.ResourceService;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;

@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static cc.caker.springboot.constant.RedisConstant.DEFAULT_KEY_EXPIRE;
+import static cc.caker.springboot.constant.RedisConst.DEFAULT_KEY_EXPIRE;
 
 /**
  * @author cakeralter

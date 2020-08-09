@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static cc.caker.springboot.constant.RedisConstant.UM_ROLE_RESOURCE;
+import static cc.caker.springboot.constant.RedisConst.UM_ROLE_RESOURCE;
 
 /**
  * 角色资源表 服务实现类

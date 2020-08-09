@@ -1,7 +1,7 @@
-package cc.caker.springboot.component;
+package cc.caker.springboot.component.xss;
 
 import cc.caker.springboot.util.XssFilterUtils;
-import org.springframework.util.StringUtils;
+import com.google.common.base.Strings;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -36,7 +36,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         }
         name = XssFilterUtils.clean(name);
         String value = super.getParameter(name);
-        if (!StringUtils.isEmpty(value)) {
+        if (!Strings.isNullOrEmpty(value)) {
             value = XssFilterUtils.clean(value);
         }
         return value;
@@ -62,7 +62,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     public String getHeader(String name) {
         name = XssFilterUtils.clean(name);
         String value = super.getHeader(name);
-        if (!StringUtils.isEmpty(value)) {
+        if (!Strings.isNullOrEmpty(value)) {
             value = XssFilterUtils.clean(value);
         }
         return value;

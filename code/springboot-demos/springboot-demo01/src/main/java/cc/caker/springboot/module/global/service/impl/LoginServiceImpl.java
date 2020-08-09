@@ -6,11 +6,11 @@ import cc.caker.springboot.repo.mapper.db1.AdminMapper;
 import cc.caker.springboot.repo.model.db1.Admin;
 import cc.caker.springboot.util.EncryptUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -30,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public ResponseResult<String> login(Admin admin) {
-        if (Objects.isNull(admin) || StringUtils.isEmpty(admin.getUsername()) || StringUtils.isEmpty(admin.getPassword())) {
+        if (Objects.isNull(admin) || Strings.isNullOrEmpty(admin.getUsername()) || Strings.isNullOrEmpty(admin.getPassword())) {
             return ResponseResult.fail("用户名或密码不存在");
         }
         Admin q = new Admin();
