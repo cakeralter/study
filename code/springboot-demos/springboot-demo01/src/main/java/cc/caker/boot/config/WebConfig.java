@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -91,5 +92,19 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(limiterInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login", "/logout", "/swagger**/**", "/v3/**");
+    }
+
+    /**
+     * 跨域配置
+     *
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 }
