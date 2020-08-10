@@ -1,6 +1,6 @@
 package cc.caker.boot.component.limiter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import cc.caker.common.vo.ResponseResult;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,7 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RequestLimiterInterceptor implements HandlerInterceptor {
 
     private final Map<String, RateLimiter> limiterMap = new ConcurrentHashMap<>();
-    private final ObjectMapper mapper;
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler)
@@ -48,8 +48,9 @@ public class RequestLimiterInterceptor implements HandlerInterceptor {
         boolean acquire = limiter.tryAcquire(annotation.timeout(), annotation.unit());
         if (!acquire) {
             // 获取令牌失败
+            res.setCharacterEncoding(StandardCharsets.UTF_8.name());
             res.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            res.getWriter().write(annotation.message());
+            res.getWriter().write(ResponseResult.toJson(ResponseResult.fail(annotation.message())));
             return false;
         }
         return true;

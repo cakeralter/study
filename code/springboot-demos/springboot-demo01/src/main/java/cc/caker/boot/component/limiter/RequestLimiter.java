@@ -21,7 +21,7 @@ public @interface RequestLimiter {
      *
      * @return
      */
-    double qps() default 10d;
+    double qps() default 1d;
 
     /**
      * 超时等待
@@ -37,5 +37,5 @@ public @interface RequestLimiter {
      *
      * @return
      */
-    String message() default "你的脚步太快,服务器跟不上啦!";
+    String message() default "你的脚步太快, 服务器跟不上啦!";
 }

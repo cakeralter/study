@@ -34,6 +34,20 @@ public class ResponseResult<T> implements Serializable {
         this.data = data;
     }
 
+    /**
+     * to json
+     *
+     * @param result
+     * @return
+     */
+    public static String toJson(ResponseResult<?> result) {
+        return "{" +
+                "\"status\": " + result.status +
+                ", \"ok\": " + result.ok +
+                ", \"message\": \"" + result.message +
+                "\"}";
+    }
+
     private static <T> ResponseResultBuilder<T> builder() {
         return new ResponseResultBuilder<T>();
     }
