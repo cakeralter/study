@@ -50,7 +50,7 @@ public class RedisServiceImpl implements RedisService {
         try {
             template.opsForValue().set(key, mapper.writeValueAsString(data), Duration.ofMillis(expire));
         } catch (Exception e) {
-            log.error("[{}] 放入缓存出错", key, e);
+            log.error("[{}] 放入缓存出错：{}", key, e.getMessage());
             return false;
         }
         return true;
@@ -67,7 +67,7 @@ public class RedisServiceImpl implements RedisService {
         try {
             return mapper.readValue(template.opsForValue().get(key), type);
         } catch (Exception e) {
-            log.error("查询缓存 [{}] 出错", key, e);
+            log.error("查询缓存 [{}] 出错：{}", key, e.getMessage());
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class RedisServiceImpl implements RedisService {
         try {
             return mapper.readValue(template.opsForValue().get(key), mapType);
         } catch (Exception e) {
-            log.error("查询缓存 [{}] 出错", key, e);
+            log.error("查询缓存 [{}] 出错：{}", key, e.getMessage());
         }
         return null;
     }

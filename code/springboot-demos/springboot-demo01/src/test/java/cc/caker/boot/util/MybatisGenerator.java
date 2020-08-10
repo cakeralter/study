@@ -1,4 +1,4 @@
-package cc.caker.boot;
+package cc.caker.boot.util;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -15,11 +15,11 @@ import org.junit.Test;
  * @author cakeralter
  * @date 2020/5/11
  */
-public class Generator {
+public class MybatisGenerator {
 
     @Test
     public void test() {
-        Generator.execute("");
+        MybatisGenerator.execute("");
     }
 
     private static void execute(String moduleName) {

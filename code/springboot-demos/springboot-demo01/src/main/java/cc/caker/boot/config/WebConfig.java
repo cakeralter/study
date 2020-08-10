@@ -1,6 +1,7 @@
 package cc.caker.boot.config;
 
 import cc.caker.boot.component.LocalDateTimeConverter;
+import cc.caker.boot.component.limiter.RequestLimiterInterceptor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,11 +10,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.format.DateTimeFormatter;
@@ -27,6 +30,14 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private RequestLimiterInterceptor limiterInterceptor;
+
+    /**
+     * 注册converter
+     *
+     * @param converters
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -60,8 +71,23 @@ public class WebConfig implements WebMvcConfigurer {
         converters.add(converter);
     }
 
+    /**
+     * 注册converter
+     *
+     * @param registry
+     */
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new LocalDateTimeConverter());
+    }
+
+    /**
+     * 注册拦截器
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(limiterInterceptor);
     }
 }

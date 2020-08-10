@@ -1,5 +1,6 @@
 package cc.caker.boot.module.log.controller;
 
+import cc.caker.boot.component.limiter.RequestLimiter;
 import cc.caker.boot.module.log.service.LogService;
 import cc.caker.boot.repo.model.db2.Log;
 import cc.caker.common.vo.ResponseResult;
@@ -33,6 +34,7 @@ public class LogController {
         return ResponseResult.ok(logService.getById(id));
     }
 
+    @RequestLimiter(qps = 1d)
     @ApiOperation("分页查询所有日志")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "页数", defaultValue = "1", dataType = "Integer"),

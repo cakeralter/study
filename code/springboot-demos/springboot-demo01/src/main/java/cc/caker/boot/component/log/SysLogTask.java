@@ -4,6 +4,7 @@ import cc.caker.boot.module.log.service.LogService;
 import cc.caker.boot.repo.model.db2.Log;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -27,13 +28,13 @@ public class SysLogTask implements Runnable {
     private final static int DEFAULT_BATCH_SIZE = 64;
     private final SysLogService queue;
     private final LogService logService;
+    private final ThreadPoolTaskExecutor executor;
     private boolean active = true;
-    private Thread thread;
 
     @PostConstruct
     public void init() {
-        thread = new Thread(this);
-        thread.start();
+        executor.execute(this);
+        log.info("日志处理线程启动成功");
     }
 
     @PreDestroy
