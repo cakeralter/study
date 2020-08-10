@@ -1,8 +1,8 @@
-package cc.caker.springboot.module.file.controller;
+package cc.caker.springboot.module.global.controller;
 
 import cc.caker.common.vo.ResponseResult;
 import cc.caker.springboot.component.log.SysLog;
-import cc.caker.springboot.module.file.service.FileService;
+import cc.caker.springboot.module.global.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package cc.caker.springboot.module.file.service.impl;
+package cc.caker.springboot.module.global.service.impl;
 
-import cc.caker.springboot.module.file.service.FileService;
+import cc.caker.springboot.module.global.service.FileService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
