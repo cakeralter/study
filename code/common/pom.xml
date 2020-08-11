@@ -19,6 +19,7 @@
         <commons-lang3.version>3.11</commons-lang3.version>
         <guava.version>29.0-jre</guava.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
+        <junit.version>4.13</junit.version>
     </properties>
 
     <dependencies>
@@ -51,6 +52,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <!--junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 

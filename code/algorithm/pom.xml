@@ -15,9 +15,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <groupId>cc.caker</groupId>
+            <artifactId>common</artifactId>
+            <version></version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>

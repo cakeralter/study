@@ -13,5 +13,12 @@
     <!--设计模式-->
     <artifactId>design-mode</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>cc.caker</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
