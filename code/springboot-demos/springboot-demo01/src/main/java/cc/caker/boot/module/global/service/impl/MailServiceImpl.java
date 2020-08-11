@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -67,7 +68,7 @@ public class MailServiceImpl implements MailService {
     public void sendAttachmentsMail(Mail mail, MultipartFile... attachments) {
         MimeMessage message = sender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getText());
             helper.setFrom(username);
@@ -75,10 +76,10 @@ public class MailServiceImpl implements MailService {
             helper.setCc(mail.getCc());
             // 附件
             for (MultipartFile attachment : attachments) {
-                helper.addAttachment(attachment.getName(), attachment.getResource());
+                helper.addAttachment(MimeUtility.encodeWord("附件：" + attachment.getOriginalFilename(), StandardCharsets.UTF_8.name(), "B"), attachment);
             }
             sender.send(message);
-        } catch (MessagingException e) {
+        } catch (MessagingException | IOException e) {
             log.error("邮件发送出错：{}", e.getMessage());
         }
     }

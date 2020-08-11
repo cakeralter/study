@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +26,7 @@ public class FileController {
     @SysLog
     @ApiOperation("文件上传")
     @PostMapping("/upload")
-    public ResponseResult<Integer> upload(@RequestParam("files[]") MultipartFile[] files) {
+    public ResponseResult<Integer> upload(MultipartFile[] files) {
         return ResponseResult.ok(fileService.upload(files));
     }
 }

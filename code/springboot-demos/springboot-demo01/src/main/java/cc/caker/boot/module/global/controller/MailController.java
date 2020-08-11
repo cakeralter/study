@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,9 +42,8 @@ public class MailController {
     }
 
     @ApiOperation("发送附件")
-    @PostMapping("/send/attachment")
-    public ResponseResult<String> sendAttachment(Mail mail, @RequestParam("files[]") MultipartFile[] files) {
-        mail.setSubject("测试附件");
+    @PostMapping(value = "/send/attachment")
+    public ResponseResult<String> sendAttachment(Mail mail, MultipartFile[] files) {
         mailService.sendAttachmentsMail(mail, files);
         return ResponseResult.ok();
     }
