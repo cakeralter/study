@@ -56,7 +56,7 @@ public interface Enumerations {
     @Getter
     @RequiredArgsConstructor
     enum OperationType {
-        REGISTER("注册账号"),
+        REGISTER("注册"),
         RESET_PASSWORD("重置密码"),
         LOGIN("登录");
 

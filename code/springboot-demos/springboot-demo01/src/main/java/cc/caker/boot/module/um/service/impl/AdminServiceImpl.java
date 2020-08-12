@@ -3,8 +3,10 @@ package cc.caker.boot.module.um.service.impl;
 import cc.caker.boot.constant.Enumerations;
 import cc.caker.boot.module.um.service.AdminService;
 import cc.caker.boot.repo.mapper.db1.AdminMapper;
+import cc.caker.boot.repo.mapper.db1.AdminRoleMapper;
 import cc.caker.boot.repo.model.db1.Admin;
 import cc.caker.boot.util.EncryptUtils;
+import cc.caker.common.service.RedisService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,15 @@ import java.util.Objects;
  * @author cakeralter
  * @since 2020-08-06
  */
+@Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
 
     private final AdminMapper adminMapper;
+    private final RedisService redisService;
+    private final AdminRoleMapper adminRoleMapper;
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public int delete(Integer... ids) {
         int count = 0;
@@ -37,6 +41,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             count += adminMapper.updateById(admin);
         }
         return count;
+    }
+
+    @Override
+    public boolean register(Admin admin, String input) {
+
+
+        return false;
     }
 
     @Override

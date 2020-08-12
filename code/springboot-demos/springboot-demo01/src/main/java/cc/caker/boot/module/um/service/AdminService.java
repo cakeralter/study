@@ -20,6 +20,15 @@ public interface AdminService extends IService<Admin> {
     int delete(Integer... ids);
 
     /**
+     * 注册账号
+     *
+     * @param admin 用户信息
+     * @param input 验证码
+     * @return
+     */
+    boolean register(Admin admin, String input);
+
+    /**
      * 修改密码
      *
      * @param adminId

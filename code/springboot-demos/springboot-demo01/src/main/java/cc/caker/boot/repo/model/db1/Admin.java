@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -43,10 +45,12 @@ public class Admin implements Serializable {
     private String nickName;
 
     @ApiModelProperty("用户名，用于登录")
+    @NotEmpty(message = "用户名不能为空")
     @TableField("username")
     private String username;
 
     @ApiModelProperty(value = "登录密码")
+    @NotEmpty(message = "密码不能为空")
     @TableField(value = "password")
     private String password;
 
@@ -55,6 +59,7 @@ public class Admin implements Serializable {
     private String icon;
 
     @ApiModelProperty("邮箱")
+    @Email(message = "邮箱格式不正确")
     @TableField("email")
     private String email;
 
