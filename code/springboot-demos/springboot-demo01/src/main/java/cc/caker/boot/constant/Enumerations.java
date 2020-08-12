@@ -49,4 +49,17 @@ public interface Enumerations {
         private final String name;
         private final int value;
     }
+
+    /**
+     * 操作类型
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum OperationType {
+        REGISTER("注册账号"),
+        RESET_PASSWORD("重置密码"),
+        LOGIN("登录");
+
+        private final String name;
+    }
 }

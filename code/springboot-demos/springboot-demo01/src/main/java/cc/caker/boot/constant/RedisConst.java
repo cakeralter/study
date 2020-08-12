@@ -9,8 +9,15 @@ public interface RedisConst {
     /**
      * 默认key有效时间(s)
      */
-//    long DEFAULT_KEY_EXPIRE = 12 * 60 * 60 * 1000;
     long DEFAULT_KEY_EXPIRE = 30 * 60 * 1000;
+    /**
+     * 默认验证码key有效时间(s)
+     */
+    long DEFAULT_VERIFY_CODE_KEY_EXPIRE = 10 * 60 * 1000;
+    /**
+     * 验证码
+     */
+    String GL_VERIFY_CODE = "GL_REGISTER_VERIFY_CODE";
     /**
      * 用户角色
      */

@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <base target="_blank"/>
     <style type="text/css">::-webkit-scrollbar {
         display: none;
@@ -72,10 +73,12 @@
             </div>
             <div style="width:680px;padding:0 10px;margin:0 auto;">
                 <div style="line-height:1.5;font-size:14px;margin-bottom:25px;color:#4d4d4d;">
-                    <strong style="display:block;margin-bottom:15px;">尊敬的<span data-th-text="${to}"></span>：<span
+                    <strong style="display:block;margin-bottom:15px;">尊敬的<span data-th-text="${user}"
+                                                                               style="font-size: 16px;color:salmon;"></span>：<span
                             style="color:#f60;font-size: 16px;"></span>您好！</strong>
                     <strong style="display:block;margin-bottom:15px;">
-                        您正在进行<span style="color: red">注册</span>操作，请在验证码输入框中输入：<span
+                        您正在进行<span data-th-text="${type}"
+                                   style="color: red;font-size: 18px;"></span>操作，请在验证码输入框中输入：<span
                             data-th-text="${code}" style="color:#f60;font-size: 24px"></span>，以完成操作。
                     </strong>
                 </div>

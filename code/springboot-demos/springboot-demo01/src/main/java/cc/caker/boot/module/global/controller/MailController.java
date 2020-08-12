@@ -1,7 +1,9 @@
 package cc.caker.boot.module.global.controller;
 
+import cc.caker.boot.component.limiter.RequestLimiter;
 import cc.caker.boot.component.log.SysLog;
 import cc.caker.boot.module.global.dto.Mail;
+import cc.caker.boot.module.global.service.LoginService;
 import cc.caker.boot.module.global.service.MailService;
 import cc.caker.common.vo.ResponseResult;
 import io.swagger.annotations.Api;
@@ -14,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+import static cc.caker.boot.constant.Enumerations.OperationType;
 import static cc.caker.boot.constant.MailConst.VERIFY_CODE_TEMPLATE;
 
 /**
@@ -29,15 +31,21 @@ import static cc.caker.boot.constant.MailConst.VERIFY_CODE_TEMPLATE;
 public class MailController {
 
     private final MailService mailService;
+    private final LoginService loginService;
 
+    @RequestLimiter(qps = 0.1d, message = "操作太过频繁, 请稍后再试!")
     @SysLog
     @ApiOperation("发送验证码")
     @PostMapping("/send/code")
-    public ResponseResult<String> verifyCode(Mail mail) {
+    public ResponseResult<String> verifyCode(String username, String email) {
+        Mail mail = new Mail();
         mail.setTemplateName(VERIFY_CODE_TEMPLATE);
+        mail.setTo(new String[]{email});
+        mail.setSubject("验证码");
         Map<String, Object> map = new HashMap<>(4);
-        map.put("to", mail.getTo()[0]);
-        map.put("code", UUID.randomUUID().toString());
+        map.put("user", username);
+        map.put("type", OperationType.REGISTER.getName());
+        map.put("code", loginService.createVerifyCode(username));
         mail.setTemplateModel(map);
         mailService.sendTemplateMail(mail);
         return ResponseResult.ok();

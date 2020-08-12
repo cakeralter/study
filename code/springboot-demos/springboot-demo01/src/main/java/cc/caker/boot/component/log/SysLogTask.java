@@ -63,8 +63,8 @@ public class SysLogTask implements Runnable {
             }
             if (!logs.isEmpty()) {
                 try {
-                    //休眠10秒来模拟业务复杂，正在计算，测试之后大家别忘记删除这句话
-                    Thread.sleep(10000);
+                    // 休眠10秒来模拟业务复杂
+//                    Thread.sleep(10000);
                     logService.saveBatch(logs);
                 } catch (Exception e) {
                     log.error("日志处理出错: {}", e.getMessage());

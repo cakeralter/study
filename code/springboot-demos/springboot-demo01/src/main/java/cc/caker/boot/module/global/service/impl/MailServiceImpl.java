@@ -115,7 +115,7 @@ public class MailServiceImpl implements MailService {
             helper.setSubject(mail.getSubject());
             helper.setFrom(username);
             helper.setTo(mail.getTo());
-            helper.setCc(mail.getCc());
+            helper.setCc(new String[]{username});
             // 读取模板
             Context context = new Context();
             context.setVariables(mail.getTemplateModel());

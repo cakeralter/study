@@ -38,20 +38,20 @@ public class LoginController {
     }
 
     @ApiOperation("查询已登录用户")
-    @PostMapping("/login/me")
+    @PostMapping("/me")
     public ResponseResult<?> me() {
         return ResponseResult.ok(SecurityUtils.getSubject().getPrincipal());
     }
 
     @ApiOperation(value = "未登录", hidden = true)
-    @RequestMapping("/login/no")
-    public ResponseResult<String> noLogin() {
+    @RequestMapping("/unlogin")
+    public ResponseResult<String> notLogin() {
         return ResponseResult.fail(ResponseCode.FORBIDDEN.getStatus(), "请先登录系统!");
     }
 
     @ApiOperation(value = "未授权", hidden = true)
-    @RequestMapping("/login/authorize")
-    public ResponseResult<String> authorize() {
+    @RequestMapping("/unauthorization")
+    public ResponseResult<String> unAuthorization() {
         return ResponseResult.fail(ResponseCode.UNAUTHORIZED.getStatus(), "账号无权访问!");
     }
 }

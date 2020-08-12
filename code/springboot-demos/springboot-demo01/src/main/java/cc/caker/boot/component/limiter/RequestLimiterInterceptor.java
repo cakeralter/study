@@ -45,7 +45,8 @@ public class RequestLimiterInterceptor implements HandlerInterceptor {
             limiterMap.put(key, RateLimiter.create(annotation.qps()));
         RateLimiter limiter = limiterMap.get(key);
         // 获取令牌
-        boolean acquire = limiter.tryAcquire(annotation.timeout(), annotation.unit());
+//        boolean acquire = limiter.tryAcquire(annotation.timeout(), annotation.unit());
+        boolean acquire = limiter.tryAcquire();
         if (!acquire) {
             // 获取令牌失败
             res.setCharacterEncoding(StandardCharsets.UTF_8.name());

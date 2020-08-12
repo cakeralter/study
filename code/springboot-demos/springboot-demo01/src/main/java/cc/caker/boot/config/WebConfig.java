@@ -93,7 +93,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(limiterInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login", "/logout", "/swagger**/**", "/v3/**");
+                .excludePathPatterns("/swagger**/**", "/v3/**");
     }
 
     /**
