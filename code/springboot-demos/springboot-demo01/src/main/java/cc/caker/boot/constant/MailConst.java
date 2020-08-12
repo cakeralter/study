@@ -16,5 +16,5 @@ public interface MailConst {
     /**
      * 模板存放的路径
      */
-    String TEMPLATE_PATH = "/template/";
+    String TEMPLATE_PATH = "/mail/";
 }

@@ -40,5 +40,5 @@ public class Mail implements Serializable {
     /**
      * 模板数据
      */
-    private Map<String, String> templateModel;
+    private Map<String, Object> templateModel;
 }

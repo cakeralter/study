@@ -1,5 +1,6 @@
 package cc.caker.boot.module.global.controller;
 
+import cc.caker.boot.component.log.SysLog;
 import cc.caker.boot.module.global.dto.Mail;
 import cc.caker.boot.module.global.service.MailService;
 import cc.caker.common.vo.ResponseResult;
@@ -29,11 +30,12 @@ public class MailController {
 
     private final MailService mailService;
 
+    @SysLog
     @ApiOperation("发送验证码")
     @PostMapping("/send/code")
     public ResponseResult<String> verifyCode(Mail mail) {
         mail.setTemplateName(VERIFY_CODE_TEMPLATE);
-        Map<String, String> map = new HashMap<>(4);
+        Map<String, Object> map = new HashMap<>(4);
         map.put("to", mail.getTo()[0]);
         map.put("code", UUID.randomUUID().toString());
         mail.setTemplateModel(map);
@@ -41,6 +43,7 @@ public class MailController {
         return ResponseResult.ok();
     }
 
+    @SysLog
     @ApiOperation("发送附件")
     @PostMapping(value = "/send/attachment")
     public ResponseResult<String> sendAttachment(Mail mail, MultipartFile[] files) {
