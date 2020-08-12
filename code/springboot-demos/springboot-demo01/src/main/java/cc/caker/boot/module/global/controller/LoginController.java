@@ -27,32 +27,31 @@ public class LoginController {
     public ResponseResult<?> login(String username, String password) {
         Subject subject = SecurityUtils.getSubject();
         SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
-        return ResponseResult.ok(subject.getPrincipal());
+        return ResponseResult.ok(subject.getSession().getId());
     }
 
     @ApiOperation("退出登录")
     @GetMapping("/logout")
-    public ResponseResult<?> logout() {
+    public ResponseResult<String> logout() {
         SecurityUtils.getSubject().logout();
         return ResponseResult.ok();
     }
 
     @ApiOperation("查询已登录用户")
     @PostMapping("/login/me")
-    public ResponseResult<Object> me() {
-        Subject subject = SecurityUtils.getSubject();
-        return ResponseResult.ok(subject.getPrincipal());
+    public ResponseResult<?> me() {
+        return ResponseResult.ok(SecurityUtils.getSubject().getPrincipal());
     }
 
     @ApiOperation(value = "未登录", hidden = true)
     @RequestMapping("/login/no")
-    public ResponseResult<?> noLogin() {
+    public ResponseResult<String> noLogin() {
         return ResponseResult.fail(ResponseCode.FORBIDDEN.getStatus(), "请先登录系统!");
     }
 
     @ApiOperation(value = "未授权", hidden = true)
     @RequestMapping("/login/authorize")
-    public ResponseResult<?> authorize() {
+    public ResponseResult<String> authorize() {
         return ResponseResult.fail(ResponseCode.UNAUTHORIZED.getStatus(), "账号无权访问!");
     }
 }

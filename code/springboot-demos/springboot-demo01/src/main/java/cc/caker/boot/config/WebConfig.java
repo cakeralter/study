@@ -13,6 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author cakeralter
@@ -101,9 +103,12 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        String[] methods = Stream.of(HttpMethod.values())
+                .map(Enum::name).toArray(String[]::new);
         registry.addMapping("/**")
+                .allowedHeaders("*")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+                .allowedMethods(methods)
                 .allowCredentials(true)
                 .maxAge(3600);
     }

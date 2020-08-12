@@ -1,8 +1,10 @@
 package cc.caker.boot.config;
 
+import cc.caker.boot.component.shiro.CustomSessionManager;
 import cc.caker.boot.component.shiro.ShiroRealm;
 import cc.caker.boot.module.um.service.ResourceService;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -51,5 +53,10 @@ public class ShiroConfig {
          */
         creator.setUsePrefix(true);
         return creator;
+    }
+
+    @Bean
+    public SessionManager sessionManager() {
+        return new CustomSessionManager();
     }
 }
