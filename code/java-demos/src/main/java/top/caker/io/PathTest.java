@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author cakeralter
  * @date 2020/8/11
  */
-public class FileTest {
+public class PathTest {
 
     File file1 = new File("student.txt");
     File file2 = new File("D:\\test\\student.txt");
@@ -97,5 +97,28 @@ public class FileTest {
         System.out.println("file7 canonicalPath = " + file7.getCanonicalPath());
         // D:\workspace\mine\study\code\java-demo\student.txt
         System.out.println("file8 absolutePath = " + file8.getCanonicalPath());
+    }
+
+    @Test
+    public void testClassPath() {
+        // 类绝对路径，即classpath目录 - file:/D:/workspace/mine/study/code/java-demos/target/classes/
+        System.out.println(PathTest.class.getResource("/"));
+        // 类相对路径 - file:/D:/workspace/mine/study/code/java-demos/target/classes/top/caker/io/
+        System.out.println(PathTest.class.getResource(""));
+
+        // maven默认情况不会编译Java文件夹中的资源文件 所以资源文件最好放在resources
+        System.out.println(PathTest.class.getResource("../test.txt"));
+        // file:/D:/workspace/mine/study/code/java-demos/target/classes/test.txt
+        System.out.println(PathTest.class.getResource("/test.txt"));
+        // file:/D:/workspace/mine/study/code/java-demos/target/classes/top/caker/io/test.txt
+        System.out.println(PathTest.class.getResource("test.txt"));
+
+//        getClassLoader().getResource("xxx") === getResource("/xxx")
+        // null
+        System.out.println(PathTest.class.getClassLoader().getResource("../test.txt"));
+        // null
+        System.out.println(PathTest.class.getClassLoader().getResource("/test.txt"));
+        // file:/D:/workspace/mine/study/code/java-demos/target/classes/test.txt
+        System.out.println(PathTest.class.getClassLoader().getResource("test.txt"));
     }
 }

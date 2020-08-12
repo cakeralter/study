@@ -13,6 +13,10 @@
     <!--java日常demo-->
     <artifactId>java-demos</artifactId>
 
+    <properties>
+        <jsoup.version>1.12.2</jsoup.version>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -45,7 +49,11 @@
             <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
     </dependencies>
-
 
 </project>
