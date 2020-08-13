@@ -29,8 +29,4 @@ public interface BaseUtils {
         }
         return String.join("", chs);
     }
-
-    static void main(String[] args) {
-        System.out.println(randomCode(6));
-    }
 }

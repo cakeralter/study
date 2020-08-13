@@ -1,6 +1,8 @@
 package cc.caker.boot.constant;
 
 /**
+ * Redis常量类
+ *
  * @author cakeralter
  * @date 2020/8/7
  */

@@ -94,7 +94,7 @@ public interface RedisService {
      * @param keys
      * @return
      */
-    int delete(final String... keys);
+    Long delete(final String... keys);
 
     /**
      * 设置过期时间

@@ -10,10 +10,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static cc.caker.boot.constant.RedisConst.DEFAULT_KEY_EXPIRE;
 
@@ -89,14 +86,14 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public int delete(String... keys) {
+    public Long delete(String... keys) {
         int count = 0;
         for (String key : keys) {
             if (delete(key)) {
                 count++;
             }
         }
-        return count;
+        return template.delete(Arrays.asList(keys));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package cc.caker.boot.config;
 
+import cc.caker.boot.component.CustomProperties;
 import cc.caker.boot.component.LocalDateTimeConverter;
 import cc.caker.boot.component.limiter.RequestLimiterInterceptor;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,10 +17,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,6 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private RequestLimiterInterceptor limiterInterceptor;
+    @Autowired
+    private CustomProperties properties;
 
     /**
      * 注册converter
@@ -111,5 +111,16 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods(methods)
                 .allowCredentials(true)
                 .maxAge(3600);
+    }
+
+    /**
+     * 静态资源路径映射
+     *
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/upload/**")
+                .addResourceLocations("file:" + properties.getUploadPath());
     }
 }

@@ -1,5 +1,6 @@
 package cc.caker.boot.module.global.service.impl;
 
+import cc.caker.boot.component.CustomProperties;
 import cc.caker.boot.module.global.service.LoginService;
 import cc.caker.boot.repo.mapper.db1.AdminMapper;
 import cc.caker.boot.repo.model.db1.Admin;
@@ -11,7 +12,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 
@@ -33,8 +33,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final AdminMapper adminMapper;
     private final RedisService redisService;
-    @Value("${custom.verify.code.length:6}")
-    private Integer verifyCodeLength;
+    private final CustomProperties properties;
 
     @Override
     public ResponseResult<String> login(Admin admin) {
@@ -64,7 +63,7 @@ public class LoginServiceImpl implements LoginService {
         String code = redisService.get(key);
         if (Strings.isNullOrEmpty(code)) {
             // 生成验证码
-            code = BaseUtils.randomCode(verifyCodeLength);
+            code = BaseUtils.randomCode(properties.getVerifyCodeLength());
             redisService.put(key, code, DEFAULT_VERIFY_CODE_KEY_EXPIRE);
         }
         return code;

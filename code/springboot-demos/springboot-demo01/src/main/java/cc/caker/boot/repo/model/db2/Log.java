@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @Setter
-@TableName("um_log")
+@TableName("sm_log")
 @ApiModel(value = "Log对象", description = "日志表")
 public class Log implements Serializable {
 
