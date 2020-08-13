@@ -71,7 +71,7 @@ public class Admin implements Serializable {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "最后登录时间")
+    @ApiModelProperty("最后登录时间")
     @TableField("login_time")
     private LocalDateTime loginTime;
 

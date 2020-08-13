@@ -1,6 +1,6 @@
 package cc.caker.boot.component.log;
 
-import cc.caker.boot.repo.model.db2.Log;
+import cc.caker.boot.repo.model.db1.Log;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.LinkedBlockingQueue;

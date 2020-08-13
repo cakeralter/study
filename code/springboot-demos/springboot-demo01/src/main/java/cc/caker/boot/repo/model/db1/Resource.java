@@ -67,7 +67,7 @@ public class Resource implements Serializable {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "最后修改时间")
+    @ApiModelProperty("最后修改时间")
     @TableField("update_time")
     private LocalDateTime updateTime;
 

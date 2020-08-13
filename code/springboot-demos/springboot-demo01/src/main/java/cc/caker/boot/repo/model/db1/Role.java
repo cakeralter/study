@@ -50,7 +50,7 @@ public class Role implements Serializable {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty("更新时间")
     @TableField("update_time")
     private LocalDateTime updateTime;
 

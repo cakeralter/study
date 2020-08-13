@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.caker.boot.repo.mapper.db1.CarouselMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, url, redirect_url, status, description, create_time, create_user_id, create_nick_name, update_time, update_user_id, update_nick_name, sort
+    </sql>
+
+</mapper>

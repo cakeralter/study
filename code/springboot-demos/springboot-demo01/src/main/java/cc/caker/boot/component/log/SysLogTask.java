@@ -1,7 +1,7 @@
 package cc.caker.boot.component.log;
 
 import cc.caker.boot.module.sm.service.LogService;
-import cc.caker.boot.repo.model.db2.Log;
+import cc.caker.boot.repo.model.db1.Log;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;

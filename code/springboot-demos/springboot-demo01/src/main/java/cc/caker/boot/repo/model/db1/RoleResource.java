@@ -33,11 +33,11 @@ public class RoleResource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "角色ID")
+    @ApiModelProperty("角色ID")
     @TableField("role_id")
     private Integer roleId;
 
-    @ApiModelProperty(value = "资源ID")
+    @ApiModelProperty("资源ID")
     @TableField("resource_id")
     private Integer resourceId;
 

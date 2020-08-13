@@ -2,7 +2,7 @@ package cc.caker.boot.module.sm.controller;
 
 import cc.caker.boot.component.limiter.RequestLimiter;
 import cc.caker.boot.module.sm.service.LogService;
-import cc.caker.boot.repo.model.db2.Log;
+import cc.caker.boot.repo.model.db1.Log;
 import cc.caker.common.vo.ResponseResult;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

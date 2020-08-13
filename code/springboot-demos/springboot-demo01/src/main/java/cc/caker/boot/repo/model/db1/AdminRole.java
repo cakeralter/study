@@ -33,11 +33,11 @@ public class AdminRole implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty("用户ID")
     @TableField("admin_id")
     private Integer adminId;
 
-    @ApiModelProperty(value = "角色ID")
+    @ApiModelProperty("角色ID")
     @TableField("role_id")
     private Integer roleId;
 

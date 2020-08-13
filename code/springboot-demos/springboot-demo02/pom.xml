@@ -142,13 +142,13 @@
                 </dependencies>
                 <configuration>
                     <!--username-->
-                    <username>root</username>
+                    <username>boot</username>
                     <!--password-->
-                    <password>caker1996</password>
+                    <password>boot123</password>
                     <!--driver-->
                     <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
                     <!--jdbc url-->
-                    <jdbcUrl>jdbc:mysql://116.85.4.107/springboot_demo?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8</jdbcUrl>
+                    <jdbcUrl>jdbc:mysql://116.85.4.107/newbee_mall?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8</jdbcUrl>
                     <!--生成文件类型-->
                     <fileType>HTML</fileType>
                     <!--打开文件输出目录-->

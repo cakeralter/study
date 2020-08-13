@@ -1,6 +1,6 @@
 package cc.caker.boot.module.sm.service;
 
-import cc.caker.boot.repo.model.db2.Log;
+import cc.caker.boot.repo.model.db1.Log;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

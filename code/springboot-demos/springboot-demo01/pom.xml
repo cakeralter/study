@@ -228,9 +228,9 @@
                 </dependencies>
                 <configuration>
                     <!--username-->
-                    <username>root</username>
+                    <username>boot</username>
                     <!--password-->
-                    <password>caker1996</password>
+                    <password>boot123</password>
                     <!--driver-->
                     <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
                     <!--jdbc url-->
@@ -238,7 +238,7 @@
                     <!--生成文件类型-->
                     <fileType>HTML</fileType>
                     <!--打开文件输出目录-->
-                    <openOutputDir>false</openOutputDir>
+                    <openOutputDir>true</openOutputDir>
                     <!--生成模板-->
                     <produceType>freemarker</produceType>
                     <!--文档名称 为空时:将采用[数据库名称-描述-版本号]作为文档名称-->

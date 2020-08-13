@@ -31,11 +31,11 @@ public class AdminResource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty("用户ID")
     @TableField("admin_id")
     private Integer adminId;
 
-    @ApiModelProperty(value = "资源ID")
+    @ApiModelProperty("资源ID")
     @TableField("resource_id")
     private Integer resourceId;
 

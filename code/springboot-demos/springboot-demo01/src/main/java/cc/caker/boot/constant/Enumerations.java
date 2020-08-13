@@ -17,7 +17,10 @@ public interface Enumerations {
     enum ModuleType {
         GL("Global", 1),
         SM("System Management", 2),
-        UM("User Management", 3);
+        UM("User Management", 3),
+        CM("Content Management", 4),
+        PM("Product Management", 5),
+        OM("Order Management", 6);
 
         private final String name;
         private final int value;
@@ -34,6 +37,25 @@ public interface Enumerations {
 
         private final String name;
         private final int value;
+    }
+
+    /**
+     * 商品状态
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum GoodsStatus {
+        DOWN("下架", 0),
+        UP("上架", 1);
+
+        private final String name;
+        private final int value;
+    }
+
+    /**
+     * 订单状态
+     */
+    enum OrderStatus {
     }
 
     /**

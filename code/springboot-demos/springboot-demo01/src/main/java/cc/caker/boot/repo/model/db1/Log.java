@@ -1,4 +1,4 @@
-package cc.caker.boot.repo.model.db2;
+package cc.caker.boot.repo.model.db1;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

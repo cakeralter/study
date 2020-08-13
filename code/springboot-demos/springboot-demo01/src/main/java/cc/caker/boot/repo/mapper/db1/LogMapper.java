@@ -1,6 +1,6 @@
-package cc.caker.boot.repo.mapper.db2;
+package cc.caker.boot.repo.mapper.db1;
 
-import cc.caker.boot.repo.model.db2.Log;
+import cc.caker.boot.repo.model.db1.Log;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
