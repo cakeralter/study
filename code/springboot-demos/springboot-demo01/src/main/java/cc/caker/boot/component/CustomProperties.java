@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 /**
+ * 自定义的属性
+ *
  * @author cakeralter
  * @date 2020/8/13
  */
