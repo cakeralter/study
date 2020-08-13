@@ -32,21 +32,21 @@
 
     <select id="findAll" resultMap="Children_Map">
         select *
-        from t_resource
+        from um_resource
         where parent_id is null
         order by sort
     </select>
 
     <select id="findByParentId" resultMap="Children_Map">
         select *
-        from t_resource
+        from um_resource
         where parent_id = #{parentId}
         order by sort
     </select>
 
     <select id="findAllEnabled" resultType="Resource">
         select id, uri, code
-        from t_resource
+        from um_resource
         where status = 1
           and uri is not null
           and uri != ''
@@ -55,9 +55,9 @@
 
     <!--<select id="findRoles" resultType="string">
         select distinct tr.code
-        from t_role tr
-                 join t_role_resource trr on tr.id = trr.role_id
-                 join t_resource tre on trr.resource_id = tre.id and tre.status = 1
+        from um_role tr
+                 join um_role_resource trr on tr.id = trr.role_id
+                 join um_resource tre on trr.resource_id = tre.id and tre.status = 1
         where tr.status = 1
           and tre.id = #{id}
     </select>-->

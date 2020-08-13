@@ -49,7 +49,7 @@ public class MybatisGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://116.85.4.107/springboot_demo_02?useSSL=false&useUnicode=true&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://116.85.4.107/boot_01?useSSL=false&useUnicode=true&characterEncoding=utf8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("caker1996");
@@ -74,7 +74,7 @@ public class MybatisGenerator {
         // 数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 设置表前缀不生成
-        strategy.setTablePrefix("t_");
+        strategy.setTablePrefix("um_");
         // 是否生成实体时，生成字段注解
         strategy.setEntityTableFieldAnnotationEnable(true);
 

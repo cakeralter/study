@@ -29,7 +29,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
-@TableName("t_admin")
+@TableName("um_admin")
 @ApiModel(value = "Admin对象", description = "用户表")
 @JsonIgnoreProperties(value = {"password", "secret"}, allowSetters = true)
 public class Admin implements Serializable {

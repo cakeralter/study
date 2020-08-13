@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @ToString
 @Setter
 @Getter
-@TableName("t_role_resource")
+@TableName("um_role_resource")
 @ApiModel(value = "RoleResource对象", description = "角色资源表")
 public class RoleResource implements Serializable {
 

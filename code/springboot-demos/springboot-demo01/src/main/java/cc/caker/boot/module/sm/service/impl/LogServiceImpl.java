@@ -1,6 +1,6 @@
-package cc.caker.boot.module.log.service.impl;
+package cc.caker.boot.module.sm.service.impl;
 
-import cc.caker.boot.module.log.service.LogService;
+import cc.caker.boot.module.sm.service.LogService;
 import cc.caker.boot.repo.mapper.db2.LogMapper;
 import cc.caker.boot.repo.model.db2.Log;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -10,6 +10,20 @@ import lombok.RequiredArgsConstructor;
 public interface Enumerations {
 
     /**
+     * 模块分类
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum ModuleType {
+        GL("Global", 1),
+        SM("System Management", 2),
+        UM("User Management", 3);
+
+        private final String name;
+        private final int value;
+    }
+
+    /**
      * 数据状态
      */
     @Getter
@@ -56,10 +70,11 @@ public interface Enumerations {
     @Getter
     @RequiredArgsConstructor
     enum OperationType {
-        REGISTER("注册"),
-        RESET_PASSWORD("重置密码"),
-        LOGIN("登录");
+        REGISTER("注册", 1),
+        RESET_PASSWORD("重置密码", 2),
+        LOGIN("登录", 3);
 
         private final String name;
+        private final int value;
     }
 }

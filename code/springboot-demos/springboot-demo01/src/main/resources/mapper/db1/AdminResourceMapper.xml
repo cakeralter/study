@@ -9,21 +9,21 @@
 
     <select id="findByAdminId" resultType="Resource">
         select tr.*
-        from t_admin_resource tar
-        join t_resource tr on tar.resource_id = tr.id
+        from um_admin_resource tar
+        join um_resource tr on tar.resource_id = tr.id
         where tar.admin_id = #{adminId}
         <if test="state != null">
             and tr.status = #{state}
         </if>
         union
         select tre.*
-        from t_admin_role tar
-        join t_role tr on tar.role_id = tr.id
+        from um_admin_role tar
+        join um_role tr on tar.role_id = tr.id
         <if test="state != null">
             and tr.status = #{state}
         </if>
-        join t_role_resource trr on tr.id = trr.role_id
-        join t_resource tre on trr.resource_id = tre.id
+        join um_role_resource trr on tr.id = trr.role_id
+        join um_resource tre on trr.resource_id = tre.id
         where tar.admin_id = #{adminId}
         <if test="state != null">
             and tre.status = #{state}
@@ -32,17 +32,17 @@
 
     <select id="findCodeByAdminId" resultType="string" parameterType="int">
         select distinct tr.code
-        from t_admin_resource tar
-                 join t_resource tr on tar.resource_id = tr.id
+        from um_admin_resource tar
+                 join um_resource tr on tar.resource_id = tr.id
         where tar.admin_id = #{adminId}
           and tr.status = 1
         union
         select distinct tre.code
-        from t_admin_role tar
-                 join t_role tr on tar.role_id = tr.id
+        from um_admin_role tar
+                 join um_role tr on tar.role_id = tr.id
             and tr.status = 1
-                 join t_role_resource trr on tr.id = trr.role_id
-                 join t_resource tre on trr.resource_id = tre.id
+                 join um_role_resource trr on tr.id = trr.role_id
+                 join um_resource tre on trr.resource_id = tre.id
         where tar.admin_id = #{adminId}
           and tre.status = 1
     </select>

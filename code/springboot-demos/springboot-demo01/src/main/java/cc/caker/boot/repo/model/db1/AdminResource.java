@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @Setter
-@TableName("t_admin_resource")
+@TableName("um_admin_resource")
 @ApiModel(value = "AdminResource对象", description = "用户资源表")
 public class AdminResource implements Serializable {
 

@@ -25,7 +25,7 @@ import java.util.List;
 @ToString
 @Setter
 @Getter
-@TableName("t_resource")
+@TableName("um_resource")
 @ApiModel(value = "Resource对象", description = "后台资源表")
 public class Resource implements Serializable {
 

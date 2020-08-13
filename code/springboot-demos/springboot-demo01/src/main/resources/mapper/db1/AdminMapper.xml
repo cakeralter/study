@@ -24,7 +24,7 @@
 
     <select id="findByUsername" resultMap="Base_Admin_Map">
         select id, nick_name, username, password, login_time, status, secret
-        from t_admin
+        from um_admin
         where username = #{username}
           and status = 1
     </select>

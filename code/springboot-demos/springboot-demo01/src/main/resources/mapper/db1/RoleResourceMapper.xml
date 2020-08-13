@@ -9,8 +9,8 @@
 
     <select id="findByRoleId" resultType="Resource" parameterType="int">
         select tr.*
-        from t_role_resource trr
-                 join t_role tr on trr.role_id = tr.id
+        from um_role_resource trr
+                 join um_role tr on trr.role_id = tr.id
         where trr.role_id = #{roleId}
     </select>
 
