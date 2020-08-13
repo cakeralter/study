@@ -1,7 +1,7 @@
-package cc.caker.boot.module.global.service.impl;
+package cc.caker.boot.module.gl.service.impl;
 
-import cc.caker.boot.module.global.dto.Mail;
-import cc.caker.boot.module.global.service.MailService;
+import cc.caker.boot.module.gl.dto.Mail;
+import cc.caker.boot.module.gl.service.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +20,6 @@ import javax.mail.internet.MimeUtility;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
-import static cc.caker.boot.constant.MailConst.TEMPLATE_PATH;
 
 /**
  * @author cakeralter
@@ -106,9 +104,10 @@ public class MailServiceImpl implements MailService {
      * 模板邮件
      *
      * @param mail
+     * @param path
      */
     @Override
-    public void sendTemplateMail(Mail mail) {
+    public void sendTemplateMail(Mail mail, String path) {
         MimeMessage message = sender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -119,7 +118,7 @@ public class MailServiceImpl implements MailService {
             // 读取模板
             Context context = new Context();
             context.setVariables(mail.getTemplateModel());
-            String html = engine.process(TEMPLATE_PATH + mail.getTemplateName(), context);
+            String html = engine.process(path + mail.getTemplateName(), context);
             helper.setText(html, true);
             sender.send(message);
         } catch (MessagingException e) {

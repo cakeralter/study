@@ -1,4 +1,4 @@
-package cc.caker.boot.module.global.controller;
+package cc.caker.boot.module.gl.controller;
 
 import cc.caker.common.enumeration.ResponseCode;
 import cc.caker.common.vo.ResponseResult;
@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @ApiOperation("查询已登录用户")
-    @PostMapping("/me")
+    @GetMapping("/me")
     public ResponseResult<?> me() {
         return ResponseResult.ok(SecurityUtils.getSubject().getPrincipal());
     }

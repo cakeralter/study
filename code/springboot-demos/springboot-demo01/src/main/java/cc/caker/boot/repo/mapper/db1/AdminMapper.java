@@ -18,4 +18,11 @@ public interface AdminMapper extends BaseMapper<Admin> {
      * @return
      */
     Admin findByUsername(String username);
+
+    /**
+     * 查询最大排序
+     *
+     * @return
+     */
+    Integer findMaxSort();
 }

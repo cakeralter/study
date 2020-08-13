@@ -1,4 +1,4 @@
-package cc.caker.boot.module.global.service;
+package cc.caker.boot.module.gl.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

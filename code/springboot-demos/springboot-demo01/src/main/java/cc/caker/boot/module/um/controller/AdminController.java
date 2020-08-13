@@ -49,38 +49,38 @@ public class AdminController {
     }
 
     @ApiOperation("更新用户")
-    @PatchMapping("/u/update")
+    @PutMapping("/u/update")
     public ResponseResult<?> update(Admin admin) {
         return adminService.updateById(admin) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("更新密码")
-    @PatchMapping("/u/{adminId}/password")
+    @PutMapping("/u/{adminId}/password")
     public ResponseResult<?> password(@PathVariable String adminId, String password) {
         return adminService.changePassword(adminId, password) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("通过ID查询用户")
-    @PostMapping("/q/{id}")
+    @GetMapping("/q/{id}")
     public ResponseResult<Admin> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(adminService.getById(id));
     }
 
     @ApiOperation("分页查询所有用户")
-    @PostMapping("/q/list")
+    @GetMapping("/q/list")
     public ResponseResult<IPage<Admin>> list(@RequestParam(defaultValue = "1") Integer page,
                                              @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(adminService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("查询所有用户")
-    @PostMapping("/q/all")
+    @GetMapping("/q/all")
     public ResponseResult<List<Admin>> all() {
         return ResponseResult.ok(adminService.list());
     }
 
     @ApiOperation("查询用户所有角色")
-    @PostMapping("/q/{adminId}/roles")
+    @GetMapping("/q/{adminId}/roles")
     public ResponseResult<List<Role>> roles(@PathVariable("adminId") Integer adminId) {
         String key = RedisConst.UM_ADMIN_ROLE + "::" + adminId;
         List<Role> roles = redisService.get(key, Role.class);
@@ -92,13 +92,13 @@ public class AdminController {
     }
 
     @ApiOperation("授予用户角色")
-    @PostMapping("/g/{adminId}/role")
+    @PutMapping("/g/{adminId}/role")
     public ResponseResult<?> grantRole(@PathVariable("adminId") Integer adminId, @RequestParam("roleIds[]") Integer[] roleIds) {
         return adminRoleService.grantRole(adminId, roleIds) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("查询用户所有资源")
-    @PostMapping("/q/{adminId}/resources")
+    @GetMapping("/q/{adminId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("adminId") Integer adminId) {
         String key = RedisConst.UM_ADMIN_RESOURCE + "::" + adminId;
         List<Resource> resources = redisService.get(key, Resource.class);
@@ -110,7 +110,7 @@ public class AdminController {
     }
 
     @ApiOperation("授予用户资源")
-    @PostMapping("/g/{adminId}/resource")
+    @PutMapping("/g/{adminId}/resource")
     public ResponseResult<?> grant(@PathVariable("adminId") Integer adminId, @RequestParam("resourceIds[]") Integer[] resourceIds) {
         return adminResourceService.grantResource(adminId, resourceIds) ? ResponseResult.ok() : ResponseResult.fail();
     }

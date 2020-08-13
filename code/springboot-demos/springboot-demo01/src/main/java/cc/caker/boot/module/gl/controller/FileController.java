@@ -1,7 +1,7 @@
-package cc.caker.boot.module.global.controller;
+package cc.caker.boot.module.gl.controller;
 
 import cc.caker.boot.component.log.SysLog;
-import cc.caker.boot.module.global.service.FileService;
+import cc.caker.boot.module.gl.service.FileService;
 import cc.caker.common.vo.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

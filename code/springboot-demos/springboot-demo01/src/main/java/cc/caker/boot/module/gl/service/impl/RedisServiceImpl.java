@@ -1,4 +1,4 @@
-package cc.caker.boot.module.global.service.impl;
+package cc.caker.boot.module.gl.service.impl;
 
 import cc.caker.common.service.RedisService;
 import com.fasterxml.jackson.databind.JavaType;

@@ -35,11 +35,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         DEFAULT_PERMISSIONS.put("/v3/**", "anon");
         DEFAULT_PERMISSIONS.put("/static/**", "anon");
         DEFAULT_PERMISSIONS.put("/register", "anon");
+        DEFAULT_PERMISSIONS.put("/code/**", "anon");
         DEFAULT_PERMISSIONS.put("/login", "anon");
         DEFAULT_PERMISSIONS.put("/logout", "anon");
         DEFAULT_PERMISSIONS.put("/unauthorization", "anon");
         DEFAULT_PERMISSIONS.put("/unlogin", "anon");
-        DEFAULT_PERMISSIONS.put("/mail/send/code", "anon");
         DEFAULT_PERMISSIONS.put("/**", "authc");
     }
 

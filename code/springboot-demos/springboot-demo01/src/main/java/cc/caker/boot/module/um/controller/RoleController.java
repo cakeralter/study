@@ -44,38 +44,38 @@ public class RoleController {
     }
 
     @ApiOperation("更新角色")
-    @PatchMapping("/u/update")
+    @PutMapping("/u/update")
     public ResponseResult<?> update(Role role) {
         return roleService.updateById(role) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("通过ID查询角色")
-    @PostMapping("/q/{id}")
+    @GetMapping("/q/{id}")
     public ResponseResult<Role> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(roleService.getById(id));
     }
 
     @ApiOperation("分页查询所有角色")
-    @PostMapping("/q/list")
+    @GetMapping("/q/list")
     public ResponseResult<IPage<Role>> list(@RequestParam(defaultValue = "1") Integer page,
                                             @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(roleService.page(new Page<>(page, size)));
     }
 
     @ApiOperation("查询所有角色")
-    @PostMapping("/q/all")
+    @GetMapping("/q/all")
     public ResponseResult<List<Role>> all() {
         return ResponseResult.ok(roleService.list());
     }
 
     @ApiOperation("授予角色资源")
-    @PostMapping("/g/{roleId}/resource")
+    @PutMapping("/g/{roleId}/resource")
     public ResponseResult<?> grant(@PathVariable Integer roleId, @RequestParam("resourceIds[]") Integer[] resourceIds) {
         return roleResourceService.grantResource(roleId, resourceIds) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("查询角色所有资源")
-    @PostMapping("/q/{roleId}/resources")
+    @GetMapping("/q/{roleId}/resources")
     public ResponseResult<List<Resource>> resources(@PathVariable("roleId") Integer roleId) {
         String key = RedisConst.UM_ROLE_RESOURCE + "::" + roleId;
         List<Resource> resources = redisService.get(key, Resource.class);

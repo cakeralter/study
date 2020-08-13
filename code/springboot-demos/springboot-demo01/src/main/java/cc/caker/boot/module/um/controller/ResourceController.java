@@ -1,6 +1,5 @@
 package cc.caker.boot.module.um.controller;
 
-import cc.caker.boot.component.log.SysLog;
 import cc.caker.boot.module.um.service.ResourceService;
 import cc.caker.boot.repo.model.db1.Resource;
 import cc.caker.common.vo.ResponseResult;
@@ -38,27 +37,26 @@ public class ResourceController {
     }
 
     @ApiOperation("更新资源")
-    @PatchMapping("/u/update")
+    @PutMapping("/u/update")
     public ResponseResult<?> update(Resource resource) {
         return resourceService.updateById(resource) ? ResponseResult.ok() : ResponseResult.fail();
     }
 
     @ApiOperation("通过ID查询资源")
-    @PostMapping("/q/{id}")
+    @GetMapping("/q/{id}")
     public ResponseResult<Resource> user(@PathVariable("id") Integer id) {
         return ResponseResult.ok(resourceService.getById(id));
     }
 
     @ApiOperation("分页查询所有资源")
-    @PostMapping("/q/list")
+    @GetMapping("/q/list")
     public ResponseResult<IPage<Resource>> list(@RequestParam(defaultValue = "1") Integer page,
                                                 @RequestParam(defaultValue = "5") Integer size) {
         return ResponseResult.ok(resourceService.page(new Page<>(page, size)));
     }
 
-    @SysLog
     @ApiOperation("查询所有资源")
-    @PostMapping("/q/all")
+    @GetMapping("/q/all")
     public ResponseResult<List<Resource>> all() {
         return ResponseResult.ok(resourceService.findAll());
     }

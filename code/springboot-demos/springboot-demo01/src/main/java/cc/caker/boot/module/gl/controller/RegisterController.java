@@ -1,4 +1,4 @@
-package cc.caker.boot.module.global.controller;
+package cc.caker.boot.module.gl.controller;
 
 import cc.caker.boot.component.limiter.RequestLimiter;
 import cc.caker.boot.component.log.SysLog;

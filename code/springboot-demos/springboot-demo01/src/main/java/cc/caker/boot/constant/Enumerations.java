@@ -37,6 +37,20 @@ public interface Enumerations {
     }
 
     /**
+     * 用户账号类型 - 大致分类
+     */
+    @Getter
+    @RequiredArgsConstructor
+    enum UserType {
+        VISITOR("游客", 1),
+        USER("普通用户", 2),
+        ADMIN("管理员", 3);
+
+        private final String name;
+        private final int value;
+    }
+
+    /**
      * 资源类型
      */
     @Getter
@@ -70,11 +84,12 @@ public interface Enumerations {
     @Getter
     @RequiredArgsConstructor
     enum OperationType {
-        REGISTER("注册", 1),
-        RESET_PASSWORD("重置密码", 2),
-        LOGIN("登录", 3);
+        REGISTER("注册", "verify_code", "/mail/"),
+        RESET_PASSWORD("重置密码", "", ""),
+        LOGIN("登录", "", "");
 
         private final String name;
-        private final int value;
+        private final String template;
+        private final String path;
     }
 }

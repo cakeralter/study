@@ -1,7 +1,7 @@
-package cc.caker.boot.module.global.service.impl;
+package cc.caker.boot.module.gl.service.impl;
 
 import cc.caker.boot.component.CustomProperties;
-import cc.caker.boot.module.global.service.FileService;
+import cc.caker.boot.module.gl.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;

@@ -29,4 +29,9 @@
           and status = 1
     </select>
 
+    <select id="findMaxSort" resultType="integer">
+        select max(sort) + 1
+        from um_admin
+    </select>
+
 </mapper>

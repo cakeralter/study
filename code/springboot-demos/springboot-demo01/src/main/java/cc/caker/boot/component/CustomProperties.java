@@ -22,13 +22,15 @@ public class CustomProperties {
      */
     private int verifyCodeLength = 6;
     /**
+     * 密码salt长度
+     */
+    private int saltLength = 6;
+    /**
      * 文件上传路径
      */
     private String uploadPath = "D:/upload/";
 
     @PostConstruct
     public void initFinished() {
-        System.out.println(verifyCodeLength);
-        System.out.println(uploadPath);
     }
 }

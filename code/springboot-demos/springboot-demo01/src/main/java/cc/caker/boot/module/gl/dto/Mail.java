@@ -1,4 +1,4 @@
-package cc.caker.boot.module.global.dto;
+package cc.caker.boot.module.gl.dto;
 
 import lombok.Getter;
 import lombok.Setter;

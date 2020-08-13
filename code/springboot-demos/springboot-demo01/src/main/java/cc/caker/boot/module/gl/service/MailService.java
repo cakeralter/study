@@ -1,6 +1,6 @@
-package cc.caker.boot.module.global.service;
+package cc.caker.boot.module.gl.service;
 
-import cc.caker.boot.module.global.dto.Mail;
+import cc.caker.boot.module.gl.dto.Mail;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -36,6 +36,7 @@ public interface MailService {
      * 发送模板邮件
      *
      * @param mail
+     * @param path
      */
-    void sendTemplateMail(Mail mail);
+    void sendTemplateMail(Mail mail, String path);
 }
