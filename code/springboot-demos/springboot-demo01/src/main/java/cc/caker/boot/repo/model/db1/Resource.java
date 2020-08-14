@@ -11,6 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,10 +43,12 @@ public class Resource implements Serializable {
     private Integer parentId;
 
     @ApiModelProperty("资源名称")
+    @NotEmpty(message = "资源名称不能为空")
     @TableField("name")
     private String name;
 
     @ApiModelProperty("资源编码")
+    @Pattern(regexp = "[A-Z_]+", message = "资源编码必须为大写字母和下划线组合")
     @TableField("code")
     private String code;
 
@@ -52,6 +57,7 @@ public class Resource implements Serializable {
     private String icon;
 
     @ApiModelProperty("资源类型：1->目录；2->菜单；3->按钮（接口绑定权限）")
+    @NotNull(message = "资源类型不能为空")
     @TableField("type")
     private Integer type;
 
@@ -60,6 +66,7 @@ public class Resource implements Serializable {
     private String uri;
 
     @ApiModelProperty("启用状态；0->禁用；1->启用")
+    @NotNull(message = "资源状态不能为空")
     @TableField("status")
     private Integer status;
 
@@ -77,7 +84,4 @@ public class Resource implements Serializable {
 
     @TableField(exist = false)
     private List<Resource> children;
-
-//    @TableField(exist = false)
-//    private List<String> roles;
 }

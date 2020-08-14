@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static cc.caker.boot.constant.RedisConst.UM_RESOURCES_ALL;
 import static cc.caker.boot.constant.RedisConst.UM_RESOURCES_ENABLED_ALL;
@@ -47,6 +44,15 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     private final RedisService redisService;
 
     @Override
+    public boolean save(Resource entity) {
+        redisService.delete(UM_RESOURCES_ALL, UM_RESOURCES_ENABLED_ALL);
+        // 排序
+        int sort = Optional.ofNullable(resourceMapper.findMaxSort()).map(x -> ++x).orElse(1);
+        entity.setSort(sort);
+        return super.save(entity);
+    }
+
+    @Override
     public List<Resource> findAll() {
         List<Resource> resources = redisService.get(UM_RESOURCES_ALL, Resource.class);
         if (Objects.isNull(resources)) {
@@ -59,15 +65,15 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int delete(Integer... ids) {
+        // 先清缓存
+        redisService.delete(UM_RESOURCES_ALL, UM_RESOURCES_ENABLED_ALL);
+
         int count = 0;
         Resource resource = new Resource();
         resource.setStatus(Enumerations.Status.DISABLED.getValue());
         for (Integer id : ids) {
             resource.setId(id);
             count += resourceMapper.updateById(resource);
-        }
-        if (count > 0) {
-            redisService.delete(UM_RESOURCES_ALL, UM_RESOURCES_ENABLED_ALL);
         }
         return count;
     }

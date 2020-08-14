@@ -30,7 +30,7 @@
     </select>
 
     <select id="findMaxSort" resultType="integer">
-        select max(sort) + 1
+        select max(sort)
         from um_admin
     </select>
 

@@ -65,14 +65,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         admin.setPassword(EncryptUtils.encrypt(admin.getPassword(), salt));
         // 盐作为私钥
         admin.setSecret(salt);
-        // 默认状态
-        admin.setStatus(Status.ENABLED.getValue());
-        // 默认头像
-        admin.setIcon("default.png");
         // 默认昵称为用户名
         admin.setNickName(admin.getUsername());
         // 序号
-        int sort = Optional.ofNullable(adminMapper.findMaxSort()).orElse(1);
+        int sort = Optional.ofNullable(adminMapper.findMaxSort()).map(x -> ++x).orElse(1);
         admin.setSort(sort);
         if (adminMapper.insert(admin) > 0) {
             // 授予默认用户权限

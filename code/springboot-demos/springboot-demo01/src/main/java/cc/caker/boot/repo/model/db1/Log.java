@@ -1,5 +1,6 @@
 package cc.caker.boot.repo.model.db1;
 
+import cc.caker.boot.constant.Enumerations;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,6 +11,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * @author cakeralter
@@ -63,4 +65,18 @@ public class Log implements Serializable {
     @ApiModelProperty("创建时间")
     @TableField("create_time")
     private LocalDateTime createTime;
+
+    public static Log byException(Exception e, Object p) {
+        Integer userId = Optional.ofNullable(p)
+                .map(x -> (Admin) x)
+                .map(Admin::getId)
+                .orElse(null);
+        return builder()
+                .userId(userId)
+                .description(e.getMessage())
+                .type(Enumerations.LogType.EXCEPTION.getValue())
+                .exceptionDetail(e.getCause().getLocalizedMessage())
+                .createTime(LocalDateTime.now())
+                .build();
+    }
 }

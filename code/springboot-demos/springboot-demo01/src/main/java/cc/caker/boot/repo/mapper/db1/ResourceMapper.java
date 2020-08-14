@@ -36,10 +36,9 @@ public interface ResourceMapper extends BaseMapper<Resource> {
     List<Resource> findAllEnabled();
 
     /**
-     * 查询该资源所有role
+     * 查询最大序号
      *
-     * @param id
      * @return
      */
-//    List<String> findRoles(Integer id);
+    Integer findMaxSort();
 }
