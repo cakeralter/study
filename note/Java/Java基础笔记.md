@@ -404,15 +404,83 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 - `Map`
 
   - `HashMap`
-    1. 线程不安全，效率高
-    2. 键和值均允许为 `null` 
+
+    1. 特点：线程不安全，效率高；键和值均允许为 `null` 
+
+    2. 源码分析
+
+       ``````java
+       /* 类成员 */
+       // 核心数组
+       transient Node<K,V>[] table;
+       // entrySet缓存
+       transient Set<Map.Entry<K,V>> entrySet;
+       // 数组节点数量 - 即Map中数据个数
+       transient int size;
+       // 
+       transient int modCount;
+       // 扩容阈值
+       int threshold;
+       // 负载因子
+       final float loadFactor;
+       
+       /* 常量 */
+       // 默认初始化容量16
+       static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; 
+       // 默认负载因子
+       static final float DEFAULT_LOAD_FACTOR = 0.75f;
+       // 链表转红黑树阈值
+       static final int TREEIFY_THRESHOLD = 8; 
+       // 红黑树转链表阈值
+       static final int UNTREEIFY_THRESHOLD = 6; 
+       // 转红黑树数组最小容量
+       static final int MIN_TREEIFY_CAPACITY = 64; 
+       
+       /* 主要内部类 */
+       // 链表节点
+       static class Node<K,V> implements Map.Entry<K,V> {
+           final int hash;
+           final K key;
+           V value;
+           Node<K,V> next;
+       
+           Node(int hash, K key, V value, Node<K,V> next) {
+               this.hash = hash;
+               this.key = key;
+               this.value = value;
+               this.next = next;
+           }
+       }
+       
+       // 红黑树节点
+       static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
+           TreeNode<K,V> parent;  // red-black tree links
+           TreeNode<K,V> left;
+           TreeNode<K,V> right;
+           TreeNode<K,V> prev;    // needed to unlink next upon deletion
+           boolean red;
+           
+           TreeNode(int hash, K key, V val, Node<K,V> next) {
+               super(hash, key, val, next);
+           }
+       }
+       
+       /* 重要方法 */
+       
+       ``````
+
+    3. 
+
   - `LinkedHashMap`
     1. 底层在 `HashMap` 基础上维护了一个双向链表，使得可以在遍历时保持插入顺序
     2. 对于频繁的遍历操作，`LinkedHashMap` 效率高于 `HashMap`
+    
   - `TreeMap`
     1. 底层使用红黑树实现
     2. 插入时按照key进行排序
+    
   - `Hashtable`
     1. 线程不安全，效率低
     2. 键值不允许为 `null`
+    
   - `Properties` ：常用来处理配置信息，键值均为 `String` 类型
