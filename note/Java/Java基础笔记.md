@@ -180,3 +180,14 @@ System.out.println("0x" + prefix + suffix); // 0x3D
 - **String** ：不可变的字符序列，底层是 `char` 数组
 - **StringBuffer** ：可变的字符序列，底层是 `char` 数组；线程安全，效率低
 - **StringBuilder** ：可变的字符序列，底层是 `char` 数组；线程不安全，效率高
+
+### 24. 序列化
+
+> `static` 和 `transient` 修饰的属性不会被序列化
+
+1. 对象可序列化要求：
+
+   - 序列化类需要实现 `Serializable` 或者 `Externalizable` 接口
+
+   - 序列化类需要提供静态常量属性 `serialVersionUID`
+   - 序列化类的属性要求必须是可序列化的

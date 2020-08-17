@@ -3,6 +3,7 @@ package top.caker.jsoup;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.junit.Test;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -15,6 +16,7 @@ import java.io.IOException;
  */
 public class JsoupTest {
 
+    @Test
     public void testParse() throws IOException {
         Document document = Jsoup.connect("http://104.194.212.8/forum/thread-10778561-1-1.html")
                 .proxy("127.0.0.1", 1080).post();
@@ -23,5 +25,11 @@ public class JsoupTest {
             String text = elements.get(1).text();
             bos.write(text.getBytes());
         }
+    }
+
+    @Test
+    public void testSpider() throws IOException {
+        Document document = Jsoup.connect("http://104.194.212.8/forum/thread-10778561-1-1.html")
+                .proxy("127.0.0.1", 1080).post();
     }
 }
