@@ -24,5 +24,6 @@
 |  设计模式   |                         design-mode                          |
 | SpringBoot  | springboot-demo01 **[SpringBoot + Mybatis]**<br />springboot-demo02 **[SpringBoot + Spring Data JPA]**<br />springboot-demo03 **[SpringBoot秒杀系统]** |
 | SpringCloud |                springcloud-demo01 **[Nacos]**                |
+|   Spring    |        spring-annotation **[Spring注解开发源码解析]**        |
 
 

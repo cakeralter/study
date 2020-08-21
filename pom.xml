@@ -16,6 +16,7 @@
         <module>code/interview-questions</module>
         <module>code/springboot-demos/springboot-demo01</module>
         <module>code/common</module>
+        <module>code/spring-demos/spring-annotation</module>
     </modules>
 
 </project>
