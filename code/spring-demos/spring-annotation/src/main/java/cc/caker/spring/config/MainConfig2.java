@@ -81,11 +81,4 @@ public class MainConfig2 {
 	public ColorFactoryBean colorFactoryBean(){
 		return new ColorFactoryBean();
 	}
-
-
-
-
-
-
-
 }

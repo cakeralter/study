@@ -13,7 +13,7 @@ public class MyImportSelector implements ImportSelector {
 		// TODO Auto-generated method stub
 		//importingClassMetadata
 		//方法不要返回null值
-		return new String[]{"com.atguigu.bean.Blue","com.atguigu.bean.Yellow"};
+		return new String[]{"cc.caker.spring.bean.Blue","cc.caker.spring.bean.Yellow"};
 	}
 
 }
