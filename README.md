@@ -9,7 +9,7 @@
 |  Maven   |                     Maven常用命令                      |
 |  Nginx   |                     Nginx常用配置                      |
 | 日常笔记 |                   项目常见问题及处理                   |
-|   Git   |Git小知识|
+|   Git   |Git笔记|
 | Spring |Spring学习笔记|
 
 

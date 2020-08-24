@@ -11,3 +11,7 @@
 - `test`：增加测试
 - `build`：改变了build工具 如 grunt换成了 npm
 - `revert`：撤销上一次的commit
+
+### 2. Git常用命令
+
+![Git常用命令](https://gitee.com/cakeralter/images/raw/master/20200410131134.jpg)
