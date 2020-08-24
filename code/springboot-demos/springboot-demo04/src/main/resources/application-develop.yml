@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${custom.host}/boot?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    mongodb:
+      uri: mongodb://${custom.host}/boot
+      username: boot
+      password: boot
+  redis:
+    host: ${custom.host}
+    database: 15
+    password: password
+  rabbitmq:
+    addresses: localhost
+    username: admin
+    password: admin
+
+custom:
+  host: 47.101.186.23
