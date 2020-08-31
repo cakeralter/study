@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.caker.boot.repo.mapper.StockMapper">
+
+    <sql id="base_sql">
+        id, name, count, sale, version
+    </sql>
+
+    <select id="findById" resultType="Stock" parameterType="long">
+        select
+        <include refid="base_sql"/>
+        from t_stock
+        where id = #{sid}
+    </select>
+
+    <update id="sale" parameterType="Stock">
+        update t_stock
+        set sale = #{sale}
+        where id = #{id}
+    </update>
+
+    <update id="saleByVersion" parameterType="Stock">
+        update t_stock
+        set sale    = sale + 1,
+            version = version + 1
+        where id = #{id}
+          and version = #{version}
+    </update>
+
+</mapper>
