@@ -17,6 +17,14 @@ public interface StockMapper {
     Stock findById(long sid);
 
     /**
+     * 根据id查询[悲观锁]
+     *
+     * @param sid
+     * @return
+     */
+    Stock findByIdForUpdate(long sid);
+
+    /**
      * 售出
      *
      * @param stock

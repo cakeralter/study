@@ -13,6 +13,14 @@
         where id = #{sid}
     </select>
 
+    <select id="findByIdForUpdate" resultType="Stock" parameterType="long">
+        select
+        <include refid="base_sql"/>
+        from t_stock
+        where id = #{sid}
+        for update
+    </select>
+
     <update id="sale" parameterType="Stock">
         update t_stock
         set sale = #{sale}
