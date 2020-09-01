@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author cakeralter
@@ -20,6 +21,8 @@ import java.util.Objects;
 @Service
 public class SpikeUpServiceImpl {
 
+    private final static long DEFAULT_EXPIRE = 60 * 1000;
+    private final static long PER_MAX_ACCESS = 5;
     private final RedisService redisService;
     private final StockMapper stockMapper;
     private final OrderMapper orderMapper;
@@ -33,6 +36,10 @@ public class SpikeUpServiceImpl {
         if (!Objects.equals(hash, value)) {
             throw new RuntimeException("校验码有误，请刷新当前页面！");
         }
+        // 访问频率限制
+        if (!access(uid)) {
+            throw new RuntimeException("请求太快，请稍后重试！");
+        }
 
         // 校验库存
         Stock stock = checkStock(sid);
@@ -40,6 +47,12 @@ public class SpikeUpServiceImpl {
         saleStock(stock);
         // 生成订单
         return createOrder(stock, uid);
+    }
+
+    private boolean access(long uid) {
+        String key = String.format("%s::%d", RedisEnum.SPIKE_ACCESS_KEY.getKey(), uid);
+        int count = Optional.ofNullable(redisService.get(key)).map(Integer::parseInt).orElse(0);
+        return count < PER_MAX_ACCESS && redisService.put(key, String.valueOf(++count), DEFAULT_EXPIRE);
     }
 
     private Stock checkStock(long sid) {

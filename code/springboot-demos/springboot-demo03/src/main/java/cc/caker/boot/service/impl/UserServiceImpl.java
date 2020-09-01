@@ -17,7 +17,7 @@ import org.springframework.util.DigestUtils;
 public class UserServiceImpl implements UserService {
 
     private final RedisService redisService;
-    private final static long DEFAULT_EXPIRE = 3600 * 1000;
+    public final static long DEFAULT_EXPIRE = 3600 * 1000;
 
     @Override
     public String getHash(long uid, long sid) {
