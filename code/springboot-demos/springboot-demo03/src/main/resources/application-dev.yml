@@ -4,3 +4,12 @@ spring:
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: boot
     password: boot123
+  redis:
+    host: 116.85.4.107
+    password: redis1996
+    database: 9
+  rabbitmq:
+    host: 116.85.4.107
+    username: ms
+    password: miaosha
+    virtual-host: /ms

@@ -20,7 +20,8 @@ import java.util.Optional;
 @Aspect
 public class SpikeAspect {
 
-    @Pointcut("execution(* cc.caker.boot.controller.SpikeController.*(..))")
+    @Pointcut("execution(* cc.caker.boot.controller.SpikeController.*(..)) " +
+            "|| execution(* cc.caker.boot.controller.SpikeUpController.*(..))")
     public void pointCut() {
     }
 
@@ -42,7 +43,7 @@ public class SpikeAspect {
             return result;
         } catch (Throwable e) {
             log.error("购买失败：[{}]", e.getMessage());
+            return ResponseResult.fail(e.getMessage());
         }
-        return ResponseResult.fail();
     }
 }

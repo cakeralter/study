@@ -3,10 +3,11 @@
 <mapper namespace="cc.caker.boot.repo.mapper.OrderMapper">
 
     <sql id="base_sql">
-        id, sid, name, createTime
+        id, sid, user_id, name, createTime
     </sql>
 
     <insert id="save" parameterType="Order" keyProperty="id" useGeneratedKeys="true" flushCache="true">
-        insert into t_order(sid, name) values (#{sid}, #{name})
+        insert into t_order(sid, user_id, name)
+        values (#{sid}, #{userId}, #{name})
     </insert>
 </mapper>
