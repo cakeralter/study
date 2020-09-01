@@ -8,6 +8,8 @@ import cc.caker.boot.service.SpikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * @author cakeralter
  * @date 2020/9/1
@@ -21,16 +23,29 @@ public class SpikeServiceImpl implements SpikeService {
 
     @Override
     public Stock checkStock(long sid) {
-        return null;
+        Stock stock = stockMapper.findById(sid);
+        if (Objects.isNull(stock)) {
+            throw new RuntimeException("暂无库存");
+        }
+        if (stock.getSale() >= stock.getCount()) {
+            throw new RuntimeException("库存已售空");
+        }
+        return stock;
     }
 
     @Override
     public int saleStock(Stock stock) {
-        return 0;
+        stock.setSale(stock.getSale() + 1);
+        return stockMapper.sale(stock);
     }
 
     @Override
     public Order createOrder(Stock stock) {
-        return null;
+        Order order = Order.builder()
+                .name(stock.getName())
+                .sid(stock.getId())
+                .build();
+        orderMapper.save(order);
+        return order;
     }
 }

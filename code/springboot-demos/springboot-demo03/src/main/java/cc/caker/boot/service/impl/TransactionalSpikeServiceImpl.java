@@ -7,21 +7,33 @@ import cc.caker.boot.repo.mapper.StockMapper;
 import cc.caker.boot.service.SpikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
 /**
- * 乐观锁秒杀服务
+ * 事务秒杀
  *
  * @author cakeralter
  * @date 2020/9/1
  */
 @RequiredArgsConstructor
 @Service
-public class OptimismSpikeServiceImpl implements SpikeService {
+public class TransactionalSpikeServiceImpl implements SpikeService {
 
     private final OrderMapper orderMapper;
     private final StockMapper stockMapper;
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Order place(long sid) {
+        // 校验库存
+        Stock stock = checkStock(sid);
+        // 扣除库存
+        saleStock(stock);
+        // 生成订单
+        return createOrder(stock);
+    }
 
     @Override
     public Stock checkStock(long sid) {
@@ -35,19 +47,10 @@ public class OptimismSpikeServiceImpl implements SpikeService {
         return stock;
     }
 
-    /**
-     * 乐观锁扣除库存
-     *
-     * @param stock
-     * @return
-     */
     @Override
     public int saleStock(Stock stock) {
-        int count = stockMapper.saleByVersion(stock);
-        if (count == 0) {
-            throw new RuntimeException("人太多了，没抢到！");
-        }
-        return count;
+        stock.setSale(stock.getSale() + 1);
+        return stockMapper.sale(stock);
     }
 
     @Override
