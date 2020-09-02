@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Component;
 @RabbitListener(queues = "del-cache-queue")
 public class DelCacheListener {
 
+    private final RedisTemplate<String, String> redisTemplate;
+
     @RabbitHandler
     public void delCache(String message) {
         log.info("接收到队列消息：[{}]", message);
         log.info("开始执行延时删除缓存：[{}]", message);
-
+        redisTemplate.delete(message);
     }
 }

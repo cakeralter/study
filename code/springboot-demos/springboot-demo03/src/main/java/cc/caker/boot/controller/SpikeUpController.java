@@ -1,9 +1,12 @@
 package cc.caker.boot.controller;
 
+import cc.caker.boot.config.RedisConfig;
 import cc.caker.boot.constant.RedisEnum;
 import cc.caker.boot.repo.entity.Order;
 import cc.caker.boot.service.impl.SpikeUpServiceImpl;
+import cc.caker.boot.vo.OrderMessage;
 import cc.caker.common.vo.ResponseResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,5 +60,16 @@ public class SpikeUpController {
         // 消息队列删除
         rabbitTemplate.convertAndSend("del-cache-queue", key);
         return ResponseResult.ok(order);
+    }
+
+    @GetMapping("/place/mq/{uid}/{sid}")
+    public ResponseResult<Order> placeOrderMq(@PathVariable Long uid, @PathVariable Long sid,
+                                              String hash) throws JsonProcessingException {
+        if (!limiter.tryAcquire()) {
+            throw new RuntimeException("你的请求太快，服务器跟不上你的节奏了！");
+        }
+        rabbitTemplate.convertAndSend("order-queue",
+                RedisConfig.getMapper().writeValueAsString(new OrderMessage(uid, sid, hash)));
+        return ResponseResult.ok();
     }
 }

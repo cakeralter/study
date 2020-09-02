@@ -13,3 +13,6 @@ spring:
     username: ms
     password: miaosha
     virtual-host: /ms
+    listener:
+      simple:
+        acknowledge-mode: manual

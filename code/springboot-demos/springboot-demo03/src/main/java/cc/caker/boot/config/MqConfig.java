@@ -15,4 +15,9 @@ public class MqConfig {
     public Queue delCacheQueue() {
         return new Queue("del-cache-queue");
     }
+
+    @Bean
+    public Queue orderQueue() {
+        return new Queue("order-queue");
+    }
 }
