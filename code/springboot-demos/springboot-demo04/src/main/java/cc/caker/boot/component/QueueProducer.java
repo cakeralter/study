@@ -1,9 +1,9 @@
 package cc.caker.boot.component;
 
+import cc.caker.boot.config.QueueConfig;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import top.caker.boot.rabbit.config.QueueConfig;
 
 import java.time.LocalDateTime;
 

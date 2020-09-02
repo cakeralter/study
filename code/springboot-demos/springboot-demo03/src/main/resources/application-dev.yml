@@ -9,7 +9,7 @@ spring:
     password: redis1996
     database: 9
   rabbitmq:
-    host: 116.85.4.107
+    addresses: 116.85.4.107
     username: ms
     password: miaosha
     virtual-host: /ms

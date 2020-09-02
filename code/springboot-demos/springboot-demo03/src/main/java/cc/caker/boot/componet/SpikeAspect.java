@@ -43,6 +43,7 @@ public class SpikeAspect {
             return result;
         } catch (Throwable e) {
             log.error("购买失败：[{}]", e.getMessage());
+            e.printStackTrace();
             return ResponseResult.fail(e.getMessage());
         }
     }

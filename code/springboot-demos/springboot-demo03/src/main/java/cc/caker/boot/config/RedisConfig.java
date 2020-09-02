@@ -33,24 +33,13 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class RedisConfig {
 
-    @Bean
-    public Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer() {
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        serializer.setObjectMapper(objectMapper());
-        return serializer;
-    }
+    private static final ObjectMapper MAPPER;
 
-    @Bean
-    public StringRedisSerializer stringRedisSerializer() {
-        return new StringRedisSerializer();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+    static {
+        MAPPER = new ObjectMapper();
+        MAPPER.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         // 添加序列化信息
-        mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
+        MAPPER.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
                 ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
         // 时间处理
         JavaTimeModule modules = new JavaTimeModule();
@@ -63,8 +52,7 @@ public class RedisConfig {
                 new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         modules.addDeserializer(LocalTime.class,
                 new LocalTimeDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        mapper.registerModules(modules);
-        return mapper;
+        MAPPER.registerModules(modules);
     }
 
     @Bean
@@ -77,5 +65,19 @@ public class RedisConfig {
         template.setHashValueSerializer(stringRedisSerializer());
         template.afterPropertiesSet();
         return template;
+    }
+
+    private Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer() {
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        serializer.setObjectMapper(MAPPER);
+        return serializer;
+    }
+
+    private StringRedisSerializer stringRedisSerializer() {
+        return new StringRedisSerializer();
+    }
+
+    public static ObjectMapper getMapper() {
+        return MAPPER;
     }
 }

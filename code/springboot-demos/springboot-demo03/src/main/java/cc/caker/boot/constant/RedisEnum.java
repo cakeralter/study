@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum RedisEnum {
     SPIKE_HASH_KEY("SPIKE_HASH_KEY"),
-    SPIKE_ACCESS_KEY("SPIKE_ACCESS_KEY");
+    SPIKE_ACCESS_KEY("SPIKE_ACCESS_KEY"),
+    STOCK_CACHE_KEY("STOCK_CACHE_KEY");
 
     private final String key;
 }

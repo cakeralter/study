@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class SpikeUpServiceImpl {
 
-    private final static long DEFAULT_EXPIRE = 60 * 1000;
+    private final static long DEFAULT_EXPIRE = 60;
     private final static long PER_MAX_ACCESS = 5;
     private final RedisService redisService;
     private final StockMapper stockMapper;
