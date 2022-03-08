@@ -17,6 +17,7 @@
         <module>code/springboot-demos/springboot-demo01</module>
         <module>code/common</module>
         <module>code/spring-demos/spring-annotation</module>
+        <module>code/netty</module>
     </modules>
 
 </project>
