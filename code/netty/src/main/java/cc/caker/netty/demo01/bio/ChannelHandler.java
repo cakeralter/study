@@ -1,4 +1,4 @@
-package cc.caker.netty.demo01.bio.channel;
+package cc.caker.netty.demo01.bio;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

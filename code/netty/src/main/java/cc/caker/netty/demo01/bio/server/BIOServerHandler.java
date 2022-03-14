@@ -1,7 +1,7 @@
 package cc.caker.netty.demo01.bio.server;
 
-import cc.caker.netty.demo01.bio.channel.ChannelAdapter;
-import cc.caker.netty.demo01.bio.channel.ChannelHandler;
+import cc.caker.netty.demo01.bio.ChannelAdapter;
+import cc.caker.netty.demo01.bio.ChannelHandler;
 
 import java.net.Socket;
 import java.nio.charset.Charset;

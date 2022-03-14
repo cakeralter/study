@@ -1,4 +1,4 @@
-package cc.caker.netty.demo01.bio.channel;
+package cc.caker.netty.demo01.bio;
 
 import java.io.BufferedReader;
 import java.io.IOException;
