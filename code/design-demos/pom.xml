@@ -10,8 +10,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <!--设计模式-->
-    <artifactId>design-mode</artifactId>
+    <groupId>cc.caker.study</groupId>
+    <artifactId>design-demos</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>

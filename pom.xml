@@ -24,7 +24,6 @@
     </properties>
 
     <modules>
-        <module>code/design-mode</module>
         <module>code/algorithm</module>
         <module>code/java-demos</module>
         <module>code/interview-questions</module>
@@ -32,6 +31,7 @@
         <module>code/common</module>
         <module>code/spring-demos/spring-annotation</module>
         <module>code/netty-demos</module>
+        <module>code/design-demos</module>
     </modules>
 
     <dependencyManagement>
