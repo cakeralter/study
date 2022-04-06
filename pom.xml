@@ -21,6 +21,8 @@
         <jedis.version>3.3.0</jedis.version>
         <jsoup.version>1.12.2</jsoup.version>
         <netty.version>4.1.59.Final</netty.version>
+        <slf4j-api.version>1.7.30</slf4j-api.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
     </properties>
 
     <modules>
@@ -32,6 +34,8 @@
         <module>code/spring-demos/spring-annotation</module>
         <module>code/netty-demos</module>
         <module>code/design-demos</module>
+        <module>code/small-spring/small-spring-v1</module>
+        <module>code/small-spring/small-spring-v2</module>
     </modules>
 
     <dependencyManagement>
@@ -100,6 +104,17 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+            <!--logging-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
