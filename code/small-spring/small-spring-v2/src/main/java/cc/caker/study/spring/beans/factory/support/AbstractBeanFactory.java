@@ -2,6 +2,7 @@ package cc.caker.study.spring.beans.factory.support;
 
 import cc.caker.study.spring.beans.factory.BeanFactory;
 import cc.caker.study.spring.beans.factory.config.BeanDefinition;
+import lombok.SneakyThrows;
 
 /**
  * AbstractBeanFactory
@@ -10,7 +11,7 @@ import cc.caker.study.spring.beans.factory.config.BeanDefinition;
  * @date 2022/4/6
  * @since 1.0
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonObjectRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
 
     /**
      * getBean
@@ -20,7 +21,14 @@ public abstract class AbstractBeanFactory extends DefaultSingletonObjectRegistry
      */
     @Override
     public Object getBean(String beanName) {
-        return null;
+        Object bean = getSingleton(beanName);
+        /* 已加载直接返回 */
+        if (bean != null) {
+            return bean;
+        }
+
+        BeanDefinition beanDefinition = getBeanDefinition(beanName);
+        return createBean(beanName, beanDefinition);
     }
 
     /**
@@ -36,5 +44,5 @@ public abstract class AbstractBeanFactory extends DefaultSingletonObjectRegistry
      * @param beanName
      * @param beanDefinition
      */
-    protected abstract void createBean(String beanName, BeanDefinition beanDefinition);
+    protected abstract Object createBean(String beanName, BeanDefinition beanDefinition);
 }

@@ -1,5 +1,6 @@
 package cc.caker.study.spring.beans.factory.support;
 
+import cc.caker.study.spring.beans.BeansException;
 import cc.caker.study.spring.beans.factory.config.BeanDefinition;
 import com.google.common.collect.Maps;
 
@@ -18,7 +19,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      * beanDefinitionMap
      */
     private final Map<String, BeanDefinition> beanDefinitionMap = Maps.newHashMap();
-    private BeanDefinition beanDefinition;
 
     /**
      * 获取Bean定义
@@ -28,7 +28,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      */
     @Override
     public BeanDefinition getBeanDefinition(String beanName) {
-        return null;
+        BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
+        if (beanDefinition == null) {
+            throw new BeansException("No bean named " + beanName + " is defined");
+        }
+        return beanDefinition;
     }
 
     /**
@@ -39,6 +43,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
      */
     @Override
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
-
+        beanDefinitionMap.put(beanName, beanDefinition);
     }
 }

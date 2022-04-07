@@ -1,5 +1,6 @@
 package cc.caker.study.spring.beans.factory.support;
 
+import cc.caker.study.spring.beans.BeansException;
 import cc.caker.study.spring.beans.factory.config.BeanDefinition;
 
 /**
@@ -18,7 +19,15 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      * @param beanDefinition
      */
     @Override
-    protected void createBean(String beanName, BeanDefinition beanDefinition) {
+    protected Object createBean(String beanName, BeanDefinition beanDefinition) {
+        Object instance = null;
+        try {
+            instance = beanDefinition.getBeanClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new BeansException("Instantiation of bean failedInstantiation of bean failed", e);
+        }
 
+        addSingleton(beanName, instance);
+        return instance;
     }
 }

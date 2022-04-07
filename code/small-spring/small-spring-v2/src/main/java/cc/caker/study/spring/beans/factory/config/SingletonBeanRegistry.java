@@ -1,13 +1,13 @@
 package cc.caker.study.spring.beans.factory.config;
 
 /**
- * SingletonObjectRegistry
+ * SingletonBeanRegistry
  *
  * @author cakeralter
  * @date 2022/4/6
  * @since 1.0
  */
-public interface SingletonObjectRegistry {
+public interface SingletonBeanRegistry {
 
     /**
      * 获取单例
