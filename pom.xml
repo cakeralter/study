@@ -40,6 +40,7 @@
         <module>code/small-spring/small-spring-v3</module>
         <module>code/small-spring/small-spring-v4</module>
         <module>code/small-spring/small-spring-v5</module>
+        <module>code/small-spring/small-spring-v6</module>
     </modules>
 
     <dependencyManagement>

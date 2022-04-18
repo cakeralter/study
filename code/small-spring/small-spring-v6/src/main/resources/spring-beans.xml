@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans">
+
+    <bean id="userDao" class="cc.caker.study.spring.dao.UserDao"/>
+
+    <bean id="userService" class="cc.caker.study.spring.service.UserService">
+        <property name="uId" value="10001"/>
+        <property name="sex" value="男"/>
+        <property name="age" value="18"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="customBeanFactoryPostProcessor" class="cc.caker.study.spring.component.CustomBeanFactoryPostProcessor"/>
+
+    <bean id="customBeanPostProcessor" class="cc.caker.study.spring.component.CustomBeanPostProcessor"/>
+
+</beans>
