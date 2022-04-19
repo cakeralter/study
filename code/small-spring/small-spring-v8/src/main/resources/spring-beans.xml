@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans">
+
+    <bean id="userDao" class="cc.caker.study.spring.dao.UserDao" init-method="initDataMethod"
+          destroy-method="destroyDataMethod"/>
+
+    <bean id="userService" class="cc.caker.study.spring.service.UserService">
+        <property name="uId" value="10001"/>
+        <property name="company" value="腾讯"/>
+        <property name="location" value="深圳"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+</beans>
