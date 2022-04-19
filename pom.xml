@@ -41,6 +41,7 @@
         <module>code/small-spring/small-spring-v4</module>
         <module>code/small-spring/small-spring-v5</module>
         <module>code/small-spring/small-spring-v6</module>
+        <module>code/small-spring/small-spring-v7</module>
     </modules>
 
     <dependencyManagement>
