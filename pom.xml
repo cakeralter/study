@@ -24,6 +24,8 @@
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <cglib.version>3.3.0</cglib.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <aspectjweaver.version>1.9.7</aspectjweaver.version>
     </properties>
 
     <modules>
@@ -45,6 +47,7 @@
         <module>code/small-spring/small-spring-v8</module>
         <module>code/small-spring/small-spring-v9</module>
         <module>code/small-spring/small-spring-v10</module>
+        <module>code/small-spring/small-spring-v11</module>
     </modules>
 
     <dependencyManagement>
@@ -130,6 +133,17 @@
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
+            </dependency>
+            <!--aspectj-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
