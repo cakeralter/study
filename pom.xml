@@ -26,6 +26,7 @@
         <cglib.version>3.3.0</cglib.version>
         <aopalliance.version>1.0</aopalliance.version>
         <aspectjweaver.version>1.9.7</aspectjweaver.version>
+        <dom4j.version>2.1.3</dom4j.version>
     </properties>
 
     <modules>
@@ -49,6 +50,7 @@
         <module>code/small-spring/small-spring-v10</module>
         <module>code/small-spring/small-spring-v11</module>
         <module>code/small-spring/small-spring-v12</module>
+        <module>code/small-spring/small-spring-v13</module>
     </modules>
 
     <dependencyManagement>
@@ -145,6 +147,12 @@
                 <groupId>aopalliance</groupId>
                 <artifactId>aopalliance</artifactId>
                 <version>${aopalliance.version}</version>
+            </dependency>
+            <!--dom4j-->
+            <dependency>
+                <groupId>org.dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
