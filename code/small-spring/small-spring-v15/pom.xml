@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v15</artifactId>
+    <description>给代理对象设置属性注入</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

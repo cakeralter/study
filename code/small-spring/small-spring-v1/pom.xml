@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v1</artifactId>
+    <description>创建简单的Bean容器</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

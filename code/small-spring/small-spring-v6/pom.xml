@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v6</artifactId>
+    <description>实现应用上下文</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

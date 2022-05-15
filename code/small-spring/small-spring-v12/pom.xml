@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v12</artifactId>
+    <description>AOP扩展到Bean的生命周期</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

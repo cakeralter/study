@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v11</artifactId>
+    <description>基于JDK、Cglib实现AOP切面</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

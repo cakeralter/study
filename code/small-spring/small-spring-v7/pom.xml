@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v7</artifactId>
+    <description>初始化和销毁方法</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

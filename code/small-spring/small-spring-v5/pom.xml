@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v5</artifactId>
+    <description>资源加载器解析文件注册对象</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

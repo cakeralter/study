@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v9</artifactId>
+    <description>对象作用域和FactoryBean</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

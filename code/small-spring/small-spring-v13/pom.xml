@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v13</artifactId>
+    <description>自动扫描Bean对象注册</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

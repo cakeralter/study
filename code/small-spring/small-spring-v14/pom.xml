@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v14</artifactId>
+    <description>通过注解注入属性信息</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

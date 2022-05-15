@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v8</artifactId>
+    <description>Aware感知容器对象</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

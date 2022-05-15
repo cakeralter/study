@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v2</artifactId>
+    <description>实现 Bean 的定义、注册、获取</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

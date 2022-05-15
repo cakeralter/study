@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v10</artifactId>
+    <description>容器事件和事件监听器</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

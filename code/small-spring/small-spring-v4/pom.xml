@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-spring-v4</artifactId>
+    <description>注入属性和依赖对象</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
