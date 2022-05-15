@@ -5,8 +5,10 @@ import cc.caker.study.spring.beans.PropertyValue;
 import cc.caker.study.spring.beans.PropertyValues;
 import cc.caker.study.spring.beans.factory.*;
 import cc.caker.study.spring.beans.factory.config.*;
+import cc.caker.study.spring.core.convert.ConversionService;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.TypeUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -253,6 +255,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
                 if (value instanceof BeanReference) {
                     value = getBean(((BeanReference) value).getBeanName());
+                } else {
+                    // 类型转换
+                    Class<?> sourceType = value.getClass();
+                    Class<?> targetType = (Class<?>) TypeUtil.getFieldType(bean.getClass(), name);
+                    ConversionService conversionService = getConversionService();
+                    if (conversionService != null) {
+                        if (conversionService.canConvert(sourceType, targetType)) {
+                            value = conversionService.convert(value, targetType);
+                        }
+                    }
                 }
                 BeanUtil.setFieldValue(bean, name, value);
             }
