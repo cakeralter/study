@@ -11,8 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cc.caker.study</groupId>
-    <artifactId>small-mybatis-v2</artifactId>
-    <description>实现映射器的注册和使用</description>
+    <artifactId>small-mybatis-v3</artifactId>
+    <description>Mapper XML的解析和注册使用</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -28,6 +28,10 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dom4j</groupId>
+            <artifactId>dom4j</artifactId>
         </dependency>
     </dependencies>
 

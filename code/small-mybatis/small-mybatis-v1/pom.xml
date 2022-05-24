@@ -12,6 +12,7 @@
 
     <groupId>cc.caker.study</groupId>
     <artifactId>small-mybatis-v1</artifactId>
+    <description>创建简单的映射器代理工厂</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

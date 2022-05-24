@@ -57,6 +57,7 @@
         <module>code/small-spring/small-spring-v17</module>
         <module>code/small-mybatis/small-mybatis-v1</module>
         <module>code/small-mybatis/small-mybatis-v2</module>
+        <module>code/small-mybatis/small-mybatis-v3</module>
     </modules>
 
     <dependencyManagement>
