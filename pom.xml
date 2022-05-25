@@ -27,6 +27,7 @@
         <aopalliance.version>1.0</aopalliance.version>
         <aspectjweaver.version>1.9.7</aspectjweaver.version>
         <dom4j.version>2.1.3</dom4j.version>
+        <rocketmq-client.version>4.9.1</rocketmq-client.version>
     </properties>
 
     <modules>
@@ -58,6 +59,7 @@
         <module>code/small-mybatis/small-mybatis-v1</module>
         <module>code/small-mybatis/small-mybatis-v2</module>
         <module>code/small-mybatis/small-mybatis-v3</module>
+        <module>code/rocketmq-demos</module>
     </modules>
 
     <dependencyManagement>
@@ -160,6 +162,12 @@
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
