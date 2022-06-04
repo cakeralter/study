@@ -64,6 +64,7 @@
         <module>code/small-mybatis/small-mybatis-v3</module>
         <module>code/rocketmq-demos</module>
         <module>code/small-mybatis/small-mybatis-v4</module>
+        <module>code/leetcode</module>
     </modules>
 
     <dependencyManagement>
