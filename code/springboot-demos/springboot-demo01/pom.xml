@@ -20,7 +20,7 @@
         <swagger.version>3.0.0</swagger.version>
         <fastjson.version>1.2.72</fastjson.version>
         <jsoup.version>1.12.2</jsoup.version>
-        <mysql.version>8.0.20</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <shiro.version>1.5.3</shiro.version>
         <thumbnailator.version>0.4.11</thumbnailator.version>
         <freemarker.version>2.3.30</freemarker.version>
