@@ -12,7 +12,7 @@
     <properties>
         <common.version>1.0-SNAPSHOT</common.version>
         <lombok.version>1.18.12</lombok.version>
-        <mysql.version>8.0.20</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <guava.version>29.0-jre</guava.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
