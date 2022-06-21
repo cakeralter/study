@@ -14,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <screw.version>1.0.3</screw.version>
-        <mysql.version>8.0.20</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <log4jdbc.version>1.2</log4jdbc.version>
         <swagger.version>3.0.0</swagger.version>
         <p6spy.version>3.9.1</p6spy.version>
