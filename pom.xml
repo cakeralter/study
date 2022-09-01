@@ -19,7 +19,7 @@
         <junit.version>4.13</junit.version>
         <hutool.version>5.5.0</hutool.version>
         <jedis.version>3.3.0</jedis.version>
-        <jsoup.version>1.12.2</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <netty.version>4.1.59.Final</netty.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <logback-classic.version>1.2.3</logback-classic.version>
